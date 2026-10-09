@@ -55,39 +55,39 @@
 
 ### 2.1 并发安全（定级分歧裁定为 P2，但排期最前）
 
-- [ ] `highlighter` 加 `sync.Mutex` 保护 `cache` / `parsedStyleCache`，`UpdateTheme` 边遍历边写处一并加锁 — [highlighter.go#L162](file:///D:/code/personal/coder-mate-core/highlighter.go#L162)、[L237-L242](file:///D:/code/personal/coder-mate-core/highlighter.go#L237-L242)
-- [ ] 全局注册表（`core.languageRegistry` / `theme.themeRegistry`）`sync.RWMutex`，或"注册完成后只读"+ `sync.Once` 保证首次注册可见性 — [core/registry.go#L15](file:///D:/code/personal/coder-mate-core/core/registry.go#L15)
-- [ ] `builtinsRegistered` 裸 bool check-then-act → `sync.Once`；`theme.EnsureBuiltinsRegistered` 的"查 map 再注册"同为 check-then-act 竞态面，加锁时一并覆盖（可并入注册表 RWMutex：存在性检查放读锁下）— [language/manager.go#L5-L13](file:///D:/code/personal/coder-mate-core/language/manager.go#L5-L13)、[theme/presets.go#L292](file:///D:/code/personal/coder-mate-core/theme/presets.go#L292)
-- [ ] 补 `-race` 并发测试：多 goroutine 同时调 `CodeToHtml` / `UpdateTheme`（现有测试全串行，`-race` 从未真正触发）
-- [ ] 验收：`go test -race ./...` 在并发用例真实触发检测的前提下全绿
+- [x] `highlighter` 加 `sync.Mutex` 保护 `cache` / `parsedStyleCache`，`UpdateTheme` 边遍历边写处一并加锁 — [highlighter.go#L162](file:///D:/code/personal/coder-mate-core/highlighter.go#L162)、[L237-L242](file:///D:/code/personal/coder-mate-core/highlighter.go#L237-L242)
+- [x] 全局注册表（`core.languageRegistry` / `theme.themeRegistry`）`sync.RWMutex`，或"注册完成后只读"+ `sync.Once` 保证首次注册可见性 — [core/registry.go#L15](file:///D:/code/personal/coder-mate-core/core/registry.go#L15)
+- [x] `builtinsRegistered` 裸 bool check-then-act → `sync.Once`；`theme.EnsureBuiltinsRegistered` 的"查 map 再注册"同为 check-then-act 竞态面，加锁时一并覆盖（可并入注册表 RWMutex：存在性检查放读锁下）— [language/manager.go#L5-L13](file:///D:/code/personal/coder-mate-core/language/manager.go#L5-L13)、[theme/presets.go#L292](file:///D:/code/personal/coder-mate-core/theme/presets.go#L292)
+- [x] 补 `-race` 并发测试：多 goroutine 同时调 `CodeToHtml` / `UpdateTheme`（现有测试全串行，`-race` 从未真正触发）
+- [x] 验收：`go test -race ./...` 在并发用例真实触发检测的前提下全绿
 
 ### 2.2 HTML 属性转义
 
-- [ ] `lineClassPrefix` 入 `class` 属性、`preStyle` 入 `style` 属性前统一转义（至少 `"` `<` `&`）— [highlighter.go#L210](file:///D:/code/personal/coder-mate-core/highlighter.go#L210)、[L226](file:///D:/code/personal/coder-mate-core/highlighter.go#L226)
-- [ ] 验收：含引号的 `preStyle` / `LineClassPrefix` 不破出属性边界（新增测试）
+- [x] `lineClassPrefix` 入 `class` 属性、`preStyle` 入 `style` 属性前统一转义（至少 `"` `<` `&`）— [highlighter.go#L210](file:///D:/code/personal/coder-mate-core/highlighter.go#L210)、[L226](file:///D:/code/personal/coder-mate-core/highlighter.go#L226)
+- [x] 验收：含引号的 `preStyle` / `LineClassPrefix` 不破出属性边界（新增测试）
 
 ### 2.3 gofmt 治理 + CI 门禁
 
-- [ ] 根级 `.gitattributes`（`*.go text eol=lf`）→ `git add --renormalize .` → 一次性 `gofmt -w .` 提交（实测 `gofmt -l` 列出全部 123 个 .go 文件：index LF / 工作区 CRLF / 无 attributes，不先治行尾任何 gofmt CI 门禁直接全红）
-- [ ] GitHub Actions 三件套门禁：`go vet` + `gofmt -l`（零输出）+ `go test ./...`
-- [ ] 后续 job：`-race` + TS 一致性 golden（此处 golden = 阶段 3 的跨仓库 TS 对照基建，依赖阶段 3；与 2.4 的内联期望 token 流无关）
-- [ ] 验收：`gofmt -l` 零输出；故意引入格式错误 / 测试失败可被 CI 拦截
+- [x] 根级 `.gitattributes`（`*.go text eol=lf`）→ `git add --renormalize .` → 一次性 `gofmt -w .` 提交（实测 `gofmt -l` 列出全部 123 个 .go 文件：index LF / 工作区 CRLF / 无 attributes，不先治行尾任何 gofmt CI 门禁直接全红）
+- [x] GitHub Actions 三件套门禁：`go vet` + `gofmt -l`（零输出）+ `go test ./...`
+- [ ] 后续 job：`-race` + TS 一致性 golden（此处 golden = 阶段 3 的跨仓库 TS 对照基建，依赖阶段 3；与 2.4 的内联期望 token 流无关）（注：-race 已随首版 CI 一并加入，golden 待阶段 3）
+- [x] 验收：`gofmt -l` 零输出；故意引入格式错误 / 测试失败可被 CI 拦截
 
 ### 2.4 语法规则缺口修正（每项先写断言再修正则；断言用**内联期望 token 流**——表驱动测试里的 `expected []core.Token`，不依赖 TS 对照 golden 基建，本阶段即可独立完成）
 
-- [ ] JavaScript：补关键字 `typeof/new/this/super/yield/delete`（javascript 包全缺）— [javascript/rules.go](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go)
-- [ ] JavaScript：数字正则支持 `e` 后符号（`1e+10` 现在只匹配出 `1e`）— [javascript/rules.go#L105](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go#L105)；运算符表补 `**` — [javascript/rules.go#L99](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go#L99)
-- [ ] Python：补关键字 `assert/del/global/nonlocal` — [python/rules.go#L10](file:///D:/code/personal/coder-mate-core/language/python/rules.go#L10)；数字支持 `0x/0o/0b` 与 `1_000` 分隔（`0x1F` 现被切成 `0` + `x1F`）— [python/rules.go#L49](file:///D:/code/personal/coder-mate-core/language/python/rules.go#L49)
-- [ ] Java：Type 规则先于 Function 导致 `Foo(` 恒判类型名，调整顺序 — [java/rules.go#L31-L32](file:///D:/code/personal/coder-mate-core/language/java/rules.go#L31-L32)
-- [ ] YAML：numeric 先于 `-` 导致 `-5` 整体吃成数字，调整顺序 — [yaml/rules.go#L26-L27](file:///D:/code/personal/coder-mate-core/language/yaml/rules.go#L26-L27)
-- [ ] 验收：内联期望 token 断言先红后绿，规则修正不引入既有用例回归
+- [x] JavaScript：补关键字 `typeof/new/this/super/yield/delete`（javascript 包全缺）— [javascript/rules.go](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go)
+- [x] JavaScript：数字正则支持 `e` 后符号（`1e+10` 现在只匹配出 `1e`）— [javascript/rules.go#L105](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go#L105)；运算符表补 `**` — [javascript/rules.go#L99](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go#L99)
+- [x] Python：补关键字 `assert/del/global/nonlocal` — [python/rules.go#L10](file:///D:/code/personal/coder-mate-core/language/python/rules.go#L10)；数字支持 `0x/0o/0b` 与 `1_000` 分隔（`0x1F` 现被切成 `0` + `x1F`）— [python/rules.go#L49](file:///D:/code/personal/coder-mate-core/language/python/rules.go#L49)
+- [x] Java：Type 规则先于 Function 导致 `Foo(` 恒判类型名，调整顺序 — [java/rules.go#L31-L32](file:///D:/code/personal/coder-mate-core/language/java/rules.go#L31-L32)
+- [x] YAML：numeric 先于 `-` 导致 `-5` 整体吃成数字，调整顺序 — [yaml/rules.go#L26-L27](file:///D:/code/personal/coder-mate-core/language/yaml/rules.go#L26-L27)
+- [x] 验收：内联期望 token 断言先红后绿，规则修正不引入既有用例回归
 
 ### 2.5 文档漂移校准
 
-- [ ] agents.md：`ts/` 引用删改或注明"参考实现已随 `896d07e` 移除"；"待进入实现阶段"改为现状；Go 版本统一为 1.23+（现三方打架：agents.md `1.21+` / go.mod `1.23.5` / README `1.23+`）— [agents.md#L14-L17](file:///D:/code/personal/coder-mate-core/agents.md#L14-L17)、[L36](file:///D:/code/personal/coder-mate-core/agents.md#L36)
-- [ ] specs 01/03/06 中 `ts/lib/` 路径引用同步标注
-- [ ] README 缓存卖点改"避免重复解析（re-parse）"（实测 CacheHit 165,755ns ≈ LargeJS 全流程 165,096ns，"return instantly"文案与自家基准矛盾）— [README.md#L17](file:///D:/code/personal/coder-mate-core/README.md#L17)
-- [ ] README `UpdateTheme` 示例补 error 处理
+- [x] agents.md：`ts/` 引用删改或注明"参考实现已随 `896d07e` 移除"；"待进入实现阶段"改为现状；Go 版本统一为 1.23+（现三方打架：agents.md `1.21+` / go.mod `1.23.5` / README `1.23+`）— [agents.md#L14-L17](file:///D:/code/personal/coder-mate-core/agents.md#L14-L17)、[L36](file:///D:/code/personal/coder-mate-core/agents.md#L36)
+- [x] specs 01/03/06 中 `ts/lib/` 路径引用同步标注
+- [x] README 缓存卖点改"避免重复解析（re-parse）"（实测 CacheHit 165,755ns ≈ LargeJS 全流程 165,096ns，"return instantly"文案与自家基准矛盾）— [README.md#L17](file:///D:/code/personal/coder-mate-core/README.md#L17)
+- [x] README `UpdateTheme` 示例补 error 处理
 
 ---
 
