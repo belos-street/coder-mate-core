@@ -52,6 +52,8 @@ hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{
 })
 ```
 
+> Unknown theme names or invalid theme values fall back to the default theme (`dark-plus`).
+
 ### WASM (Browser)
 
 ```go

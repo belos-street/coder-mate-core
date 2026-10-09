@@ -2,6 +2,7 @@ package theme
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -60,6 +61,12 @@ func ListThemes() []*HighlightTheme {
 	for _, theme := range themeRegistry {
 		themes = append(themes, theme)
 	}
+
+	// 按 ID 排序，保证返回顺序确定（Go map 遍历顺序随机）
+	sort.Slice(themes, func(i, j int) bool {
+		return themes[i].ID < themes[j].ID
+	})
+
 	return themes
 }
 
@@ -85,6 +92,21 @@ func ResolveTheme(theme interface{}) (*HighlightTheme, error) {
 	default:
 		return nil, fmt.Errorf("invalid theme type: %T", theme)
 	}
+}
+
+// ResolveThemeOrDefault 解析主题；未知主题名或无效类型时回退默认主题。
+// 这是 NewHighlighter 的文档化行为：无效的主题配置不报错、不中断，
+// 回退到 DefaultThemeID。调用前须已通过 EnsureBuiltinsRegistered 注册内置主题。
+func ResolveThemeOrDefault(theme interface{}) *HighlightTheme {
+	if resolved, err := ResolveTheme(theme); err == nil && resolved != nil {
+		return resolved
+	}
+
+	resolved, err := ResolveTheme(nil)
+	if err != nil {
+		panic(fmt.Sprintf("theme: default theme %q is not registered: %v", DefaultThemeID, err))
+	}
+	return resolved
 }
 
 // ResolveScopeStyle 查找 scope 对应的样式：

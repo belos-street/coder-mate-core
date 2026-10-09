@@ -1,6 +1,8 @@
 package theme
 
 import (
+	"fmt"
+
 	"code-mate-core/theme/darkplus"
 )
 
@@ -285,9 +287,23 @@ var presetBuiltInThemes = []*HighlightTheme{
 	SolarizedLightTheme,
 }
 
+// EnsureBuiltinsRegistered 幂等注册内置主题：默认主题已存在时跳过；
+// 注册表被 ClearRegistry 清空（如测试场景）后再次调用会自动重建。
+func EnsureBuiltinsRegistered() {
+	if _, ok := themeRegistry[DefaultThemeID]; !ok {
+		RegisterBuiltInThemes()
+	}
+}
+
 func RegisterBuiltInThemes() {
-	RegisterTheme(DarkPlusTheme)
+	mustRegisterTheme(DarkPlusTheme)
 	for _, theme := range presetBuiltInThemes {
-		RegisterTheme(theme)
+		mustRegisterTheme(theme)
+	}
+}
+
+func mustRegisterTheme(theme *HighlightTheme) {
+	if err := RegisterTheme(theme); err != nil {
+		panic(fmt.Sprintf("theme: register built-in theme %q: %v", theme.ID, err))
 	}
 }

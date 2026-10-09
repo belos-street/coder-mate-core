@@ -51,8 +51,10 @@ func NewHighlighter(opts ...HighlighterOptions) Highlighter {
 
 func newHighlighter(opts HighlighterOptions) *highlighter {
 	language.EnsureBuiltinsRegistered()
+	theme.EnsureBuiltinsRegistered()
 
-	currentTheme, _ := theme.ResolveTheme(theme.ResolveAlias(opts.Theme))
+	// 未知主题名 / 无效类型回退默认主题（文档化行为，见 ResolveThemeOrDefault）
+	currentTheme := theme.ResolveThemeOrDefault(theme.ResolveAlias(opts.Theme))
 
 	return &highlighter{
 		currentTheme:     currentTheme,
