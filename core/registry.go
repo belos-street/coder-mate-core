@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"reflect"
+	"sort"
 	"strings"
 )
 
@@ -65,6 +66,11 @@ func ListLanguages() []LanguageAdapter {
 		seen[key] = true
 		languages = append(languages, lang)
 	}
+
+	// 按 ID 排序，保证返回顺序确定（Go map 遍历顺序随机）
+	sort.Slice(languages, func(i, j int) bool {
+		return languages[i].ID() < languages[j].ID()
+	})
 
 	return languages
 }

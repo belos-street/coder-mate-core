@@ -2,6 +2,7 @@ package codematecore
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 
 	"code-mate-core/core"
@@ -94,11 +95,18 @@ func stringifyInlineStyle(style core.TokenStyle) string {
 		return ""
 	}
 
+	// 按 key 排序序列化，保证相同 style 的输出逐字节确定（Go map 遍历顺序随机）
+	properties := make([]string, 0, len(style))
+	for property := range style {
+		properties = append(properties, property)
+	}
+	sort.Strings(properties)
+
 	var b strings.Builder
-	for property, value := range style {
+	for _, property := range properties {
 		b.WriteString(property)
 		b.WriteString(": ")
-		b.WriteString(value)
+		b.WriteString(style[property])
 		b.WriteString("; ")
 	}
 	result := b.String()
