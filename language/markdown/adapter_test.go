@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_BasicFormatting(t *testing.T) {
+	t.Parallel()
+
 	code := `# Hello World
 
 This is **bold** and *italic* and ~~strikethrough~~.
@@ -28,6 +30,8 @@ This is **bold** and *italic* and ~~strikethrough~~.
 }
 
 func TestParse_CodeBlocks(t *testing.T) {
+	t.Parallel()
+
 	code := "```go\nfunc main() {}\n```"
 	tokens := flatten(Language.Parse(code))
 
@@ -36,12 +40,16 @@ func TestParse_CodeBlocks(t *testing.T) {
 }
 
 func TestParse_InlineCode(t *testing.T) {
+	t.Parallel()
+
 	code := "Use `code` inline"
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "markup.inline.raw.markdown")
 }
 
 func TestParse_LinksAndImages(t *testing.T) {
+	t.Parallel()
+
 	code := `[link text](https://example.com)
 ![alt text](image.png)`
 	tokens := flatten(Language.Parse(code))
@@ -52,6 +60,8 @@ func TestParse_LinksAndImages(t *testing.T) {
 }
 
 func TestParse_HorizontalRule(t *testing.T) {
+	t.Parallel()
+
 	code := `---
 ***`
 	tokens := flatten(Language.Parse(code))
@@ -59,6 +69,8 @@ func TestParse_HorizontalRule(t *testing.T) {
 }
 
 func TestParse_TaskList(t *testing.T) {
+	t.Parallel()
+
 	code := `- [x] done
 - [ ] todo`
 	tokens := flatten(Language.Parse(code))
@@ -66,6 +78,8 @@ func TestParse_TaskList(t *testing.T) {
 }
 
 func TestParse_Table(t *testing.T) {
+	t.Parallel()
+
 	code := `| A | B |
 | --- | --- |
 | 1 | 2 |`
@@ -75,6 +89,8 @@ func TestParse_Table(t *testing.T) {
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows, got %d", len(rows))
@@ -82,6 +98,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_UnclosedFencedCode(t *testing.T) {
+	t.Parallel()
+
 	code := "```\nhello world"
 	tokens := flatten(Language.Parse(code))
 	if len(tokens) == 0 {
@@ -90,12 +108,16 @@ func TestParse_UnclosedFencedCode(t *testing.T) {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "markdown" {
 		t.Errorf("expected ID 'markdown', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	found := false
 	for _, a := range aliases {
@@ -129,6 +151,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -140,4 +164,49 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", "*t* `c`", []seqTok{
+			{"*", "markup.italic.markdown"},
+			{"t", "markup.italic.markdown"},
+			{"*", "markup.italic.markdown"},
+			{" ", "default"},
+			{"`", "markup.inline.raw.markdown"},
+			{"c", "markup.inline.raw.markdown"},
+			{"`", "markup.inline.raw.markdown"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

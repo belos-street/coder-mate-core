@@ -57,6 +57,8 @@ func countTokensByScope(tokens core.TokenStream, scope string) int {
 }
 
 func TestParse_MissingKeywords(t *testing.T) {
+	t.Parallel()
+
 	// 2.4 回归：这些关键字此前落入 identifier（JS 关键字表缺口）
 	for _, kw := range []string{"typeof", "new", "delete", "void", "yield", "instanceof"} {
 		stream := Language.Parse(kw + " x")
@@ -82,6 +84,8 @@ func TestParse_MissingKeywords(t *testing.T) {
 }
 
 func TestParse_NumberExponentSign(t *testing.T) {
+	t.Parallel()
+
 	// 2.4 回归：此前 1e+10 只匹配出 1e
 	stream := Language.Parse("1e+10")
 	tok := requireToken(t, stream, 0, 0)
@@ -94,6 +98,8 @@ func TestParse_NumberExponentSign(t *testing.T) {
 }
 
 func TestParse_ExponentOperator(t *testing.T) {
+	t.Parallel()
+
 	// 2.4 回归：此前运算符表无 **，被拆成两个 *
 	stream := Language.Parse("2 ** 3")
 	tok := requireToken(t, stream, 0, 2)
@@ -103,6 +109,8 @@ func TestParse_ExponentOperator(t *testing.T) {
 }
 
 func TestParse_EmptyInput(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("")
 	if len(stream) != 0 {
 		t.Fatalf("expected 0 rows for empty input, got %d", len(stream))
@@ -110,6 +118,8 @@ func TestParse_EmptyInput(t *testing.T) {
 }
 
 func TestParse_OnlyNewlines(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("\n\n")
 	if len(stream) != 2 {
 		t.Fatalf("expected 2 rows, got %d", len(stream))
@@ -123,6 +133,8 @@ func TestParse_OnlyNewlines(t *testing.T) {
 }
 
 func TestParse_Keywords(t *testing.T) {
+	t.Parallel()
+
 	ctrlKeywords := []string{"if", "else", "for", "while", "do", "switch", "case",
 		"break", "continue", "return", "throw", "try", "catch", "finally"}
 	for _, kw := range ctrlKeywords {
@@ -138,6 +150,8 @@ func TestParse_Keywords(t *testing.T) {
 }
 
 func TestParse_AsyncAwait(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("async function() {}")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "async" {
@@ -158,6 +172,8 @@ func TestParse_AsyncAwait(t *testing.T) {
 }
 
 func TestParse_ClassKeywords(t *testing.T) {
+	t.Parallel()
+
 	classKws := []string{"class", "extends", "static", "constructor"}
 	for _, kw := range classKws {
 		stream := Language.Parse(kw + " X")
@@ -172,6 +188,8 @@ func TestParse_ClassKeywords(t *testing.T) {
 }
 
 func TestParse_DeclarationKeywords(t *testing.T) {
+	t.Parallel()
+
 	declKws := []string{"function", "var", "let", "const"}
 	for _, kw := range declKws {
 		stream := Language.Parse(kw + " x")
@@ -186,6 +204,8 @@ func TestParse_DeclarationKeywords(t *testing.T) {
 }
 
 func TestParse_BooleanLiterals(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("true")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Scope != ScopeBoolean {
@@ -200,6 +220,8 @@ func TestParse_BooleanLiterals(t *testing.T) {
 }
 
 func TestParse_NullUndefined(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("null")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Scope != ScopeNull {
@@ -214,6 +236,8 @@ func TestParse_NullUndefined(t *testing.T) {
 }
 
 func TestParse_LineComment(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("// this is a comment")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "// this is a comment" {
@@ -225,6 +249,8 @@ func TestParse_LineComment(t *testing.T) {
 }
 
 func TestParse_BlockComment(t *testing.T) {
+	t.Parallel()
+
 	code := `/* multi
 line */`
 	stream := Language.Parse(code)
@@ -238,6 +264,8 @@ line */`
 }
 
 func TestParse_GlobalThis(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("globalThis")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Scope != ScopeGlobalThis {
@@ -246,6 +274,8 @@ func TestParse_GlobalThis(t *testing.T) {
 }
 
 func TestParse_PromiseAllSettled(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("Promise.allSettled")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Scope != ScopeSupportPromise {
@@ -254,6 +284,8 @@ func TestParse_PromiseAllSettled(t *testing.T) {
 }
 
 func TestParse_OptionalChaining(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("?.property")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "?." {
@@ -265,6 +297,8 @@ func TestParse_OptionalChaining(t *testing.T) {
 }
 
 func TestParse_NullishCoalescing(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("?? value")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "??" {
@@ -276,6 +310,8 @@ func TestParse_NullishCoalescing(t *testing.T) {
 }
 
 func TestParse_ImportKeyword(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`import { x } from "./mod"`)
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "import" {
@@ -287,6 +323,8 @@ func TestParse_ImportKeyword(t *testing.T) {
 }
 
 func TestParse_ExportKeyword(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("export const x = 1")
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "export" {
@@ -298,6 +336,8 @@ func TestParse_ExportKeyword(t *testing.T) {
 }
 
 func TestParse_ExportStarAs(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`export * as ns from "./module.js"`)
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "export * as ns from" {
@@ -309,6 +349,8 @@ func TestParse_ExportStarAs(t *testing.T) {
 }
 
 func TestParse_DynamicImport(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`import("./module.js")`)
 	tok := requireToken(t, stream, 0, 0)
 	if tok.Text != "import(" {
@@ -320,6 +362,8 @@ func TestParse_DynamicImport(t *testing.T) {
 }
 
 func TestParse_ArrowFunction(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("x => x + 1")
 	arrowTok := findTokenByText(t, stream, "=>")
 	if arrowTok.Scope != ScopeArrowFunction {
@@ -328,6 +372,8 @@ func TestParse_ArrowFunction(t *testing.T) {
 }
 
 func TestParse_NumericLiterals(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		code string
 	}{
@@ -349,6 +395,8 @@ func TestParse_NumericLiterals(t *testing.T) {
 }
 
 func TestParse_DoubleQuotedString(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`"hello world"`)
 	// 正则 ^[^\\"]*(?:\\.[^\\"]*)*" 将 "hello world" 整体匹配为一个 token
 	// 第一个 token 是 " (PushState)，第二个 token 是 hello world" (PopState)
@@ -362,6 +410,8 @@ func TestParse_DoubleQuotedString(t *testing.T) {
 }
 
 func TestParse_SingleQuotedString(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`'hello world'`)
 	strCount := countTokensByScope(stream, ScopeStringSingle)
 	if strCount < 1 {
@@ -370,6 +420,8 @@ func TestParse_SingleQuotedString(t *testing.T) {
 }
 
 func TestParse_DoubleQuotedStringWithEscape(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`"hello \"world\""`)
 	// The escaped string rule matches everything including the closing quote
 	strCount := countTokensByScope(stream, ScopeStringDouble)
@@ -379,6 +431,8 @@ func TestParse_DoubleQuotedStringWithEscape(t *testing.T) {
 }
 
 func TestParse_SingleQuotedStringWithEscape(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse(`'hello \'world\''`)
 	strCount := countTokensByScope(stream, ScopeStringSingle)
 	if strCount < 1 {
@@ -387,6 +441,8 @@ func TestParse_SingleQuotedStringWithEscape(t *testing.T) {
 }
 
 func TestParse_TemplateString(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("`hello world`")
 	templateCount := countTokensByScope(stream, ScopeStringBacktick)
 	if templateCount < 2 {
@@ -395,6 +451,8 @@ func TestParse_TemplateString(t *testing.T) {
 }
 
 func TestParse_TemplateInterpolation(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("`hello ${name} world`")
 	templateExprCount := countTokensByScope(stream, ScopeTemplateExpression)
 	if templateExprCount < 2 {
@@ -403,6 +461,8 @@ func TestParse_TemplateInterpolation(t *testing.T) {
 }
 
 func TestParse_MultiLineCode(t *testing.T) {
+	t.Parallel()
+
 	code := "const x = 1;\nlet y = 2;"
 	stream := Language.Parse(code)
 	if len(stream) != 2 {
@@ -426,6 +486,8 @@ func TestParse_MultiLineCode(t *testing.T) {
 }
 
 func TestParse_CrossLineCommentLineTracking(t *testing.T) {
+	t.Parallel()
+
 	code := "/*a\nb*/\nconst x = 1;"
 	stream := Language.Parse(code)
 
@@ -446,6 +508,8 @@ func TestParse_CrossLineCommentLineTracking(t *testing.T) {
 }
 
 func TestParse_NewlineToken(t *testing.T) {
+	t.Parallel()
+
 	code := "x\ny"
 	stream := Language.Parse(code)
 
@@ -475,6 +539,8 @@ func TestParse_NewlineToken(t *testing.T) {
 }
 
 func TestParse_ComplexCode(t *testing.T) {
+	t.Parallel()
+
 	code := `const greeting = \x60Hello, ${name}!\x60;
 // A comment
 class Person {
@@ -513,12 +579,16 @@ class Person {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "javascript" {
 		t.Errorf("expected ID='javascript', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	if len(aliases) != 1 || aliases[0] != "js" {
 		t.Errorf("expected aliases=['js'], got %v", aliases)
@@ -526,6 +596,8 @@ func TestAdapter_Aliases(t *testing.T) {
 }
 
 func TestParse_Operators(t *testing.T) {
+	t.Parallel()
+
 	ops := []string{"===", "!==", "==", "!=", ">=", "<=", "&&", "||",
 		"+", "-", "*", "/", "%", "=", ">", "<", "!", ".",
 		",", ":", ";", "(", ")", "{", "}", "[", "]"}
@@ -544,6 +616,8 @@ func TestParse_Operators(t *testing.T) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder

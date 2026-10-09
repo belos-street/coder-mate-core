@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_BasicSyntax(t *testing.T) {
+	t.Parallel()
+
 	code := `use std::collections::HashMap;
 
 /// Doc comment
@@ -43,24 +45,32 @@ fn main() {
 }
 
 func TestParse_BlockComment(t *testing.T) {
+	t.Parallel()
+
 	code := `/* block */ fn main() {}`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "comment.block.rust")
 }
 
 func TestParse_Attribute(t *testing.T) {
+	t.Parallel()
+
 	code := "#[derive(Debug)]\nstruct Foo {}"
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "meta.attribute.rust")
 }
 
 func TestParse_LanguageVars(t *testing.T) {
+	t.Parallel()
+
 	code := "fn foo(self: &Self) { let _ = super::bar(); }"
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "variable.language.rust")
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows, got %d", len(rows))
@@ -68,6 +78,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_UnclosedString(t *testing.T) {
+	t.Parallel()
+
 	code := `let s = "unclosed`
 	tokens := flatten(Language.Parse(code))
 	if len(tokens) == 0 {
@@ -86,12 +98,16 @@ func TestParse_UnclosedString(t *testing.T) {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "rust" {
 		t.Errorf("expected ID 'rust', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	found := false
 	for _, a := range aliases {
@@ -125,6 +141,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -136,4 +154,61 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `fn main() { let x = 1; } // c`, []seqTok{
+			{"fn", "keyword.declaration.rust"},
+			{" ", "default"},
+			{"main(", "entity.name.function.rust"},
+			{")", "operator.rust"},
+			{" ", "default"},
+			{"{", "operator.rust"},
+			{" ", "default"},
+			{"let", "keyword.declaration.rust"},
+			{" ", "default"},
+			{"x", "default"},
+			{" ", "default"},
+			{"=", "operator.rust"},
+			{" ", "default"},
+			{"1", "constant.numeric.rust"},
+			{";", "operator.rust"},
+			{" ", "default"},
+			{"}", "operator.rust"},
+			{" ", "default"},
+			{"// c", "comment.line.double-slash.rust"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

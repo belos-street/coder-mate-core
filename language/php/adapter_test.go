@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_BasicSyntax(t *testing.T) {
+	t.Parallel()
+
 	code := `<?php
 
 namespace App\Controller;
@@ -44,6 +46,8 @@ class UserController {
 }
 
 func TestParse_Comments(t *testing.T) {
+	t.Parallel()
+
 	code := `<?php
 // line comment
 # hash comment
@@ -55,6 +59,8 @@ func TestParse_Comments(t *testing.T) {
 }
 
 func TestParse_Attribute(t *testing.T) {
+	t.Parallel()
+
 	code := `<?php
 #[Route('/api', methods: ['GET'])]
 class ApiController {}`
@@ -63,6 +69,8 @@ class ApiController {}`
 }
 
 func TestParse_BooleanNull(t *testing.T) {
+	t.Parallel()
+
 	code := `<?php
 $x = true;
 $y = false;
@@ -73,6 +81,8 @@ $z = null;`
 }
 
 func TestParse_MagicConstants(t *testing.T) {
+	t.Parallel()
+
 	code := `<?php
 echo __FILE__;
 echo __CLASS__;`
@@ -81,12 +91,16 @@ echo __CLASS__;`
 }
 
 func TestParse_BacktickString(t *testing.T) {
+	t.Parallel()
+
 	code := "<?php\n$out = `ls -la`;"
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "string.quoted.backtick.php")
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows, got %d", len(rows))
@@ -94,12 +108,16 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "php" {
 		t.Errorf("expected ID 'php', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	expected := []string{"phtml", "php8"}
 	for _, exp := range expected {
@@ -136,6 +154,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -147,4 +167,62 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `function f($x = 1) { return "s"; }`, []seqTok{
+			{"function", "keyword.declaration.php"},
+			{" ", "default"},
+			{"f(", "entity.name.function.php"},
+			{"$x", "variable.other.php"},
+			{" ", "default"},
+			{"=", "operator.php"},
+			{" ", "default"},
+			{"1", "constant.numeric.php"},
+			{")", "operator.php"},
+			{" ", "default"},
+			{"{", "operator.php"},
+			{" ", "default"},
+			{"return", "keyword.control.php"},
+			{" ", "default"},
+			{"\"", "string.quoted.double.php"},
+			{"s", "string.quoted.double.php"},
+			{"\"", "string.quoted.double.php"},
+			{";", "operator.php"},
+			{" ", "default"},
+			{"}", "operator.php"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

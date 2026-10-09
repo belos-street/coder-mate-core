@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_BasicSyntax(t *testing.T) {
+	t.Parallel()
+
 	code := `package main
 
 import "fmt"
@@ -51,18 +53,24 @@ func nilCheck(p *int) bool {
 }
 
 func TestParse_BlockComment(t *testing.T) {
+	t.Parallel()
+
 	code := `/* block */ var x = 1`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "comment.block.go")
 }
 
 func TestParse_RawString(t *testing.T) {
+	t.Parallel()
+
 	code := "var s = `raw\nstring`"
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "string.quoted.raw.go")
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows, got %d", len(rows))
@@ -70,6 +78,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_UnclosedString(t *testing.T) {
+	t.Parallel()
+
 	code := `s := "unclosed`
 	tokens := flatten(Language.Parse(code))
 	if len(tokens) == 0 {
@@ -88,12 +98,16 @@ func TestParse_UnclosedString(t *testing.T) {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "go" {
 		t.Errorf("expected ID 'go', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	found := false
 	for _, a := range aliases {
@@ -127,6 +141,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -138,4 +154,61 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `func F(a int) string { return "s" }`, []seqTok{
+			{"func", "keyword.declaration.go"},
+			{" ", "default"},
+			{"F(", "entity.name.function.go"},
+			{"a", "default"},
+			{" ", "default"},
+			{"int", "support.type.builtin.go"},
+			{")", "operator.go"},
+			{" ", "default"},
+			{"string", "support.type.builtin.go"},
+			{" ", "default"},
+			{"{", "operator.go"},
+			{" ", "default"},
+			{"return", "keyword.control.go"},
+			{" ", "default"},
+			{"\"", "string.quoted.double.go"},
+			{"s", "string.quoted.double.go"},
+			{"\"", "string.quoted.double.go"},
+			{" ", "default"},
+			{"}", "operator.go"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

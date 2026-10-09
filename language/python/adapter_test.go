@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_MissingKeywords(t *testing.T) {
+	t.Parallel()
+
 	// 2.4 回归：这些关键字此前落入 identifier（Python 关键字表缺口）
 	for _, kw := range []string{"assert", "del", "global", "nonlocal"} {
 		tokens := flatten(Language.Parse(kw + " x"))
@@ -22,6 +24,8 @@ func TestParse_MissingKeywords(t *testing.T) {
 }
 
 func TestParse_NumberLiterals(t *testing.T) {
+	t.Parallel()
+
 	// 2.4 回归：此前数字规则不支持 0x/0o/0b 前缀与下划线分隔
 	for _, lit := range []string{"0x1F", "0o17", "0b101", "1_000", "1_000.5"} {
 		tokens := flatten(Language.Parse(lit))
@@ -36,6 +40,8 @@ func TestParse_NumberLiterals(t *testing.T) {
 }
 
 func TestParse_BasicSyntax(t *testing.T) {
+	t.Parallel()
+
 	code := `# comment
 def greet(name: str) -> str:
     if name:
@@ -75,6 +81,8 @@ data = {"key": "value"}
 }
 
 func TestParse_Decorator(t *testing.T) {
+	t.Parallel()
+
 	code := `@app.route('/')
 def index():
     return "ok"`
@@ -83,6 +91,8 @@ def index():
 }
 
 func TestParse_TripleStrings(t *testing.T) {
+	t.Parallel()
+
 	code := `s = """hello
 world"""
 t = '''single
@@ -93,6 +103,8 @@ triple'''`
 }
 
 func TestParse_FString(t *testing.T) {
+	t.Parallel()
+
 	code := `name = "world"
 msg = f"Hello, {name}!"`
 	tokens := flatten(Language.Parse(code))
@@ -102,6 +114,8 @@ msg = f"Hello, {name}!"`
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows, got %d", len(rows))
@@ -109,6 +123,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_UnclosedString(t *testing.T) {
+	t.Parallel()
+
 	code := "s = \"unclosed"
 	tokens := flatten(Language.Parse(code))
 	if len(tokens) == 0 {
@@ -127,12 +143,16 @@ func TestParse_UnclosedString(t *testing.T) {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "python" {
 		t.Errorf("expected ID 'python', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	found := false
 	for _, a := range aliases {
@@ -166,6 +186,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -177,4 +199,49 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `x = 1  # note`, []seqTok{
+			{"x", "variable.identifier.python"},
+			{" ", "default"},
+			{"=", "operator.python"},
+			{" ", "default"},
+			{"1", "constant.numeric.python"},
+			{"  ", "default"},
+			{"# note", "comment.line.number-sign.python"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

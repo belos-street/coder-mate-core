@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_SelectorsAndDeclarations(t *testing.T) {
+	t.Parallel()
+
 	code := `.card:hover::before, #app[data-theme="dark"] {
   color: #1f2937;
   margin: 12px 8px;
@@ -28,6 +30,8 @@ func TestParse_SelectorsAndDeclarations(t *testing.T) {
 }
 
 func TestParse_CommentsAndFunctions(t *testing.T) {
+	t.Parallel()
+
 	code := `/* reset */
 @media screen and (min-width: 768px) {
   .box {
@@ -45,6 +49,8 @@ func TestParse_CommentsAndFunctions(t *testing.T) {
 }
 
 func TestParse_UnclosedCommentAndString(t *testing.T) {
+	t.Parallel()
+
 	code := `.title { content: "hello
 /* not closed`
 	tokens := flatten(Language.Parse(code))
@@ -65,6 +71,8 @@ func TestParse_UnclosedCommentAndString(t *testing.T) {
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows, got %d", len(rows))
@@ -72,6 +80,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_TagAndPseudoSelectors(t *testing.T) {
+	t.Parallel()
+
 	code := `div:hover { color: red; }`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "entity.name.tag.css")
@@ -82,6 +92,8 @@ func TestParse_TagAndPseudoSelectors(t *testing.T) {
 }
 
 func TestParse_AttrSelectors(t *testing.T) {
+	t.Parallel()
+
 	code := `input[type="text"] { }`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "entity.name.tag.css")
@@ -91,6 +103,8 @@ func TestParse_AttrSelectors(t *testing.T) {
 }
 
 func TestParse_NestedAtRules(t *testing.T) {
+	t.Parallel()
+
 	code := `@media screen {
   @supports (display: flex) {
     .box { display: flex; }
@@ -103,18 +117,24 @@ func TestParse_NestedAtRules(t *testing.T) {
 }
 
 func TestParse_SingleQuotedString(t *testing.T) {
+	t.Parallel()
+
 	code := `a[href='test'] { color: red; }`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "string.quoted.single.css")
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "css" {
 		t.Errorf("expected ID 'css', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	if len(aliases) != 0 {
 		t.Errorf("expected empty aliases, got %v", aliases)
@@ -141,6 +161,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -152,4 +174,60 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `body { margin: 0 auto; } /* c */`, []seqTok{
+			{"body", "entity.name.tag.css"},
+			{" ", "default"},
+			{"{", "punctuation.section.block.begin.css"},
+			{" ", "default"},
+			{"margin:", "support.type.property-name.css"},
+			{" ", "default"},
+			{"0", "constant.numeric.css"},
+			{" ", "default"},
+			{"a", "default"},
+			{"u", "default"},
+			{"t", "default"},
+			{"o", "default"},
+			{";", "punctuation.terminator.rule.css"},
+			{" ", "default"},
+			{"}", "punctuation.section.block.end.css"},
+			{" ", "default"},
+			{"/*", "comment.block.css"},
+			{" c */", "comment.block.css"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

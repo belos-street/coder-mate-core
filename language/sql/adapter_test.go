@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_BasicQuery(t *testing.T) {
+	t.Parallel()
+
 	code := `SELECT u.id, u.name, COUNT(o.id) AS order_count
 FROM users u
 LEFT JOIN orders o ON o.user_id = u.id
@@ -29,6 +31,8 @@ LIMIT 10;`
 }
 
 func TestParse_CommentsAndStrings(t *testing.T) {
+	t.Parallel()
+
 	code := `-- fetch one user
 SELECT "display_name"
 FROM "users"
@@ -59,6 +63,8 @@ WHERE id = $1
 }
 
 func TestParse_UnclosedCommentAndString(t *testing.T) {
+	t.Parallel()
+
 	code := `SELECT 'hello
 /* not closed`
 	tokens := flatten(Language.Parse(code))
@@ -80,6 +86,8 @@ func TestParse_UnclosedCommentAndString(t *testing.T) {
 }
 
 func TestParse_LineTracking(t *testing.T) {
+	t.Parallel()
+
 	code := `SELECT id
 FROM users
 WHERE id = 1;`
@@ -105,6 +113,8 @@ WHERE id = 1;`
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows for empty input, got %d", len(rows))
@@ -112,12 +122,16 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_TableNameQuoted(t *testing.T) {
+	t.Parallel()
+
 	code := `SELECT * FROM "users" WHERE id = 1;`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "entity.name.table.sql")
 }
 
 func TestParse_JoinWithAlias(t *testing.T) {
+	t.Parallel()
+
 	code := `SELECT * FROM users AS u JOIN orders AS o ON u.id = o.user_id`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "keyword.control.sql")
@@ -126,18 +140,24 @@ func TestParse_JoinWithAlias(t *testing.T) {
 }
 
 func TestParse_BacktickIdentifiers(t *testing.T) {
+	t.Parallel()
+
 	code := "SELECT `first_name` FROM `users`"
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "entity.name.column.sql")
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "sql" {
 		t.Errorf("expected ID 'sql', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	expected := []string{"postgresql", "pgsql"}
 	for _, exp := range expected {
@@ -174,6 +194,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -185,4 +207,60 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `SELECT * FROM t WHERE id = 1; -- c`, []seqTok{
+			{"SELECT", "keyword.control.sql"},
+			{" ", "default"},
+			{"*", "keyword.operator.sql"},
+			{" ", "default"},
+			{"FROM", "keyword.control.sql"},
+			{" ", "default"},
+			{"t", "entity.name.table.sql"},
+			{" ", "default"},
+			{"WHERE", "keyword.control.sql"},
+			{" ", "default"},
+			{"id", "entity.name.column.sql"},
+			{" ", "default"},
+			{"=", "keyword.operator.sql"},
+			{" ", "default"},
+			{"1", "constant.numeric.sql"},
+			{";", "punctuation.terminator.statement.sql"},
+			{" ", "default"},
+			{"-- c", "comment.line.double-dash.sql"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

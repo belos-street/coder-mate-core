@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_NegativeNumberSequenceItem(t *testing.T) {
+	t.Parallel()
+
 	// 2.4 回归：此前 numeric 规则先于 '-'，-5 被整体吃成数字
 	tokens := flatten(Language.Parse("-5"))
 	if len(tokens) < 2 {
@@ -22,6 +24,8 @@ func TestParse_NegativeNumberSequenceItem(t *testing.T) {
 }
 
 func TestParse_BasicMappingAndSequence(t *testing.T) {
+	t.Parallel()
+
 	code := `name: coder-mate
 version: 1
 enabled: true
@@ -42,6 +46,8 @@ meta: null`
 }
 
 func TestParse_CommentsAndDocuments(t *testing.T) {
+	t.Parallel()
+
 	code := `---
 # app config
 defaults: &defaults
@@ -61,6 +67,8 @@ profile:
 }
 
 func TestParse_UnclosedStrings(t *testing.T) {
+	t.Parallel()
+
 	code := `name: "coder
 title: 'mate`
 	tokens := flatten(Language.Parse(code))
@@ -82,6 +90,8 @@ title: 'mate`
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows for empty input, got %d", len(rows))
@@ -89,6 +99,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_LineTracking(t *testing.T) {
+	t.Parallel()
+
 	code := "a: 1\nb: 2\nc: 3"
 	rows := Language.Parse(code)
 	if len(rows) < 3 {
@@ -104,12 +116,16 @@ func TestParse_LineTracking(t *testing.T) {
 }
 
 func TestParse_SingleQuotedString(t *testing.T) {
+	t.Parallel()
+
 	code := `title: 'hello world'`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "string.quoted.single.yaml")
 }
 
 func TestParse_NestedCollections(t *testing.T) {
+	t.Parallel()
+
 	code := `list:
   - [1, 2]
   - {x: 1, y: 2}`
@@ -119,6 +135,8 @@ func TestParse_NestedCollections(t *testing.T) {
 }
 
 func TestParse_NullVariants(t *testing.T) {
+	t.Parallel()
+
 	code := `a: null
 b: ~`
 	tokens := flatten(Language.Parse(code))
@@ -135,12 +153,16 @@ b: ~`
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "yaml" {
 		t.Errorf("expected ID 'yaml', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	found := false
 	for _, a := range aliases {
@@ -174,6 +196,8 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -185,4 +209,52 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `k: [1, true] # c`, []seqTok{
+			{"k:", "support.type.property-name.yaml"},
+			{" ", "default"},
+			{"[", "punctuation.section.flow.yaml"},
+			{"1", "constant.numeric.yaml"},
+			{",", "punctuation.section.flow.yaml"},
+			{" ", "default"},
+			{"true", "constant.language.boolean.yaml"},
+			{"]", "punctuation.section.flow.yaml"},
+			{" ", "default"},
+			{"# c", "comment.line.number-sign.yaml"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }

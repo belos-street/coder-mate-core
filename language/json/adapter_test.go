@@ -8,6 +8,8 @@ import (
 )
 
 func TestParse_ObjectAndArray(t *testing.T) {
+	t.Parallel()
+
 	code := `{
   "name": "coder-mate",
   "count": 3,
@@ -33,6 +35,8 @@ func TestParse_ObjectAndArray(t *testing.T) {
 }
 
 func TestParse_NumericFormats(t *testing.T) {
+	t.Parallel()
+
 	code := `{"a": -12.5e+2, "b": 0, "c": 1.23E-4}`
 	tokens := flatten(Language.Parse(code))
 
@@ -62,6 +66,8 @@ func TestParse_NumericFormats(t *testing.T) {
 }
 
 func TestParse_EmptyObject(t *testing.T) {
+	t.Parallel()
+
 	code := `{}`
 	rows := Language.Parse(code)
 	if len(rows) == 0 {
@@ -70,6 +76,8 @@ func TestParse_EmptyObject(t *testing.T) {
 }
 
 func TestParse_NestedArrays(t *testing.T) {
+	t.Parallel()
+
 	code := `[[1, 2], [3, 4]]`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "meta.structure.array.json")
@@ -77,6 +85,8 @@ func TestParse_NestedArrays(t *testing.T) {
 }
 
 func TestParse_EmptyString(t *testing.T) {
+	t.Parallel()
+
 	rows := Language.Parse("")
 	if len(rows) != 0 {
 		t.Errorf("expected 0 rows for empty input, got %d", len(rows))
@@ -84,6 +94,8 @@ func TestParse_EmptyString(t *testing.T) {
 }
 
 func TestParse_UnclosedString(t *testing.T) {
+	t.Parallel()
+
 	code := `{"key": "unclosed`
 	rows := Language.Parse(code)
 	if len(rows) == 0 {
@@ -92,6 +104,8 @@ func TestParse_UnclosedString(t *testing.T) {
 }
 
 func TestParse_BooleanValues(t *testing.T) {
+	t.Parallel()
+
 	code := `{"a": true, "b": false}`
 	tokens := flatten(Language.Parse(code))
 
@@ -114,6 +128,8 @@ func TestParse_BooleanValues(t *testing.T) {
 }
 
 func TestParse_NullValue(t *testing.T) {
+	t.Parallel()
+
 	code := `{"a": null}`
 	tokens := flatten(Language.Parse(code))
 
@@ -130,6 +146,8 @@ func TestParse_NullValue(t *testing.T) {
 }
 
 func TestParse_StringWithEscapes(t *testing.T) {
+	t.Parallel()
+
 	code := `{"msg": "hello\nworld\t\"escaped\""}`
 	tokens := flatten(Language.Parse(code))
 	checkScopeExists(t, tokens, "string.quoted.double.json")
@@ -137,6 +155,8 @@ func TestParse_StringWithEscapes(t *testing.T) {
 }
 
 func TestParse_LineTracking(t *testing.T) {
+	t.Parallel()
+
 	code := "{\n  \"key\": 42\n}"
 	rows := Language.Parse(code)
 	if len(rows) < 3 {
@@ -170,12 +190,16 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 }
 
 func TestAdapter_ID(t *testing.T) {
+	t.Parallel()
+
 	if Language.ID() != "json" {
 		t.Errorf("expected ID 'json', got %q", Language.ID())
 	}
 }
 
 func TestAdapter_Aliases(t *testing.T) {
+	t.Parallel()
+
 	aliases := Language.Aliases()
 	if len(aliases) != 0 {
 		t.Errorf("expected empty aliases, got %v", aliases)
@@ -184,6 +208,8 @@ func TestAdapter_Aliases(t *testing.T) {
 
 // 多字节字符不得被字节级切碎（分词无损性）
 func TestParse_MultibyteLossless(t *testing.T) {
+	t.Parallel()
+
 	stream := Language.Parse("值")
 
 	var b strings.Builder
@@ -195,4 +221,57 @@ func TestParse_MultibyteLossless(t *testing.T) {
 	if got := b.String(); got != "值" {
 		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
+}
+
+// 精确 token 序列（行为锁定）：任何规则变更都会在此显式失败
+func TestParse_TokenSequence(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		code string
+		want []seqTok
+	}{
+		{"representative", `{"k": [1, true, null]}`, []seqTok{
+			{"{", "meta.structure.dictionary.json"},
+			{"\"", "string.quoted.double.json"},
+			{"k\"", "string.quoted.double.json"},
+			{":", "punctuation.separator.key-value.json"},
+			{" ", "default"},
+			{"[", "meta.structure.array.json"},
+			{"1", "constant.numeric.json"},
+			{",", "punctuation.separator.value.json"},
+			{" ", "default"},
+			{"true", "constant.language.boolean.json"},
+			{",", "punctuation.separator.value.json"},
+			{" ", "default"},
+			{"null", "constant.language.null.json"},
+			{"]", "meta.structure.array.json"},
+			{"}", "meta.structure.dictionary.json"},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			var got []seqTok
+			for _, row := range Language.Parse(tt.code) {
+				for _, tok := range row {
+					got = append(got, seqTok{tok.Text, tok.Scope})
+				}
+			}
+			if len(got) != len(tt.want) {
+				t.Fatalf("token count = %d, want %d\ngot:  %+v", len(got), len(tt.want), got)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("token %d = %+v, want %+v", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+type seqTok struct {
+	Text  string
+	Scope string
 }
