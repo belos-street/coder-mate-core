@@ -67,6 +67,30 @@ func escapeHtml(text string) string {
 	return b.String()
 }
 
+// escapeHtmlAttr 转义 HTML 属性值：防止含引号的选项值（如 preStyle /
+// lineClassPrefix）破出属性边界形成注入面。
+func escapeHtmlAttr(s string) string {
+	var b strings.Builder
+	b.Grow(len(s) + 8)
+	for _, r := range s {
+		switch r {
+		case '&':
+			b.WriteString("&amp;")
+		case '<':
+			b.WriteString("&lt;")
+		case '>':
+			b.WriteString("&gt;")
+		case '"':
+			b.WriteString("&quot;")
+		case '\'':
+			b.WriteString("&#39;")
+		default:
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
+}
+
 func parseInlineStyle(styleText string) core.TokenStyle {
 	style := make(core.TokenStyle)
 	declarations := strings.Split(styleText, ";")
@@ -233,7 +257,7 @@ func (h *highlighter) CodeToHtml(code, lang string, opts ...HtmlOption) (string,
 	var rowsHtml strings.Builder
 	for rowIndex, rowTokens := range rows {
 		rowsHtml.WriteString(`<div class="code-line `)
-		rowsHtml.WriteString(lineClassPrefix)
+		rowsHtml.WriteString(escapeHtmlAttr(lineClassPrefix))
 		rowsHtml.WriteString(fmt.Sprintf("%d", rowIndex+1))
 		rowsHtml.WriteString(`">`)
 
@@ -249,7 +273,7 @@ func (h *highlighter) CodeToHtml(code, lang string, opts ...HtmlOption) (string,
 		rowsHtml.WriteString(`</div>`)
 	}
 
-	return `<pre style="` + preStyle + `"><code>` + rowsHtml.String() + `</code></pre>`, nil
+	return `<pre style="` + escapeHtmlAttr(preStyle) + `"><code>` + rowsHtml.String() + `</code></pre>`, nil
 }
 
 func (h *highlighter) UpdateTheme(t interface{}) error {

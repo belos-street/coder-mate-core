@@ -581,3 +581,29 @@ func TestConcurrentHighlighting(t *testing.T) {
 	}
 	wg.Wait()
 }
+
+func TestCodeToHtml_AttributeInjectionEscaped(t *testing.T) {
+	hl := NewHighlighter(HighlighterOptions{
+		PreStyle:        `background: red; " onmouseover="alert(1)`,
+		LineClassPrefix: `ln-" onfocus="alert(2)`,
+	})
+
+	html, err := hl.CodeToHtml("const x = 1;", "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// 属性值内的引号必须被转义，注入载荷不得以属性边界破出的形式出现
+	if strings.Contains(html, `" onmouseover="alert(1)`) {
+		t.Error("preStyle attribute injection not escaped")
+	}
+	if strings.Contains(html, `" onfocus="alert(2)`) {
+		t.Error("lineClassPrefix attribute injection not escaped")
+	}
+	if !strings.Contains(html, "&quot; onmouseover=&quot;alert(1)") {
+		t.Error("expected escaped preStyle in style attribute")
+	}
+	if !strings.Contains(html, `class="code-line ln-&quot; onfocus=&quot;alert(2)1"`) {
+		t.Error("expected escaped lineClassPrefix in class attribute")
+	}
+}
