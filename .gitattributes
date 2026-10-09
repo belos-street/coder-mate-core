@@ -1,0 +1,14 @@
+# 统一 LF 行尾：跨平台协作下避免 CRLF 伪 diff，保证 gofmt 合规
+* text=auto eol=lf
+
+# 二进制文件不做行尾/编码处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.exe binary
+*.dll binary
+*.wasm binary

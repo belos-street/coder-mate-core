@@ -1,6 +1,5 @@
 package darkplus
 
-
 var CssStyles = map[string]string{
 	"comment.block.css":                              "color: #6A9955; font-style: italic;",
 	"constant.numeric.css":                           "color: #B5CEA8;",

@@ -27,9 +27,9 @@ const (
 )
 
 const (
-	GrammarStateGlobal        = "global"
-	GrammarStateCommentBlock  = "comment-block"
-	GrammarStateStringDouble  = "string-double"
-	GrammarStateStringSingle  = "string-single"
+	GrammarStateGlobal         = "global"
+	GrammarStateCommentBlock   = "comment-block"
+	GrammarStateStringDouble   = "string-double"
+	GrammarStateStringSingle   = "string-single"
 	GrammarStateStringBacktick = "string-backtick"
 )

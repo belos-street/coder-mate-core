@@ -56,7 +56,7 @@ var GrammarRules = map[string][]core.GrammarRule{
 		{Regex: regexp.MustCompile(`^.`), Scope: ScopeStringSingle},
 	},
 	GrammarStateStringBacktick: {
-		{Regex: regexp.MustCompile(`^[^`+"`"+`\\\n]+`), Scope: ScopeStringBacktick},
+		{Regex: regexp.MustCompile(`^[^` + "`" + `\\\n]+`), Scope: ScopeStringBacktick},
 		{Regex: regexp.MustCompile(`^\\.`), Scope: ScopeStringBacktick},
 		{Regex: regexp.MustCompile("^`"), Scope: ScopeStringBacktick, PopState: true},
 		{Regex: regexp.MustCompile(`^.`), Scope: ScopeStringBacktick},

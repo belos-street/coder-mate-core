@@ -215,7 +215,7 @@ func TestResolveScopeStyle_Exact(t *testing.T) {
 		DisplayName:  "Test",
 		DefaultStyle: "color: #000;",
 		Styles: ThemeStyleMap{
-			"comment.line.js": "color: #6A9955;",
+			"comment.line.js":  "color: #6A9955;",
 			"comment.block.js": "color: #6A9955; font-style: italic;",
 		},
 	}
@@ -253,7 +253,7 @@ func TestResolveScopeStyle_FallbackToDefaultStyle(t *testing.T) {
 		ID:           "test",
 		DisplayName:  "Test",
 		DefaultStyle: "color: #999;",
-		Styles: ThemeStyleMap{},
+		Styles:       ThemeStyleMap{},
 	}
 
 	style := ResolveScopeStyle("completely.unknown.scope", theme)
@@ -317,7 +317,7 @@ func TestCreateThemeVariant_ColorReplacement(t *testing.T) {
 
 func TestCreateThemeVariant_UnmappedColorPreserved(t *testing.T) {
 	base := &HighlightTheme{
-		ID:   "base",
+		ID: "base",
 		Styles: ThemeStyleMap{
 			"keyword": "color: #569CD6; font-weight: bold;",
 		},
@@ -337,7 +337,7 @@ func TestCreateThemeVariant_UnmappedColorPreserved(t *testing.T) {
 
 func TestCreateThemeVariant_CaseInsensitiveColor(t *testing.T) {
 	base := &HighlightTheme{
-		ID:   "base",
+		ID: "base",
 		Styles: ThemeStyleMap{
 			"keyword": "color: #569cd6;",
 		},

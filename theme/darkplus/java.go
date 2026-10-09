@@ -1,6 +1,5 @@
 package darkplus
 
-
 var JavaStyles = map[string]string{
 	"comment.block.java":             "color: #6A9955; font-style: italic;",
 	"comment.line.double-slash.java": "color: #6A9955;",

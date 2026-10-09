@@ -1,8 +1,7 @@
 package darkplus
 
-
 var RustStyles = map[string]string{
-	"comment.block.rust":            "color: #6A9955; font-style: italic;",
+	"comment.block.rust":             "color: #6A9955; font-style: italic;",
 	"comment.line.double-slash.rust": "color: #6A9955;",
 	"constant.language.boolean.rust": "color: #569CD6;",
 	"constant.language.null.rust":    "color: #569CD6;",
