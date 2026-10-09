@@ -1,0 +1,244 @@
+{
+  "lang": "rust",
+  "case": "hello",
+  "code": "fn main() { let v: Vec<i32> = vec![1, 2]; println!(\"{}\", v[0]); }\n",
+  "tokens": [
+    [
+      {
+        "t": "fn",
+        "s": "keyword.declaration.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "main",
+        "s": "entity.name.function.rust",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "let",
+        "s": "keyword.declaration.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "v",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "Vec",
+        "s": "support.type.builtin.rust",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "i32",
+        "s": "support.type.builtin.rust",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "vec",
+        "s": "entity.name.macro.rust",
+        "l": 1
+      },
+      {
+        "t": "!",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.rust",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.rust",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "println",
+        "s": "entity.name.macro.rust",
+        "l": 1
+      },
+      {
+        "t": "!",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.rust",
+        "l": 1
+      },
+      {
+        "t": "{}",
+        "s": "string.quoted.double.rust",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.rust",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "v",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.rust",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "lang": "go",
+  "case": "generics",
+  "code": "func F[T any](v T) *T { s := []byte(`raw`); return nil }\n",
+  "tokens": [
+    [
+      {
+        "t": "func",
+        "s": "keyword.declaration.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "F",
+        "s": "entity.name.type.go",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "T",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "any",
+        "s": "support.type.builtin.go",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "v",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "T",
+        "s": "entity.name.type.go",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "*",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "T",
+        "s": "entity.name.type.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "s",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ":=",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "byte",
+        "s": "support.type.builtin.go",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "`",
+        "s": "string.quoted.raw.go",
+        "l": 1
+      },
+      {
+        "t": "raw",
+        "s": "string.quoted.raw.go",
+        "l": 1
+      },
+      {
+        "t": "`",
+        "s": "string.quoted.raw.go",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "return",
+        "s": "keyword.control.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "nil",
+        "s": "constant.language.null.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

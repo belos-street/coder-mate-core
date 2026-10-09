@@ -1,0 +1,236 @@
+{
+  "lang": "sql",
+  "case": "dml",
+  "code": "INSERT INTO t (a, b) VALUES (1, 'x');\nUPDATE t SET a = 2 WHERE b IS NULL;\n",
+  "tokens": [
+    [
+      {
+        "t": "INSERT",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "INTO",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "t",
+        "s": "entity.name.table.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "punctuation.section.group.begin.sql",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "entity.name.column.sql",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.comma.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "b",
+        "s": "entity.name.column.sql",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "punctuation.section.group.end.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "VALUES",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "punctuation.section.group.begin.sql",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.sql",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.comma.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.sql",
+        "l": 1
+      },
+      {
+        "t": "x'",
+        "s": "string.quoted.single.sql",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "punctuation.section.group.end.sql",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.statement.sql",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "UPDATE",
+        "s": "keyword.control.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "t",
+        "s": "entity.name.table.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "SET",
+        "s": "keyword.control.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "a",
+        "s": "entity.name.column.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "keyword.operator.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "WHERE",
+        "s": "keyword.control.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "b",
+        "s": "entity.name.column.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "IS",
+        "s": "keyword.control.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "NULL",
+        "s": "constant.language.null.sql",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.statement.sql",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

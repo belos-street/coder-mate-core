@@ -1,0 +1,131 @@
+{
+  "lang": "java",
+  "case": "annotation",
+  "code": "/** javadoc */\n@interface A { String v() default \"x\"; }\n",
+  "tokens": [
+    [
+      {
+        "t": "/*",
+        "s": "comment.block.java",
+        "l": 1
+      },
+      {
+        "t": "* javadoc */",
+        "s": "comment.block.java",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "@interface",
+        "s": "meta.annotation.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "A",
+        "s": "entity.name.type.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "String",
+        "s": "support.type.builtin.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "v",
+        "s": "entity.name.function.java",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.java",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "default",
+        "s": "keyword.modifier.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.java",
+        "l": 2
+      },
+      {
+        "t": "x",
+        "s": "string.quoted.double.java",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.java",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.java",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.java",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

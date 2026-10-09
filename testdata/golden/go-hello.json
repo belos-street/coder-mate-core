@@ -1,0 +1,172 @@
+{
+  "lang": "go",
+  "case": "hello",
+  "code": "package main\n\nimport \"fmt\"\n\nfunc main() { fmt.Println(\"hi\") }\n",
+  "tokens": [
+    [
+      {
+        "t": "package",
+        "s": "keyword.declaration.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "main",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "import",
+        "s": "keyword.declaration.go",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.go",
+        "l": 3
+      },
+      {
+        "t": "fmt",
+        "s": "string.quoted.double.go",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.go",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ],
+    [
+      {
+        "t": "func",
+        "s": "keyword.declaration.go",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "main",
+        "s": "entity.name.function.go",
+        "l": 5
+      },
+      {
+        "t": "(",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": ")",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "{",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "fmt",
+        "s": "entity.name.namespace.go",
+        "l": 5
+      },
+      {
+        "t": ".",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": "Println",
+        "s": "entity.name.function.go",
+        "l": 5
+      },
+      {
+        "t": "(",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.go",
+        "l": 5
+      },
+      {
+        "t": "hi",
+        "s": "string.quoted.double.go",
+        "l": 5
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.go",
+        "l": 5
+      },
+      {
+        "t": ")",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "}",
+        "s": "operator.go",
+        "l": 5
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 5
+      }
+    ]
+  ]
+}

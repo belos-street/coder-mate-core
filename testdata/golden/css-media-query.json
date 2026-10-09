@@ -1,0 +1,169 @@
+{
+  "lang": "css",
+  "case": "media-query",
+  "code": "@media (max-width: 600px) { .x { --v: calc(1px + 2em); } }\n",
+  "tokens": [
+    [
+      {
+        "t": "@media",
+        "s": "keyword.control.at-rule.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "max-width",
+        "s": "entity.name.tag.css",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "600px",
+        "s": "constant.numeric.css",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "punctuation.section.block.begin.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ".x",
+        "s": "entity.other.attribute-name.class.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "punctuation.section.block.begin.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "--v",
+        "s": "variable.parameter.custom-property.css",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "calc",
+        "s": "support.function.css",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "1px",
+        "s": "constant.numeric.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "+",
+        "s": "operator.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "2em",
+        "s": "constant.numeric.css",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.rule.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "punctuation.section.block.end.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "punctuation.section.block.end.css",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

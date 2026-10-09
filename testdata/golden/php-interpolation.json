@@ -1,0 +1,120 @@
+{
+  "lang": "php",
+  "case": "interpolation",
+  "code": "<?php\n$name = 'world';\necho \"hi $name\";\n?>\n",
+  "tokens": [
+    [
+      {
+        "t": "<?php",
+        "s": "meta.tag.php",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "$name",
+        "s": "variable.other.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.php",
+        "l": 2
+      },
+      {
+        "t": "world",
+        "s": "string.quoted.single.php",
+        "l": 2
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.php",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "echo",
+        "s": "keyword.control.php",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.php",
+        "l": 3
+      },
+      {
+        "t": "hi ",
+        "s": "string.quoted.double.php",
+        "l": 3
+      },
+      {
+        "t": "$name",
+        "s": "variable.other.php",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.php",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.php",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "?>",
+        "s": "meta.tag.php",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ]
+  ]
+}

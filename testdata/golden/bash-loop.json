@@ -1,0 +1,158 @@
+{
+  "lang": "bash",
+  "case": "loop",
+  "code": "#!/bin/bash\nset -euo pipefail\nfor f in *.txt; do echo \"$f\"; done\n",
+  "tokens": [
+    [
+      {
+        "t": "#!/bin/bash",
+        "s": "comment.line.number-sign.bash",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "set",
+        "s": "support.function.builtin.bash",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "-euo",
+        "s": "entity.name.command.bash",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "pipefail",
+        "s": "entity.name.command.bash",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "for",
+        "s": "keyword.control.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "f",
+        "s": "entity.name.command.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "in",
+        "s": "keyword.control.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "*",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": ".txt",
+        "s": "entity.name.command.bash",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "do",
+        "s": "keyword.control.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "echo",
+        "s": "support.function.builtin.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.bash",
+        "l": 3
+      },
+      {
+        "t": "$f",
+        "s": "variable.parameter.bash",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.bash",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.bash",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "done",
+        "s": "keyword.control.bash",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

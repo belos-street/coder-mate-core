@@ -1,0 +1,274 @@
+{
+  "lang": "python",
+  "case": "control-flow",
+  "code": "import os\nfrom sys import path\ntry:\n    y = [i ** 2 for i in range(10)]\nexcept ValueError as e:\n    raise\n",
+  "tokens": [
+    [
+      {
+        "t": "import",
+        "s": "keyword.control.python",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "os",
+        "s": "variable.identifier.python",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "from",
+        "s": "keyword.control.python",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "sys",
+        "s": "variable.identifier.python",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "import",
+        "s": "keyword.control.python",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "path",
+        "s": "variable.identifier.python",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "try",
+        "s": "keyword.control.python",
+        "l": 3
+      },
+      {
+        "t": ":",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "    ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "y",
+        "s": "variable.identifier.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "=",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "[",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": "i",
+        "s": "variable.identifier.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "**",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "for",
+        "s": "keyword.control.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "i",
+        "s": "variable.comprehension.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "in",
+        "s": "keyword.control.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "range",
+        "s": "support.function.builtin.python",
+        "l": 4
+      },
+      {
+        "t": "(",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": "10",
+        "s": "constant.numeric.python",
+        "l": 4
+      },
+      {
+        "t": ")",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": "]",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ],
+    [
+      {
+        "t": "except",
+        "s": "keyword.control.python",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "ValueError",
+        "s": "support.type.annotation.python",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "as",
+        "s": "keyword.control.python",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "e",
+        "s": "variable.alias.python",
+        "l": 5
+      },
+      {
+        "t": ":",
+        "s": "operator.python",
+        "l": 5
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 5
+      }
+    ],
+    [
+      {
+        "t": "    ",
+        "s": "default",
+        "l": 6
+      },
+      {
+        "t": "raise",
+        "s": "keyword.control.python",
+        "l": 6
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 6
+      }
+    ]
+  ]
+}

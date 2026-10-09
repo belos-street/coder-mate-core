@@ -1,0 +1,111 @@
+{
+  "lang": "html",
+  "case": "void-elements",
+  "code": "<input type=\"text\" value=\"v\" disabled>\n<img src=a.png>\n",
+  "tokens": [
+    [
+      {
+        "t": "<input",
+        "s": "entity.name.tag.html",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "type",
+        "s": "entity.other.attribute-name.html",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 1
+      },
+      {
+        "t": "\"text\"",
+        "s": "string.quoted.double.html",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "value",
+        "s": "entity.other.attribute-name.html",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 1
+      },
+      {
+        "t": "\"v\"",
+        "s": "string.quoted.double.html",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "disabled",
+        "s": "entity.other.attribute-name.html",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "<img",
+        "s": "entity.name.tag.html",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "src",
+        "s": "entity.other.attribute-name.html",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 2
+      },
+      {
+        "t": "a.png",
+        "s": "string.unquoted.html",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

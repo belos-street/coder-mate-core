@@ -1,0 +1,97 @@
+{
+  "lang": "markdown",
+  "case": "code-link",
+  "code": "```go\ncode block\n```\n\n[link](http://x.y) and `code`\n",
+  "tokens": [
+    [
+      {
+        "t": "```go",
+        "s": "markup.fenced-code.block.begin.markdown",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "code block",
+        "s": "string.unquoted.markdown",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "```",
+        "s": "markup.fenced-code.block.end.markdown",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ],
+    [
+      {
+        "t": "[link]",
+        "s": "markup.link.label.markdown",
+        "l": 5
+      },
+      {
+        "t": "(http://x.y)",
+        "s": "markup.link.url.markdown",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "and",
+        "s": "string.unquoted.markdown",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "`",
+        "s": "markup.inline.raw.markdown",
+        "l": 5
+      },
+      {
+        "t": "code",
+        "s": "markup.inline.raw.markdown",
+        "l": 5
+      },
+      {
+        "t": "`",
+        "s": "markup.inline.raw.markdown",
+        "l": 5
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 5
+      }
+    ]
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "lang": "typescript",
+  "case": "declare-enum",
+  "code": "declare enum E { A, B }\nlet u: string | null = null;\nconst w = v satisfies Partial<A>;\n",
+  "tokens": [
+    [
+      {
+        "t": "declare",
+        "s": "keyword.declaration.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "enum",
+        "s": "keyword.declaration.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "E",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "A",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "B",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "let",
+        "s": "keyword.declaration.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "u",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "string",
+        "s": "support.type.builtin.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "|",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "null",
+        "s": "constant.language.null.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "null",
+        "s": "constant.language.null.js",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "const",
+        "s": "keyword.declaration.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "w",
+        "s": "variable.identifier.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "v",
+        "s": "variable.identifier.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "satisfies",
+        "s": "keyword.operator.type.typescript",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "Partial",
+        "s": "support.type.builtin.typescript",
+        "l": 3
+      },
+      {
+        "t": "<",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "A",
+        "s": "entity.name.type.typescript",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

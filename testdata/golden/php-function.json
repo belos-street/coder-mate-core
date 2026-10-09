@@ -1,0 +1,189 @@
+{
+  "lang": "php",
+  "case": "function",
+  "code": "function f(int $x): ?string { return $x > 0 ? \"$x\" : null; }\n",
+  "tokens": [
+    [
+      {
+        "t": "function",
+        "s": "keyword.declaration.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "f",
+        "s": "entity.name.function.php",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "$x",
+        "s": "variable.other.php",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "?",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": "string",
+        "s": "support.type.builtin.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "return",
+        "s": "keyword.control.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "$x",
+        "s": "variable.other.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "?",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.php",
+        "l": 1
+      },
+      {
+        "t": "$x",
+        "s": "variable.other.php",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "null",
+        "s": "constant.language.null.php",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "lang": "rust",
+  "case": "rawstring-match",
+  "code": "/* block */\nlet r = r\"raw\\path\";\nmatch x { Some(y) => y, None => 0 }\n",
+  "tokens": [
+    [
+      {
+        "t": "/*",
+        "s": "comment.block.rust",
+        "l": 1
+      },
+      {
+        "t": " block */",
+        "s": "comment.block.rust",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "let",
+        "s": "keyword.declaration.rust",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "r",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "r\"",
+        "s": "string.quoted.raw.rust",
+        "l": 2
+      },
+      {
+        "t": "raw\\path\"",
+        "s": "string.quoted.raw.rust",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "match",
+        "s": "keyword.control.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "x",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "{",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "Some",
+        "s": "entity.name.function.rust",
+        "l": 3
+      },
+      {
+        "t": "(",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": "y",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": ")",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=>",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "y",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": ",",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "None",
+        "s": "constant.language.null.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=>",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.rust",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "}",
+        "s": "operator.rust",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

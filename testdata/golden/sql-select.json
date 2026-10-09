@@ -1,0 +1,139 @@
+{
+  "lang": "sql",
+  "case": "select",
+  "code": "SELECT id, name FROM users WHERE age > 21 ORDER BY name;\n",
+  "tokens": [
+    [
+      {
+        "t": "SELECT",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "id",
+        "s": "entity.name.column.sql",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.comma.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "name",
+        "s": "entity.name.column.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "FROM",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "users",
+        "s": "entity.name.table.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "WHERE",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "age",
+        "s": "entity.name.column.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "keyword.operator.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "21",
+        "s": "constant.numeric.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "ORDER",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "BY",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "name",
+        "s": "entity.name.column.sql",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.statement.sql",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "lang": "csharp",
+  "case": "collections",
+  "code": "var list = new List<int> { 1, 2 };\nstring s = @\"verbatim \\n\";\n",
+  "tokens": [
+    [
+      {
+        "t": "var",
+        "s": "support.type.builtin.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "list",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "new",
+        "s": "keyword.modifier.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "List",
+        "s": "support.type.builtin.csharp",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.csharp",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.csharp",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "string",
+        "s": "support.type.builtin.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "s",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "@\"",
+        "s": "string.quoted.verbatim.csharp",
+        "l": 2
+      },
+      {
+        "t": "verbatim \\n",
+        "s": "string.quoted.verbatim.csharp",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.verbatim.csharp",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

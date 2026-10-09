@@ -1,0 +1,180 @@
+{
+  "lang": "sql",
+  "case": "ddl",
+  "code": "CREATE TABLE t (\n  id INT PRIMARY KEY,\n  v VARCHAR(255) NOT NULL\n);\n",
+  "tokens": [
+    [
+      {
+        "t": "CREATE",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "TABLE",
+        "s": "keyword.control.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "t",
+        "s": "entity.name.table.sql",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "punctuation.section.group.begin.sql",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "id",
+        "s": "entity.name.column.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "INT",
+        "s": "entity.name.column.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "PRIMARY",
+        "s": "keyword.control.sql",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "KEY",
+        "s": "keyword.control.sql",
+        "l": 2
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.comma.sql",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "v",
+        "s": "entity.name.column.sql",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "VARCHAR",
+        "s": "entity.name.column.sql",
+        "l": 3
+      },
+      {
+        "t": "(",
+        "s": "punctuation.section.group.begin.sql",
+        "l": 3
+      },
+      {
+        "t": "255",
+        "s": "constant.numeric.sql",
+        "l": 3
+      },
+      {
+        "t": ")",
+        "s": "punctuation.section.group.end.sql",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "NOT",
+        "s": "keyword.control.sql",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "NULL",
+        "s": "constant.language.null.sql",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": ")",
+        "s": "punctuation.section.group.end.sql",
+        "l": 4
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.statement.sql",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ]
+  ]
+}

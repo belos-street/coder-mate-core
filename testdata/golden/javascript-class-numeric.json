@@ -1,0 +1,246 @@
+{
+  "lang": "javascript",
+  "case": "class-numeric",
+  "code": "class A extends B { constructor() { super(); this.v = new Map(); } }\nexport default 1e+10;\n",
+  "tokens": [
+    [
+      {
+        "t": "class",
+        "s": "keyword.control.class.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "A",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "extends",
+        "s": "keyword.control.class.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "B",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "constructor",
+        "s": "keyword.control.class.js",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "super",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "this",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": ".",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "v",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "new",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "Map",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "export",
+        "s": "keyword.control.module.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "default",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "1e",
+        "s": "constant.numeric.js",
+        "l": 2
+      },
+      {
+        "t": "+",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "10",
+        "s": "constant.numeric.js",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

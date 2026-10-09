@@ -1,0 +1,116 @@
+{
+  "lang": "python",
+  "case": "function-annotation",
+  "code": "def greet(name: str) -> str:\n    return f\"hi {name}\"\n",
+  "tokens": [
+    [
+      {
+        "t": "def",
+        "s": "keyword.declaration.python",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "greet",
+        "s": "entity.name.function.python",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.python",
+        "l": 1
+      },
+      {
+        "t": "name",
+        "s": "variable.identifier.python",
+        "l": 1
+      },
+      {
+        "t": ": str",
+        "s": "support.type.annotation.python",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.python",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "-> str",
+        "s": "support.type.annotation.python",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.python",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "    ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "return",
+        "s": "keyword.control.python",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "f\"",
+        "s": "string.interpolated.python",
+        "l": 2
+      },
+      {
+        "t": "hi ",
+        "s": "string.interpolated.python",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "punctuation.definition.interpolation.begin.python",
+        "l": 2
+      },
+      {
+        "t": "name",
+        "s": "variable.identifier.python",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "punctuation.definition.interpolation.end.python",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.interpolated.python",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

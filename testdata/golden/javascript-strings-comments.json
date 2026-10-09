@@ -1,0 +1,210 @@
+{
+  "lang": "javascript",
+  "case": "strings-comments",
+  "code": "/* block\n   comment */\nlet s = \"a\\\"b\" + 'c\\n';\nif (a === b) x?.y ?? z;\n",
+  "tokens": [
+    [
+      {
+        "t": "/*",
+        "s": "comment.block.js",
+        "l": 1
+      },
+      {
+        "t": " block",
+        "s": "comment.block.js",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "   comment */",
+        "s": "comment.block.js",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "let",
+        "s": "keyword.declaration.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "s",
+        "s": "variable.identifier.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.js",
+        "l": 3
+      },
+      {
+        "t": "a\\\"b\"",
+        "s": "string.quoted.double.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "+",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.js",
+        "l": 3
+      },
+      {
+        "t": "c\\n'",
+        "s": "string.quoted.single.js",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "if",
+        "s": "keyword.control.js",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 4
+      },
+      {
+        "t": "a",
+        "s": "variable.identifier.js",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "===",
+        "s": "operator.js",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "b",
+        "s": "variable.identifier.js",
+        "l": 4
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "x",
+        "s": "variable.identifier.js",
+        "l": 4
+      },
+      {
+        "t": "?.",
+        "s": "operator.optional-chaining.js",
+        "l": 4
+      },
+      {
+        "t": "y",
+        "s": "variable.identifier.js",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "??",
+        "s": "operator.nullish-coalescing.js",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "z",
+        "s": "variable.identifier.js",
+        "l": 4
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ]
+  ]
+}

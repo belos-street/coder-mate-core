@@ -1,0 +1,137 @@
+{
+  "lang": "yaml",
+  "case": "sequence-nested",
+  "code": "items:\n  - a\n  - b\nnested:\n  key: \"quoted # not comment\"\n",
+  "tokens": [
+    [
+      {
+        "t": "items",
+        "s": "support.type.property-name.yaml",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "-",
+        "s": "punctuation.definition.sequence.item.yaml",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "a",
+        "s": "string.unquoted.yaml",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "-",
+        "s": "punctuation.definition.sequence.item.yaml",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "b",
+        "s": "string.unquoted.yaml",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "nested",
+        "s": "support.type.property-name.yaml",
+        "l": 4
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "key",
+        "s": "support.type.property-name.yaml",
+        "l": 5
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 5
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 5
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.yaml",
+        "l": 5
+      },
+      {
+        "t": "quoted # not comment",
+        "s": "string.quoted.double.yaml",
+        "l": 5
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.yaml",
+        "l": 5
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 5
+      }
+    ]
+  ]
+}

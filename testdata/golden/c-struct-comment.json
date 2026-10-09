@@ -1,0 +1,225 @@
+{
+  "lang": "c",
+  "case": "struct-comment",
+  "code": "/* multi\nline */\nstatic const char *s = \"a\\0b\";\nstruct P { int x; float y; };\n",
+  "tokens": [
+    [
+      {
+        "t": "/*",
+        "s": "comment.block.c",
+        "l": 1
+      },
+      {
+        "t": " multi",
+        "s": "comment.block.c",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "line */",
+        "s": "comment.block.c",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "static",
+        "s": "keyword.modifier.c",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "const",
+        "s": "keyword.modifier.c",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "char",
+        "s": "support.type.builtin.c",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "*",
+        "s": "operator.c",
+        "l": 3
+      },
+      {
+        "t": "s",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=",
+        "s": "operator.c",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.c",
+        "l": 3
+      },
+      {
+        "t": "a",
+        "s": "string.quoted.double.c",
+        "l": 3
+      },
+      {
+        "t": "\\0",
+        "s": "string.quoted.double.c",
+        "l": 3
+      },
+      {
+        "t": "b",
+        "s": "string.quoted.double.c",
+        "l": 3
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.c",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "struct",
+        "s": "keyword.declaration.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "P",
+        "s": "entity.name.macro.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "{",
+        "s": "operator.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "x",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "float",
+        "s": "support.type.builtin.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "y",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "}",
+        "s": "operator.c",
+        "l": 4
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ]
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "lang": "markdown",
+  "case": "lists",
+  "code": "- item one\n- item two\n  - nested\n",
+  "tokens": [
+    [
+      {
+        "t": "- ",
+        "s": "markup.list.markdown",
+        "l": 1
+      },
+      {
+        "t": "item",
+        "s": "string.unquoted.markdown",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "one",
+        "s": "string.unquoted.markdown",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "- ",
+        "s": "markup.list.markdown",
+        "l": 2
+      },
+      {
+        "t": "item",
+        "s": "string.unquoted.markdown",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "two",
+        "s": "string.unquoted.markdown",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "- ",
+        "s": "markup.list.markdown",
+        "l": 3
+      },
+      {
+        "t": "nested",
+        "s": "string.unquoted.markdown",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

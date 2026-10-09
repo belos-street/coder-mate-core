@@ -1,0 +1,189 @@
+{
+  "lang": "css",
+  "case": "selectors",
+  "code": ".cls, #id > a:hover { background: url(img.png) no-repeat; }\n",
+  "tokens": [
+    [
+      {
+        "t": ".cls",
+        "s": "entity.other.attribute-name.class.css",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.selector.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "#id",
+        "s": "entity.other.attribute-name.id.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "entity.name.tag.css",
+        "l": 1
+      },
+      {
+        "t": ":hover",
+        "s": "entity.other.attribute-name.pseudo-class.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "punctuation.section.block.begin.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "background",
+        "s": "support.type.property-name.css",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "url",
+        "s": "support.function.css",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "i",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "m",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "g",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ".png",
+        "s": "entity.other.attribute-name.class.css",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "n",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "o",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "-",
+        "s": "operator.css",
+        "l": 1
+      },
+      {
+        "t": "r",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "e",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "p",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "e",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "t",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.rule.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "punctuation.section.block.end.css",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

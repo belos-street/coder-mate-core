@@ -1,0 +1,149 @@
+{
+  "lang": "cpp",
+  "case": "namespace",
+  "code": "namespace n { struct S { virtual ~S() = default; }; }\n",
+  "tokens": [
+    [
+      {
+        "t": "namespace",
+        "s": "keyword.declaration.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "n",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "struct",
+        "s": "keyword.declaration.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "S",
+        "s": "entity.name.macro.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "virtual",
+        "s": "keyword.modifier.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "~S",
+        "s": "entity.name.function.cpp",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "default",
+        "s": "keyword.control.cpp",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

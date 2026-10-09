@@ -1,0 +1,124 @@
+{
+  "lang": "json",
+  "case": "mixed-values",
+  "code": "{\"a\": 1, \"b\": [true, false, null]}\n",
+  "tokens": [
+    [
+      {
+        "t": "{",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "a\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.json",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "b\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "meta.structure.array.json",
+        "l": 1
+      },
+      {
+        "t": "true",
+        "s": "constant.language.boolean.json",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "false",
+        "s": "constant.language.boolean.json",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "null",
+        "s": "constant.language.null.json",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "meta.structure.array.json",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

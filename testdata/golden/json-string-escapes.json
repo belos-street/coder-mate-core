@@ -1,0 +1,89 @@
+{
+  "lang": "json",
+  "case": "string-escapes",
+  "code": "{\"s\": \"line\\nnext\", \"n\": -1.5e+10}\n",
+  "tokens": [
+    [
+      {
+        "t": "{",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "s\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "line\\nnext\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "punctuation.separator.value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "n\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "-1.5e+10",
+        "s": "constant.numeric.json",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

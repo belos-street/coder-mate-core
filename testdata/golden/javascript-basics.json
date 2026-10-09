@@ -1,0 +1,171 @@
+{
+  "lang": "javascript",
+  "case": "basics",
+  "code": "const x = 42; // answer\nfunction greet(name) { return `hi ${name}`; }\n",
+  "tokens": [
+    [
+      {
+        "t": "const",
+        "s": "keyword.declaration.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "x",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "42",
+        "s": "constant.numeric.js",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "// answer",
+        "s": "comment.line.double-slash.js",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "function",
+        "s": "keyword.declaration.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "greet",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "name",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "return",
+        "s": "keyword.control.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "`",
+        "s": "string.quoted.backtick.js",
+        "l": 2
+      },
+      {
+        "t": "hi ",
+        "s": "string.quoted.backtick.js",
+        "l": 2
+      },
+      {
+        "t": "${",
+        "s": "punctuation.definition.template-expression.js",
+        "l": 2
+      },
+      {
+        "t": "name",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "punctuation.definition.template-expression.js",
+        "l": 2
+      },
+      {
+        "t": "`",
+        "s": "string.quoted.backtick.js",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

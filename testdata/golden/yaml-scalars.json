@@ -1,0 +1,88 @@
+{
+  "lang": "yaml",
+  "case": "scalars",
+  "code": "name: app\nversion: 1\nenabled: true\n",
+  "tokens": [
+    [
+      {
+        "t": "name",
+        "s": "support.type.property-name.yaml",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "app",
+        "s": "string.unquoted.yaml",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "version",
+        "s": "support.type.property-name.yaml",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.yaml",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "enabled",
+        "s": "support.type.property-name.yaml",
+        "l": 3
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "true",
+        "s": "constant.language.boolean.yaml",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "lang": "c",
+  "case": "loop",
+  "code": "for (int i = 0; i < 10; ++i) { sum += arr[i] * 2; }\n",
+  "tokens": [
+    [
+      {
+        "t": "for",
+        "s": "keyword.control.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "i",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.c",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "i",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "10",
+        "s": "constant.numeric.c",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "++",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": "i",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "sum",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "+",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "arr",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": "i",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "*",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.c",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.c",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

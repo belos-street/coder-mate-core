@@ -1,0 +1,250 @@
+{
+  "lang": "python",
+  "case": "class-keywords",
+  "code": "class A(Exception):\n    x: int = 0x1F\n    def m(self, *args, **kw) -> None:\n        assert True, 'msg'\n",
+  "tokens": [
+    [
+      {
+        "t": "class",
+        "s": "keyword.declaration.python",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "A",
+        "s": "entity.name.class.python",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.python",
+        "l": 1
+      },
+      {
+        "t": "Exception",
+        "s": "support.type.annotation.python",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.python",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.python",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "    ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "x",
+        "s": "variable.identifier.python",
+        "l": 2
+      },
+      {
+        "t": ": int",
+        "s": "support.type.annotation.python",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.python",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.python",
+        "l": 2
+      },
+      {
+        "t": "x1F",
+        "s": "variable.identifier.python",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "    ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "def",
+        "s": "keyword.declaration.python",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "m",
+        "s": "entity.name.function.python",
+        "l": 3
+      },
+      {
+        "t": "(",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": "self",
+        "s": "variable.identifier.python",
+        "l": 3
+      },
+      {
+        "t": ",",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "*",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": "args",
+        "s": "variable.identifier.python",
+        "l": 3
+      },
+      {
+        "t": ",",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "**",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": "kw",
+        "s": "variable.identifier.python",
+        "l": 3
+      },
+      {
+        "t": ")",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "->",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "None",
+        "s": "constant.language.none.python",
+        "l": 3
+      },
+      {
+        "t": ":",
+        "s": "operator.python",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "        ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "assert",
+        "s": "variable.identifier.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "True",
+        "s": "support.type.annotation.python",
+        "l": 4
+      },
+      {
+        "t": ",",
+        "s": "operator.python",
+        "l": 4
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 4
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.python",
+        "l": 4
+      },
+      {
+        "t": "msg'",
+        "s": "string.quoted.single.python",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ]
+  ]
+}

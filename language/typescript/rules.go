@@ -34,7 +34,7 @@ func buildGrammarRules() map[string][]core.GrammarRule {
 		{Regex: regexp.MustCompile(`^(declare)\b`), Scope: ScopeKeywordDeclTypeTS},
 		{Regex: regexp.MustCompile(`^(public|private|protected|readonly|abstract|override)\b`), Scope: ScopeKeywordModifierAccessTS},
 		{Regex: regexp.MustCompile(`^(as)\b`), Scope: ScopeKeywordOperatorAssertionTS},
-		{Regex: regexp.MustCompile(`^(satisfies|keyof|typeof|infer|is|asserts|in)\b`), Scope: ScopeKeywordOperatorTypeTS},
+		{Regex: regexp.MustCompile(`^(satisfies|keyof|typeof|infer|is|asserts|in|extends)\b`), Scope: ScopeKeywordOperatorTypeTS},
 		{Regex: tsBuiltinTypes, Scope: ScopeSupportBuiltinTS},
 		{Regex: regexp.MustCompile(`^[A-Z][a-zA-Z0-9_$]*`), Scope: ScopeEntityTypeTS},
 	}
@@ -78,7 +78,9 @@ func buildGrammarRules() map[string][]core.GrammarRule {
 	})
 	merged = append(merged, core.GrammarRule{
 		Regex: regexp.MustCompile(`^.`),
-		Scope: js.ScopeIdentifier,
+		// TS 参考实现的 global 状态无 catch-all（未匹配走 fallbackScope=default），
+		// 这里保持一致：兜底给 default 而非 identifier
+		Scope: js.ScopeDefault,
 	})
 
 	base["global"] = merged

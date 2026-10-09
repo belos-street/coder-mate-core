@@ -1,0 +1,189 @@
+{
+  "lang": "csharp",
+  "case": "record",
+  "code": "public record R(int A, string B) { public int C { get; init; } }\n",
+  "tokens": [
+    [
+      {
+        "t": "public",
+        "s": "keyword.modifier.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "record",
+        "s": "keyword.declaration.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "R",
+        "s": "entity.name.function.csharp",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "A",
+        "s": "entity.name.type.csharp",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "string",
+        "s": "support.type.builtin.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "B",
+        "s": "entity.name.type.csharp",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "public",
+        "s": "keyword.modifier.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "C",
+        "s": "entity.name.type.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "get",
+        "s": "keyword.control.csharp",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "init",
+        "s": "keyword.control.csharp",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

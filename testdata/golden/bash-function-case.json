@@ -1,0 +1,164 @@
+{
+  "lang": "bash",
+  "case": "function-case",
+  "code": "func() { local x=1; case $x in a) echo a;; esac }\n",
+  "tokens": [
+    [
+      {
+        "t": "func",
+        "s": "entity.name.function.bash",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "local",
+        "s": "support.function.builtin.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "x",
+        "s": "variable.other.readwrite.bash",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.bash",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "case",
+        "s": "keyword.control.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "$x",
+        "s": "variable.parameter.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "in",
+        "s": "keyword.control.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "entity.name.command.bash",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "echo",
+        "s": "support.function.builtin.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "entity.name.command.bash",
+        "l": 1
+      },
+      {
+        "t": ";;",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "esac",
+        "s": "keyword.control.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

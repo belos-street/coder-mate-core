@@ -1,0 +1,201 @@
+{
+  "lang": "go",
+  "case": "struct-map",
+  "code": "type S struct { A int `json:\"a\"` }\nvar m = map[string]int{\"x\": 1}\n",
+  "tokens": [
+    [
+      {
+        "t": "type",
+        "s": "keyword.declaration.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "S",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "struct",
+        "s": "keyword.declaration.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "A",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "`",
+        "s": "string.quoted.raw.go",
+        "l": 1
+      },
+      {
+        "t": "json:\"a\"",
+        "s": "string.quoted.raw.go",
+        "l": 1
+      },
+      {
+        "t": "`",
+        "s": "string.quoted.raw.go",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.go",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "var",
+        "s": "keyword.declaration.go",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "m",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.go",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "map",
+        "s": "keyword.declaration.go",
+        "l": 2
+      },
+      {
+        "t": "[",
+        "s": "operator.go",
+        "l": 2
+      },
+      {
+        "t": "string",
+        "s": "support.type.builtin.go",
+        "l": 2
+      },
+      {
+        "t": "]",
+        "s": "operator.go",
+        "l": 2
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.go",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.go",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.go",
+        "l": 2
+      },
+      {
+        "t": "x",
+        "s": "string.quoted.double.go",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.go",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "operator.go",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.go",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.go",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

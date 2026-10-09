@@ -1,0 +1,136 @@
+{
+  "lang": "cpp",
+  "case": "template-class",
+  "code": "template <typename T>\nclass Box { public: T value; };\n",
+  "tokens": [
+    [
+      {
+        "t": "template",
+        "s": "keyword.declaration.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": "typename",
+        "s": "keyword.declaration.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "T",
+        "s": "entity.name.macro.cpp",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.cpp",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "class",
+        "s": "keyword.declaration.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "Box",
+        "s": "entity.name.type.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "public",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "T",
+        "s": "entity.name.macro.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "value",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

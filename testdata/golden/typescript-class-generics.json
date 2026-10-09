@@ -1,0 +1,336 @@
+{
+  "lang": "typescript",
+  "case": "class-generics",
+  "code": "class C<T> implements I { public readonly f: Map<string, unknown> = new Map(); }\nfunction g<T>(p: T) { return true as unknown; }\n",
+  "tokens": [
+    [
+      {
+        "t": "class",
+        "s": "keyword.control.class.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "C",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "T",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "implements",
+        "s": "keyword.declaration.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "I",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "public",
+        "s": "keyword.modifier.access.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "readonly",
+        "s": "keyword.modifier.access.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "f",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "Map",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "string",
+        "s": "support.type.builtin.typescript",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "unknown",
+        "s": "support.type.builtin.typescript",
+        "l": 1
+      },
+      {
+        "t": ">",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "new",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "Map",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "function",
+        "s": "keyword.declaration.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "g",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": "<",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "T",
+        "s": "entity.name.type.typescript",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "p",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "T",
+        "s": "entity.name.type.typescript",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "return",
+        "s": "keyword.control.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "true",
+        "s": "constant.language.boolean.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "as",
+        "s": "keyword.operator.assertion.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "unknown",
+        "s": "support.type.builtin.typescript",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

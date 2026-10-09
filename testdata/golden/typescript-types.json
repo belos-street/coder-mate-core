@@ -1,0 +1,278 @@
+{
+  "lang": "typescript",
+  "case": "types",
+  "code": "type A = { x: number };\ninterface B extends A { y?: string }\nconst v: Array<Promise<number>> = [];\n",
+  "tokens": [
+    [
+      {
+        "t": "type",
+        "s": "keyword.declaration.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "A",
+        "s": "entity.name.type.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "x",
+        "s": "variable.identifier.js",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "number",
+        "s": "support.type.builtin.typescript",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "interface",
+        "s": "keyword.declaration.type.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "B",
+        "s": "entity.name.type.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "extends",
+        "s": "keyword.operator.type.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "A",
+        "s": "entity.name.type.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "y",
+        "s": "variable.identifier.js",
+        "l": 2
+      },
+      {
+        "t": "?",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "string",
+        "s": "support.type.builtin.typescript",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.js",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "const",
+        "s": "keyword.declaration.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "v",
+        "s": "variable.identifier.js",
+        "l": 3
+      },
+      {
+        "t": ":",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "Array",
+        "s": "support.type.builtin.typescript",
+        "l": 3
+      },
+      {
+        "t": "<",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "Promise",
+        "s": "support.type.builtin.typescript",
+        "l": 3
+      },
+      {
+        "t": "<",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "number",
+        "s": "support.type.builtin.typescript",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "[",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "]",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.js",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

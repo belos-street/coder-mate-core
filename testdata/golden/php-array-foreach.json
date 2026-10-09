@@ -1,0 +1,246 @@
+{
+  "lang": "php",
+  "case": "array-foreach",
+  "code": "$arr = ['a' => 1, 'b' => 2];\nforeach ($arr as $k => $v) { echo $k; }\n",
+  "tokens": [
+    [
+      {
+        "t": "$arr",
+        "s": "variable.other.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.php",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "string.quoted.single.php",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=>",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.php",
+        "l": 1
+      },
+      {
+        "t": ",",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.php",
+        "l": 1
+      },
+      {
+        "t": "b",
+        "s": "string.quoted.single.php",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "=>",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.php",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.php",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "foreach",
+        "s": "keyword.control.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": "$arr",
+        "s": "variable.other.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "as",
+        "s": "keyword.control.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "$k",
+        "s": "variable.other.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "=>",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "$v",
+        "s": "variable.other.php",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "echo",
+        "s": "keyword.control.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "$k",
+        "s": "variable.other.php",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.php",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "lang": "json",
+  "case": "nested",
+  "code": "{\"nested\": {\"deep\": {\"x\": []}}}\n",
+  "tokens": [
+    [
+      {
+        "t": "{",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "nested\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "deep\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": "x\"",
+        "s": "string.quoted.double.json",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.json",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "meta.structure.array.json",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "meta.structure.array.json",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "meta.structure.dictionary.json",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

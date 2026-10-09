@@ -1,0 +1,124 @@
+{
+  "lang": "css",
+  "case": "basic",
+  "code": "body { color: #fff; margin: 0 auto; }\n",
+  "tokens": [
+    [
+      {
+        "t": "body",
+        "s": "entity.name.tag.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "{",
+        "s": "punctuation.section.block.begin.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "color",
+        "s": "support.type.property-name.css",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "#fff",
+        "s": "constant.other.color.hex.css",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.rule.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "margin",
+        "s": "support.type.property-name.css",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "u",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "t",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "o",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "punctuation.terminator.rule.css",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "punctuation.section.block.end.css",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ]
+  ]
+}

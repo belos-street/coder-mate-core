@@ -1,0 +1,116 @@
+{
+  "lang": "html",
+  "case": "comment-entities",
+  "code": "<!-- comment -->\n<div id=\"a\" data-x='1'>text &amp; more</div>\n",
+  "tokens": [
+    [
+      {
+        "t": "<!--",
+        "s": "comment.block.html",
+        "l": 1
+      },
+      {
+        "t": " comment -->",
+        "s": "comment.block.html",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "<div",
+        "s": "entity.name.tag.html",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "id",
+        "s": "entity.other.attribute-name.html",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 2
+      },
+      {
+        "t": "\"a\"",
+        "s": "string.quoted.double.html",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "data-x",
+        "s": "entity.other.attribute-name.html",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 2
+      },
+      {
+        "t": "'1'",
+        "s": "string.quoted.single.html",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 2
+      },
+      {
+        "t": "text ",
+        "s": "text.plain.html",
+        "l": 2
+      },
+      {
+        "t": "&amp;",
+        "s": "constant.character.entity.html",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "more",
+        "s": "text.plain.html",
+        "l": 2
+      },
+      {
+        "t": "</",
+        "s": "punctuation.definition.tag.begin.html",
+        "l": 2
+      },
+      {
+        "t": "div",
+        "s": "entity.name.tag.html",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

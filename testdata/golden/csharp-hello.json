@@ -1,0 +1,226 @@
+{
+  "lang": "csharp",
+  "case": "hello",
+  "code": "using System;\nnamespace N { class P { static void Main() { Console.WriteLine(\"hi\"); } } }\n",
+  "tokens": [
+    [
+      {
+        "t": "using",
+        "s": "keyword.declaration.csharp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "System",
+        "s": "entity.name.type.csharp",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.csharp",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "namespace",
+        "s": "keyword.declaration.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "N",
+        "s": "entity.name.type.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "class",
+        "s": "keyword.declaration.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "P",
+        "s": "entity.name.type.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "static",
+        "s": "keyword.modifier.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "void",
+        "s": "support.type.builtin.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "Main",
+        "s": "entity.name.function.csharp",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "Console",
+        "s": "entity.name.type.csharp",
+        "l": 2
+      },
+      {
+        "t": ".",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": "WriteLine",
+        "s": "entity.name.function.csharp",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.csharp",
+        "l": 2
+      },
+      {
+        "t": "hi",
+        "s": "string.quoted.double.csharp",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.csharp",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.csharp",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "lang": "html",
+  "case": "document",
+  "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<body class=\"x\"><p>hi</p></body>\n</html>\n",
+  "tokens": [
+    [
+      {
+        "t": "<!DOCTYPE html>",
+        "s": "keyword.control.doctype.html",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "<html",
+        "s": "entity.name.tag.html",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "lang",
+        "s": "entity.other.attribute-name.html",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 2
+      },
+      {
+        "t": "\"en\"",
+        "s": "string.quoted.double.html",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "<body",
+        "s": "entity.name.tag.html",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "class",
+        "s": "entity.other.attribute-name.html",
+        "l": 3
+      },
+      {
+        "t": "=",
+        "s": "punctuation.separator.key-value.html",
+        "l": 3
+      },
+      {
+        "t": "\"x\"",
+        "s": "string.quoted.double.html",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 3
+      },
+      {
+        "t": "<p",
+        "s": "entity.name.tag.html",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 3
+      },
+      {
+        "t": "hi",
+        "s": "text.plain.html",
+        "l": 3
+      },
+      {
+        "t": "</",
+        "s": "punctuation.definition.tag.begin.html",
+        "l": 3
+      },
+      {
+        "t": "p",
+        "s": "entity.name.tag.html",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 3
+      },
+      {
+        "t": "</",
+        "s": "punctuation.definition.tag.begin.html",
+        "l": 3
+      },
+      {
+        "t": "body",
+        "s": "entity.name.tag.html",
+        "l": 3
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ],
+    [
+      {
+        "t": "</",
+        "s": "punctuation.definition.tag.begin.html",
+        "l": 4
+      },
+      {
+        "t": "html",
+        "s": "entity.name.tag.html",
+        "l": 4
+      },
+      {
+        "t": ">",
+        "s": "punctuation.definition.tag.end.html",
+        "l": 4
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 4
+      }
+    ]
+  ]
+}

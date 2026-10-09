@@ -1,0 +1,181 @@
+{
+  "lang": "rust",
+  "case": "lifetime-impl",
+  "code": "struct S<'a> { name: &'a str }\nimpl<'a> S<'a> { fn new(n: &'a str) -> Self { S { name: n } } }\n",
+  "tokens": [
+    [
+      {
+        "t": "struct",
+        "s": "keyword.declaration.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "S",
+        "s": "entity.name.type.rust",
+        "l": 1
+      },
+      {
+        "t": "<",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.rust",
+        "l": 1
+      },
+      {
+        "t": "a> { name: &",
+        "s": "string.quoted.single.rust",
+        "l": 1
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.rust",
+        "l": 1
+      },
+      {
+        "t": "a",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "str",
+        "s": "support.type.builtin.rust",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "}",
+        "s": "operator.rust",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "impl",
+        "s": "keyword.declaration.rust",
+        "l": 2
+      },
+      {
+        "t": "<",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.rust",
+        "l": 2
+      },
+      {
+        "t": "a> S<",
+        "s": "string.quoted.single.rust",
+        "l": 2
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.rust",
+        "l": 2
+      },
+      {
+        "t": "a",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "fn",
+        "s": "keyword.declaration.rust",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "new",
+        "s": "entity.name.function.rust",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": "n",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "&",
+        "s": "operator.rust",
+        "l": 2
+      },
+      {
+        "t": "'",
+        "s": "string.quoted.single.rust",
+        "l": 2
+      },
+      {
+        "t": "a str) -> Self { S { name: n } } }",
+        "s": "string.quoted.single.rust",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

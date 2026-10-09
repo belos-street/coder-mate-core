@@ -1,0 +1,156 @@
+{
+  "lang": "c",
+  "case": "hello",
+  "code": "#include <stdio.h>\nint main(void) { printf(\"hi\\n\"); return 0; }\n",
+  "tokens": [
+    [
+      {
+        "t": "#include",
+        "s": "keyword.control.directive.c",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "<stdio.h>",
+        "s": "string.quoted.angle.c",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "int",
+        "s": "support.type.builtin.c",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "main",
+        "s": "entity.name.function.c",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": "void",
+        "s": "support.type.builtin.c",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "printf",
+        "s": "entity.name.function.c",
+        "l": 2
+      },
+      {
+        "t": "(",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.c",
+        "l": 2
+      },
+      {
+        "t": "hi",
+        "s": "string.quoted.double.c",
+        "l": 2
+      },
+      {
+        "t": "\\n",
+        "s": "string.quoted.double.c",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.c",
+        "l": 2
+      },
+      {
+        "t": ")",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "return",
+        "s": "keyword.control.c",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "0",
+        "s": "constant.numeric.c",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.c",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ]
+  ]
+}

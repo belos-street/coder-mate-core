@@ -1,0 +1,178 @@
+{
+  "lang": "cpp",
+  "case": "vector-rawstring",
+  "code": "#include <vector>\nstd::vector<int> v{1, 2, 3};\nauto s = R\"(raw\\string)\";\n",
+  "tokens": [
+    [
+      {
+        "t": "#include",
+        "s": "keyword.control.directive.cpp",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "<vector>",
+        "s": "string.quoted.angle.cpp",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "std",
+        "s": "entity.name.namespace.cpp",
+        "l": 2
+      },
+      {
+        "t": "::",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": "vector",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "<",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": "int",
+        "s": "support.type.builtin.cpp",
+        "l": 2
+      },
+      {
+        "t": ">",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "v",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "{",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.cpp",
+        "l": 2
+      },
+      {
+        "t": ",",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "2",
+        "s": "constant.numeric.cpp",
+        "l": 2
+      },
+      {
+        "t": ",",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "3",
+        "s": "constant.numeric.cpp",
+        "l": 2
+      },
+      {
+        "t": "}",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": ";",
+        "s": "operator.cpp",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "auto",
+        "s": "keyword.modifier.cpp",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "s",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "=",
+        "s": "operator.cpp",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "R\"(",
+        "s": "string.quoted.raw.cpp",
+        "l": 3
+      },
+      {
+        "t": "raw\\string)\"",
+        "s": "string.quoted.raw.cpp",
+        "l": 3
+      },
+      {
+        "t": ";",
+        "s": "operator.cpp",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

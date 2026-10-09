@@ -1,0 +1,108 @@
+{
+  "lang": "yaml",
+  "case": "anchor-tag",
+  "code": "anchors: &a 1\nref: *a\ntag: !!str 42\n",
+  "tokens": [
+    [
+      {
+        "t": "anchors",
+        "s": "support.type.property-name.yaml",
+        "l": 1
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "&a",
+        "s": "entity.name.tag.anchor.yaml",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "1",
+        "s": "constant.numeric.yaml",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "ref",
+        "s": "support.type.property-name.yaml",
+        "l": 2
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "*a",
+        "s": "variable.other.alias.yaml",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "tag",
+        "s": "support.type.property-name.yaml",
+        "l": 3
+      },
+      {
+        "t": ":",
+        "s": "punctuation.separator.key-value.yaml",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "!!str",
+        "s": "entity.name.tag.yaml",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "42",
+        "s": "constant.numeric.yaml",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

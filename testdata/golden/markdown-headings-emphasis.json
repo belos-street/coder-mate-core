@@ -1,0 +1,98 @@
+{
+  "lang": "markdown",
+  "case": "headings-emphasis",
+  "code": "# Title\n\nSome *emph* and **strong** text.\n",
+  "tokens": [
+    [
+      {
+        "t": "# Title",
+        "s": "markup.heading.markdown",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "Some",
+        "s": "string.unquoted.markdown",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "*",
+        "s": "markup.italic.markdown",
+        "l": 3
+      },
+      {
+        "t": "emph",
+        "s": "markup.italic.markdown",
+        "l": 3
+      },
+      {
+        "t": "*",
+        "s": "markup.italic.markdown",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "and",
+        "s": "string.unquoted.markdown",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "**",
+        "s": "markup.bold.markdown",
+        "l": 3
+      },
+      {
+        "t": "strong",
+        "s": "markup.bold.markdown",
+        "l": 3
+      },
+      {
+        "t": "**",
+        "s": "markup.bold.markdown",
+        "l": 3
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 3
+      },
+      {
+        "t": "text.",
+        "s": "string.unquoted.markdown",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}

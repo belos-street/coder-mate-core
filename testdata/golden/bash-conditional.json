@@ -1,0 +1,148 @@
+{
+  "lang": "bash",
+  "case": "conditional",
+  "code": "if [ -z \"$VAR\" ]; then\n  export PATH=\"/usr/bin:$PATH\"\nfi\n",
+  "tokens": [
+    [
+      {
+        "t": "if",
+        "s": "keyword.control.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "[",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "-z",
+        "s": "entity.name.command.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.bash",
+        "l": 1
+      },
+      {
+        "t": "$VAR",
+        "s": "variable.parameter.bash",
+        "l": 1
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "]",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": ";",
+        "s": "operator.bash",
+        "l": 1
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 1
+      },
+      {
+        "t": "then",
+        "s": "keyword.control.bash",
+        "l": 1
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 1
+      }
+    ],
+    [
+      {
+        "t": "  ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "export",
+        "s": "support.function.builtin.bash",
+        "l": 2
+      },
+      {
+        "t": " ",
+        "s": "default",
+        "l": 2
+      },
+      {
+        "t": "PATH",
+        "s": "variable.other.readwrite.bash",
+        "l": 2
+      },
+      {
+        "t": "=",
+        "s": "operator.bash",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.bash",
+        "l": 2
+      },
+      {
+        "t": "/usr/bin:",
+        "s": "string.quoted.double.bash",
+        "l": 2
+      },
+      {
+        "t": "$PATH",
+        "s": "variable.parameter.bash",
+        "l": 2
+      },
+      {
+        "t": "\"",
+        "s": "string.quoted.double.bash",
+        "l": 2
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 2
+      }
+    ],
+    [
+      {
+        "t": "fi",
+        "s": "keyword.control.bash",
+        "l": 3
+      },
+      {
+        "t": "\n",
+        "s": "default",
+        "l": 3
+      }
+    ]
+  ]
+}
