@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
 
 	"code-mate-core/core"
 	"code-mate-core/language"
@@ -16,6 +17,9 @@ type cachedEntry struct {
 }
 
 type highlighter struct {
+	// mu 保护 cache / parsedStyleCache / currentTheme；defaultPreStyle 与
+	// lineClassPrefix 构造后只读，无需加锁
+	mu               sync.Mutex
 	currentTheme     *theme.HighlightTheme
 	defaultPreStyle  string
 	lineClassPrefix  string
@@ -167,14 +171,23 @@ func (h *highlighter) CodeToTokens(code, lang string) (core.TokenStream, error) 
 	}
 
 	cacheKey := createCacheKey(langID, code)
-	if cached, ok := h.cache[cacheKey]; ok {
-		return cloneTokenStream(cached.styledRows), nil
-	}
 
+	h.mu.Lock()
+	if cached, ok := h.cache[cacheKey]; ok {
+		rows := cloneTokenStream(cached.styledRows)
+		h.mu.Unlock()
+		return rows, nil
+	}
+	h.mu.Unlock()
+
+	// 解析在锁外进行：并发未命中同一 key 时可能重复解析，但结果幂等
 	baseRows, err := language.Tokenize(code, langID)
 	if err != nil {
 		return nil, err
 	}
+
+	h.mu.Lock()
+	defer h.mu.Unlock()
 	styledRows := applyThemeStyles(baseRows, h.currentTheme, h.parsedStyleCache)
 
 	h.cache[cacheKey] = &cachedEntry{
@@ -196,11 +209,16 @@ func (h *highlighter) CodeToHtml(code, lang string, opts ...HtmlOption) (string,
 		opt(o)
 	}
 
+	// currentTheme 可能被并发的 UpdateTheme 修改，先在锁内取快照
+	h.mu.Lock()
+	currentTheme := h.currentTheme
+	h.mu.Unlock()
+
 	preStyle := h.defaultPreStyle
 	if o.PreStyle != "" {
 		preStyle = o.PreStyle
-	} else if preStyle == "" && h.currentTheme != nil && h.currentTheme.PreStyle != "" {
-		preStyle = h.currentTheme.PreStyle
+	} else if preStyle == "" && currentTheme != nil && currentTheme.PreStyle != "" {
+		preStyle = currentTheme.PreStyle
 	} else if preStyle == "" {
 		preStyle = DefaultPreStyle
 	}
@@ -239,6 +257,9 @@ func (h *highlighter) UpdateTheme(t interface{}) error {
 	if err != nil {
 		return err
 	}
+
+	h.mu.Lock()
+	defer h.mu.Unlock()
 
 	h.currentTheme = newTheme
 

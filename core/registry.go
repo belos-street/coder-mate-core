@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+	"sync"
 )
 
 type LanguageAdapter interface {
@@ -13,7 +14,10 @@ type LanguageAdapter interface {
 	Parse(code string) TokenStream
 }
 
-var languageRegistry = make(map[string]LanguageAdapter)
+var (
+	registryMu       sync.RWMutex
+	languageRegistry = make(map[string]LanguageAdapter)
+)
 
 func normalizeID(id string) string {
 	return strings.TrimSpace(strings.ToLower(id))
@@ -34,6 +38,9 @@ func RegisterLanguage(lang LanguageAdapter) error {
 		keys = append(keys, ensureValidID(alias))
 	}
 
+	registryMu.Lock()
+	defer registryMu.Unlock()
+
 	for _, key := range keys {
 		existing, ok := languageRegistry[key]
 		if ok && !reflect.DeepEqual(existing, lang) {
@@ -50,11 +57,17 @@ func RegisterLanguage(lang LanguageAdapter) error {
 
 func GetLanguage(id string) (LanguageAdapter, bool) {
 	normalized := ensureValidID(id)
+
+	registryMu.RLock()
+	defer registryMu.RUnlock()
 	lang, ok := languageRegistry[normalized]
 	return lang, ok
 }
 
 func ListLanguages() []LanguageAdapter {
+	registryMu.RLock()
+	defer registryMu.RUnlock()
+
 	seen := make(map[string]bool)
 	var languages []LanguageAdapter
 
@@ -87,5 +100,7 @@ func Tokenize(code, langID string) (TokenStream, error) {
 }
 
 func ClearRegistry() {
+	registryMu.Lock()
+	defer registryMu.Unlock()
 	languageRegistry = make(map[string]LanguageAdapter)
 }

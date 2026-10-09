@@ -289,8 +289,12 @@ var presetBuiltInThemes = []*HighlightTheme{
 
 // EnsureBuiltinsRegistered 幂等注册内置主题：默认主题已存在时跳过；
 // 注册表被 ClearRegistry 清空（如测试场景）后再次调用会自动重建。
+// 存在性检查与注册均在注册表锁内，并发调用安全且幂等。
 func EnsureBuiltinsRegistered() {
-	if _, ok := themeRegistry[DefaultThemeID]; !ok {
+	registryMu.RLock()
+	_, ok := themeRegistry[DefaultThemeID]
+	registryMu.RUnlock()
+	if !ok {
 		RegisterBuiltInThemes()
 	}
 }

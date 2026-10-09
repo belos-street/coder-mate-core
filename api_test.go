@@ -2,6 +2,7 @@ package codematecore
 
 import (
 	"strings"
+	"sync"
 	"testing"
 
 	"code-mate-core/core"
@@ -551,4 +552,32 @@ func TestCodeToHtml_MultibyteNotMojibake(t *testing.T) {
 	if !strings.Contains(html, "值") {
 		t.Errorf("expected HTML to contain complete CJK char, got %q", html)
 	}
+}
+
+func TestConcurrentHighlighting(t *testing.T) {
+	hl := NewHighlighter()
+
+	var wg sync.WaitGroup
+	themes := []string{"dark-plus", "github-light", "dracula", "nord"}
+	for i := 0; i < 8; i++ {
+		wg.Add(1)
+		go func(n int) {
+			defer wg.Done()
+			for j := 0; j < 50; j++ {
+				if _, err := hl.CodeToHtml("const x = 1; /* comment */", "javascript"); err != nil {
+					t.Errorf("CodeToHtml error: %v", err)
+					return
+				}
+				if _, err := hl.CodeToTokens("let 值 = 1", "javascript"); err != nil {
+					t.Errorf("CodeToTokens error: %v", err)
+					return
+				}
+				if err := hl.UpdateTheme(themes[j%len(themes)]); err != nil {
+					t.Errorf("UpdateTheme error: %v", err)
+					return
+				}
+			}
+		}(i)
+	}
+	wg.Wait()
 }

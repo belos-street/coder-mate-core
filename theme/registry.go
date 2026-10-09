@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
 )
 
 var DefaultThemeID = "dark-plus"
@@ -13,7 +14,10 @@ var THEME_ALIAS_MAP = map[string]string{
 	"github": "github-light",
 }
 
-var themeRegistry = make(map[string]*HighlightTheme)
+var (
+	registryMu    sync.RWMutex
+	themeRegistry = make(map[string]*HighlightTheme)
+)
 
 func normalizeThemeID(id string) string {
 	return strings.TrimSpace(strings.ToLower(id))
@@ -24,6 +28,9 @@ func RegisterTheme(theme *HighlightTheme) error {
 	if normalizedID == "" {
 		return fmt.Errorf("theme id cannot be empty")
 	}
+
+	registryMu.Lock()
+	defer registryMu.Unlock()
 
 	if existing, ok := themeRegistry[normalizedID]; ok && existing != theme {
 		return fmt.Errorf("theme %q is already registered", theme.ID)
@@ -48,6 +55,8 @@ func GetTheme(themeID string) (*HighlightTheme, error) {
 		return nil, fmt.Errorf("theme id cannot be empty")
 	}
 
+	registryMu.RLock()
+	defer registryMu.RUnlock()
 	theme, ok := themeRegistry[normalizedID]
 	if !ok {
 		return nil, fmt.Errorf("theme %q is not registered", normalizedID)
@@ -57,6 +66,9 @@ func GetTheme(themeID string) (*HighlightTheme, error) {
 }
 
 func ListThemes() []*HighlightTheme {
+	registryMu.RLock()
+	defer registryMu.RUnlock()
+
 	themes := make([]*HighlightTheme, 0, len(themeRegistry))
 	for _, theme := range themeRegistry {
 		themes = append(themes, theme)
@@ -134,5 +146,7 @@ func ResolveScopeStyle(scope string, theme *HighlightTheme) string {
 }
 
 func ClearRegistry() {
+	registryMu.Lock()
+	defer registryMu.Unlock()
 	themeRegistry = make(map[string]*HighlightTheme)
 }

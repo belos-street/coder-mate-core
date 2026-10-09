@@ -51,6 +51,3 @@ func RegisterBuiltins() {
 	}
 }
 
-func ResetBuiltins() {
-	builtinsRegistered = false
-}
