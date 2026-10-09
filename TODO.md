@@ -93,12 +93,12 @@
 
 ## 阶段 3：测试补强（依赖 1.3 确定性修复完成）
 
-- [ ] **TS 一致性 golden 验证落地**（注意与 2.4 区分：2.4 是内联期望 token 流，此处是跨仓库 TS 对照的 golden 文件基建）：spec 08 §2 承诺的"每语言 3-5 片段 JSON diff"目前零落地（仓库无 testdata/golden 文件），而"与 TS 版输出一致"是 agents.md 第一条核心约束 — [.agents/docs/specs/08-testing-strategy.md](file:///D:/code/personal/coder-mate-core/.agents/docs/specs/08-testing-strategy.md)
-- [ ] 断言升级：16 个语言包的 `checkScopeExists`"存在即过"式弱断言 → 关键用例逐 token 校验（对齐 javascript 包 33 个精确断言的标准），覆盖误分类检测
-- [ ] 淘汰形式主义测试：如 [core_test.go#L559-L581](file:///D:/code/personal/coder-mate-core/core/core_test.go#L559-L581)（建 spec 后 `_ = spec`、对输出零断言）
-- [ ] panic 路径用例：无效 theme、空语言 ID（`ensureValidID` panic 面）当前零覆盖
-- [ ] 测试卫生：`ClearRegistry`/`ResetBuiltins`/`RegisterBuiltInThemes` 在 init 与各测试反复操作全局注册表导致无法并行——梳理后启用 `t.Parallel()`
-- [ ] 验收：golden 进 CI；原弱断言包各至少 1 条精确断言；测试可并行执行
+- [x] **TS 一致性 golden 验证落地**（注意与 2.4 区分：2.4 是内联期望 token 流，此处是跨仓库 TS 对照的 golden 文件基建）：spec 08 §2 承诺的"每语言 3-5 片段 JSON diff"目前零落地（仓库无 testdata/golden 文件），而"与 TS 版输出一致"是 agents.md 第一条核心约束 — [.agents/docs/specs/08-testing-strategy.md](file:///D:/code/personal/coder-mate-core/.agents/docs/specs/08-testing-strategy.md)（2026-10-09 完成：testdata/golden/ 51 基准 + dump.ts 生成脚本 + knownDivergences 分歧清单，24 例严格相等 / 27 例已归因分歧；顺带修正 TS catch-all 与 extends 两处移植走样）
+- [x] 断言升级：16 个语言包的 `checkScopeExists`"存在即过"式弱断言 → 关键用例逐 token 校验（对齐 javascript 包 33 个精确断言的标准），覆盖误分类检测（行为锁定法，共 254 token）
+- [x] 淘汰形式主义测试：如 [core_test.go#L559-L581](file:///D:/code/personal/coder-mate-core/core/core_test.go#L559-L581)（建 spec 后 `_ = spec`、对输出零断言）（改为注入式 adapter 验证分发；TestThemeType 已删）
+- [x] panic 路径用例：无效 theme、空语言 ID（`ensureValidID` panic 面）当前零覆盖（无效 theme 回退已在阶段 1 覆盖；新增空 ID panic 用例）
+- [x] 测试卫生：`ClearRegistry`/`ResetBuiltins`/`RegisterBuiltInThemes` 在 init 与各测试反复操作全局注册表导致无法并行——梳理后启用 `t.Parallel()`（17 包 202 个测试启用；注册表操作类测试保持串行）
+- [x] 验收：golden 进 CI；原弱断言包各至少 1 条精确断言；测试可并行执行
 
 ---
 
@@ -111,6 +111,7 @@
 - [ ] 命名惯例：`GRAMMAR_RULES`/`THEME_ALIAS_MAP`/`copy_` 改 Go 风格；`ResolveScopeStyle` 参数名 `theme` 遮蔽包名；spec 导出模式统一（16 包可变导出 map vs TS `GetSpec()` vs JS 深拷贝三套并存，防篡改防护对齐）— [javascript/rules.go#L11-L20](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go#L11-L20)
 - [ ] 性能：缓存 LRU 上限或超长代码不缓存（现整段源码做 key 无淘汰）— [highlighter.go#L33-L34](file:///D:/code/personal/coder-mate-core/highlighter.go#L33-L34)；`fmt.Sprintf("%d")` → `strconv.Itoa`；空 style 跳过 `<span style="">`；`escapeHtml` 冗余转义（`` ` ``/`$`）清理
 - [ ] （可选）缓存真收益：同 key 命中缓存渲染后 HTML 字符串而非 token 流（当前缓存只省 parse，clone + 重渲染占主导）
+- [ ] 评审 nit（2026-10-09 复审补充）：① `CodeToHtml` 的 theme 快照与 `CodeToTokens` styled rows 间有极小 TOCTOU 窗口（UpdateTheme 恰好插入两步之间时混用旧样式 + 新 preStyle），纯外观非 race，可在快照后加版本号校验或接受现状；② Python 数字 `\d[\d_]*` 会过匹配尾下划线（`1_` 不合法）→ 改 `\d(?:[\d_]*\d)?`；③ Java `EntityFunction` 要求 `(` 紧跟标识符（`Foo (` 欠匹配仍判类型）→ 允许可选空白
 
 ---
 
