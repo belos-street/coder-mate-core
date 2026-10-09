@@ -7,14 +7,17 @@
 
 ## 项目概述
 
-**目标**：将 `ts/lib/` 下的语法高亮引擎完整复刻到 Go，编译为 WASM 供前端调用。
+**目标**：将原 TypeScript 版本的语法高亮引擎复刻为 Go 实现，编译为 WASM 供前端调用。
 
 **核心约束**：
-- 输入/输出行为与 TS 版本一致（相同代码 → 相同 HTML/Token 流）
-- Go 1.21+，零外部依赖，仅用标准库
+- 输出确定性：相同输入代码必须产生相同的 HTML/Token 流
+- Go 1.23+（见 go.mod），零外部依赖，仅用标准库
 - 目录结构遵循 Go 标准项目布局
 
-**当前状态**：需求规格文档（specs/01-10）已编写完成，待进入实现阶段。
+**当前状态**：Go 实现已完成（17 语言 / 10 主题 / WASM / 并发安全 / CI 门禁）。
+
+> 注：TypeScript 参考实现（`ts/` 目录）已随提交 `896d07e` 移除，文中残留的
+> `ts/lib/` 路径仅作历史参考；行为验证以仓库内测试与 golden 基准为准。
 
 ---
 
@@ -31,13 +34,10 @@ code-mate-core/
 │   │   └── writing-plans/    # 实现计划编写规范
 │   └── docs/                 # 项目文档（需求、设计、计划）
 │       ├── go-migration-requirements.md  # 需求索引文件（入口）
-│       ├── specs/            # 详细规格文档（01-09，按 Phase 组织）
+│       ├── specs/            # 详细规格文档（01-10，按 Phase 组织）
 │       └── plans/            # 实现阶段计划
-├── ts/                       # TypeScript 源码（参考实现，不要修改）
-│   └── lib/
-│       ├── core/             # 语言无关核心引擎（types, tokenizer, registry）
-│       ├── language/         # 17 种语言适配器
-│       └── themes/           # 主题系统（dark-plus + 9 预设）
+├── core/ language/ theme/ api.go  # Go 实现源码
+├── cmd/wasm/                 # WASM 入口
 └── agents.md                 # 本文件 - 项目入口指南
 ```
 
@@ -66,16 +66,9 @@ code-mate-core/
 | [specs/](.agents/docs/specs/) | 详细规格文档（01-10），按 Phase 组织 |
 | [plans/](.agents/docs/plans/) | 实现阶段计划 |
 
-### `ts/` — TypeScript 参考实现
+### `ts/` — TypeScript 参考实现（已移除）
 
-**不要修改此目录**。它作为 Go 版本的参考实现和一致性验证基准。
-
-核心入口文件：
-- `ts/lib/core/types.ts` — 所有核心类型定义
-- `ts/lib/core/tokenizer.ts` — FSM 分词引擎（核心算法）
-- `ts/lib/core/registry.ts` — 语言注册表
-- `ts/lib/api.ts` — 公共 API（Highlighter）
-- `ts/lib/language/manager.ts` — 语言管理器
+TypeScript 参考实现已随提交 `896d07e` 从仓库移除（原 [coder-mate-core-js](https://github.com/belos-street/coder-mate-core-js) 仍可在线访问）。行为一致性验证以仓库内测试（内联期望 token 流 / 确定性快照 / golden 基准）为准。
 
 ---
 
@@ -83,8 +76,8 @@ code-mate-core/
 
 1. **理解需求** → 阅读 `.agents/docs/go-migration-requirements.md`
 2. **撰写计划** → 使用 `writing-plans` skill 创建详细的实现计划
-3. **编码实现** → 参考 `golang-best-practices` skill，对照 `ts/` 源码
-4. **验证一致性** → 与 TS 版本对比 token 流和 HTML 输出
+3. **编码实现** → 参考 `golang-best-practices` skill 与既有 Go 源码
+4. **验证行为** → 内联期望 token 断言 / 确定性快照测试 / CI 四道门禁（gofmt/vet/test/race）
 
 ---
 
@@ -93,7 +86,7 @@ code-mate-core/
 **首次进入项目的 Agent 应执行**：
 1. 阅读本文件（agents.md）了解项目全貌
 2. 阅读 [需求索引](.agents/docs/go-migration-requirements.md)，按当前 Phase 加载对应 spec
-3. 浏览 `ts/lib/core/` 理解核心算法
+3. 浏览 `core/` 与 `language/` 理解 FSM 分词与适配器架构
 4. 加载 `golang-best-practices` skill 获取 Go 开发规范
 
 ---

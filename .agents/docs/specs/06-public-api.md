@@ -3,6 +3,8 @@
 > **所属 Phase**：Phase 4
 > **参考源码**：`ts/lib/api.ts`
 
+> ⚠️ 历史注记：上述 `ts/lib/` 参考源码已随提交 `896d07e` 移除，仅作历史参考。
+
 ---
 
 ## 1. Highlighter 接口

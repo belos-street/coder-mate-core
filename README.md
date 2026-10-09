@@ -14,7 +14,7 @@ html, _ := hl.CodeToHtml(`const x: number = 42;`, "typescript")
 - **10 themes** — Dark+ (default), GitHub Light, Dracula, One Dark Pro, Nord, Monokai, Material Ocean, Tokyo Night, Solarized Dark, Solarized Light
 - **No external dependencies** — pure Go standard library
 - **WASM support** — compile to WebAssembly for browser use
-- **Token caching** — repeated highlights return instantly
+- **Token caching** — avoids re-parsing repeated input
 - **Customizable** — per-call pre style, line class prefix, theme switching
 
 ## Usage
@@ -39,7 +39,9 @@ html, err := hl.CodeToHtml("const x = 1;", "javascript",
 )
 
 // Switch theme
-hl.UpdateTheme("github-light")
+if err := hl.UpdateTheme("github-light"); err != nil {
+    // handle unknown theme
+}
 ```
 
 ### Custom Highlighter
