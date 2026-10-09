@@ -1,6 +1,7 @@
 package css
 
 import (
+	"strings"
 	"testing"
 
 	"code-mate-core/core"
@@ -136,4 +137,19 @@ func checkScopeExists(t *testing.T, tokens []core.Token, scope string) {
 		}
 	}
 	t.Errorf("expected token with scope %q not found", scope)
+}
+
+// 多字节字符不得被字节级切碎（分词无损性）
+func TestParse_MultibyteLossless(t *testing.T) {
+	stream := Language.Parse("值")
+
+	var b strings.Builder
+	for _, row := range stream {
+		for _, tok := range row {
+			b.WriteString(tok.Text)
+		}
+	}
+	if got := b.String(); got != "值" {
+		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
+	}
 }

@@ -1,6 +1,7 @@
 package json
 
 import (
+	"strings"
 	"testing"
 
 	"code-mate-core/core"
@@ -178,5 +179,20 @@ func TestAdapter_Aliases(t *testing.T) {
 	aliases := Language.Aliases()
 	if len(aliases) != 0 {
 		t.Errorf("expected empty aliases, got %v", aliases)
+	}
+}
+
+// 多字节字符不得被字节级切碎（分词无损性）
+func TestParse_MultibyteLossless(t *testing.T) {
+	stream := Language.Parse("值")
+
+	var b strings.Builder
+	for _, row := range stream {
+		for _, tok := range row {
+			b.WriteString(tok.Text)
+		}
+	}
+	if got := b.String(); got != "值" {
+		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
 }

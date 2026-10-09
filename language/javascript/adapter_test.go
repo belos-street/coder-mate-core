@@ -1,6 +1,7 @@
 package javascript
 
 import (
+	"strings"
 	"testing"
 
 	"code-mate-core/core"
@@ -492,5 +493,20 @@ func TestParse_Operators(t *testing.T) {
 		if tok.Scope != ScopeOperator {
 			t.Errorf("%q: expected scope=%q, got %q", op, ScopeOperator, tok.Scope)
 		}
+	}
+}
+
+// 多字节字符不得被字节级切碎（分词无损性）
+func TestParse_MultibyteLossless(t *testing.T) {
+	stream := Language.Parse("值")
+
+	var b strings.Builder
+	for _, row := range stream {
+		for _, tok := range row {
+			b.WriteString(tok.Text)
+		}
+	}
+	if got := b.String(); got != "值" {
+		t.Errorf("expected lossless tokenization of multibyte char, got %q", got)
 	}
 }
