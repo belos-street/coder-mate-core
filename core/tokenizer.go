@@ -4,6 +4,7 @@ import (
 	"errors"
 	"regexp"
 	"strings"
+	"unicode/utf8"
 )
 
 func NewParserContext(initialState string) *ParserContext {
@@ -154,23 +155,27 @@ func MatchToken(code string, ctx *ParserContext, spec *TokenizerSpec) (*Token, *
 		}
 	}
 
-	if len(code) > 0 {
-		char := string(code[0])
-		token := Token{
-			Text:  char,
-			Scope: spec.FallbackScope,
-			Line:  ctx.Line,
-			Col:   [2]int{ctx.Col, ctx.Col},
-			Style: TokenStyle{},
-		}
-		return &token, &ParserContext{
-			StateStack: newStateStack(ctx.StateStack),
-			Line:       ctx.Line,
-			Col:        ctx.Col + 1,
-		}
-	}
+	return matchFallbackToken(code, ctx, spec)
+}
 
-	return nil, ctx
+// matchFallbackToken 当前状态无规则命中时的兜底：按单个 rune 消费，
+// 保证多字节字符（CJK、emoji 等）不会被按字节切碎。code 须非空。
+// Text 取原始字节切片（code[:size]）：非法 UTF-8 字节按原字节保留而非
+// 替换成 U+FFFD，保证分词完全无损。
+func matchFallbackToken(code string, ctx *ParserContext, spec *TokenizerSpec) (*Token, *ParserContext) {
+	_, size := utf8.DecodeRuneInString(code)
+	token := Token{
+		Text:  code[:size],
+		Scope: spec.FallbackScope,
+		Line:  ctx.Line,
+		Col:   [2]int{ctx.Col, ctx.Col + size - 1},
+		Style: TokenStyle{},
+	}
+	return &token, &ParserContext{
+		StateStack: newStateStack(ctx.StateStack),
+		Line:       ctx.Line,
+		Col:        ctx.Col + size,
+	}
 }
 
 func newStateStack(original []string) []string {
@@ -212,6 +217,11 @@ func Parse(code string, spec *TokenizerSpec) TokenStream {
 			remainingCode = remainingCode[1:]
 			ctx.Col++
 			continue
+		}
+
+		if len(token.Text) == 0 {
+			// 防护：零宽匹配的自定义规则会造成零长度消费死循环，按 1 rune 兜底
+			token, newCtx = matchFallbackToken(remainingCode, ctx, spec)
 		}
 
 		if strings.Contains(token.Text, "\n") {
