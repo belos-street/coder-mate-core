@@ -56,6 +56,52 @@ func countTokensByScope(tokens core.TokenStream, scope string) int {
 	return count
 }
 
+func TestParse_MissingKeywords(t *testing.T) {
+	// 2.4 回归：这些关键字此前落入 identifier（JS 关键字表缺口）
+	for _, kw := range []string{"typeof", "new", "delete", "void", "yield", "instanceof"} {
+		stream := Language.Parse(kw + " x")
+		tok := requireToken(t, stream, 0, 0)
+		if tok.Text != kw {
+			t.Errorf("expected text=%q, got %q", kw, tok.Text)
+		}
+		if tok.Scope != ScopeKeywordControl {
+			t.Errorf("%q: expected scope %q, got %q", kw, ScopeKeywordControl, tok.Scope)
+		}
+	}
+
+	for _, kw := range []string{"this", "super"} {
+		stream := Language.Parse(kw + ".x")
+		tok := requireToken(t, stream, 0, 0)
+		if tok.Text != kw {
+			t.Errorf("expected text=%q, got %q", kw, tok.Text)
+		}
+		if tok.Scope != ScopeVariableThis {
+			t.Errorf("%q: expected scope %q, got %q", kw, ScopeVariableThis, tok.Scope)
+		}
+	}
+}
+
+func TestParse_NumberExponentSign(t *testing.T) {
+	// 2.4 回归：此前 1e+10 只匹配出 1e
+	stream := Language.Parse("1e+10")
+	tok := requireToken(t, stream, 0, 0)
+	if tok.Text != "1e+10" {
+		t.Errorf("expected full scientific notation, got %q", tok.Text)
+	}
+	if tok.Scope != ScopeNumeric {
+		t.Errorf("expected scope %q, got %q", ScopeNumeric, tok.Scope)
+	}
+}
+
+func TestParse_ExponentOperator(t *testing.T) {
+	// 2.4 回归：此前运算符表无 **，被拆成两个 *
+	stream := Language.Parse("2 ** 3")
+	tok := requireToken(t, stream, 0, 2)
+	if tok.Text != "**" {
+		t.Errorf("expected '**' operator, got %q", tok.Text)
+	}
+}
+
 func TestParse_EmptyInput(t *testing.T) {
 	stream := Language.Parse("")
 	if len(stream) != 0 {

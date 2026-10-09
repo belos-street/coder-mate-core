@@ -66,6 +66,14 @@ var GRAMMAR_RULES = map[string][]core.GrammarRule{
 			Scope: ScopeKeywordAsync,
 		},
 		{
+			Regex: regexp.MustCompile(`^(typeof|new|delete|void|yield|instanceof)\b`),
+			Scope: ScopeKeywordControl,
+		},
+		{
+			Regex: regexp.MustCompile(`^(this|super)\b`),
+			Scope: ScopeVariableThis,
+		},
+		{
 			Regex: regexp.MustCompile(`^(class|extends|static|constructor)\b`),
 			Scope: ScopeKeywordClass,
 		},
@@ -96,13 +104,13 @@ var GRAMMAR_RULES = map[string][]core.GrammarRule{
 			Scope: ScopeArrowFunction,
 		},
 		{
-			Regex: regexp.MustCompile(`^(===|!==|==|!=|>=|<=|&&|\|\||\+\+|--|\+|-|\*|\/|%|=|>|<|!|\.|,|:|;|\(|\)|\{|\}|\[|\])`),
+			Regex: regexp.MustCompile(`^(===|!==|==|!=|>=|<=|&&|\|\||\+\+|--|\*\*|\+|-|\*|\/|%|=|>|<|!|\.|,|:|;|\(|\)|\{|\}|\[|\])`),
 			Scope: ScopeOperator,
 		},
 
 		// === 6. 值类型 ===
 		{
-			Regex: regexp.MustCompile(`^(0b[01]+n?|0o[0-7]+n?|0x[0-9a-fA-F]+n?|\d+\.?\d*e?\d*n?|\.\d+e?\d*n?)`),
+			Regex: regexp.MustCompile(`^(0b[01]+n?|0o[0-7]+n?|0x[0-9a-fA-F]+n?|\d+\.?\d*(?:[eE][+-]?\d+)?n?|\.\d+(?:[eE][+-]?\d+)?n?)`),
 			Scope: ScopeNumeric,
 		},
 		{

@@ -7,6 +7,17 @@ import (
 	"code-mate-core/core"
 )
 
+func TestParse_FunctionCallNotType(t *testing.T) {
+	// 2.4 回归：此前 EntityType 规则先于 EntityFunction，Foo( 恒被判为类型名
+	tokens := flatten(Language.Parse("Foo(1);"))
+	if len(tokens) == 0 || tokens[0].Text != "Foo(" {
+		t.Fatalf("expected first token 'Foo(', got %v", tokens)
+	}
+	if tokens[0].Scope != ScopeEntityFunction {
+		t.Errorf("expected scope %q, got %q", ScopeEntityFunction, tokens[0].Scope)
+	}
+}
+
 func TestParse_BasicSyntax(t *testing.T) {
 	code := `package com.example;
 

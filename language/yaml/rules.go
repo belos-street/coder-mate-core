@@ -23,8 +23,8 @@ var GrammarRules = map[string][]core.GrammarRule{
 		{Regex: regexp.MustCompile(`^'`), Scope: ScopeStringQuotedSingle, PushState: GrammarStateStringSingle},
 		{Regex: regexp.MustCompile(`^(?:true|false|yes|no|on|off)\b`), Scope: ScopeConstantBoolean},
 		{Regex: regexp.MustCompile(`^(?:null|~)\b`), Scope: ScopeConstantNull},
-		{Regex: regexp.MustCompile(`^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?`), Scope: ScopeConstantNumeric},
 		{Regex: regexp.MustCompile(`^-`), Scope: ScopePunctuationSequenceItem},
+		{Regex: regexp.MustCompile(`^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?`), Scope: ScopeConstantNumeric},
 		{Regex: regexp.MustCompile(`^[^\s\[\]\{\},#][^#\r\n]*`), Scope: ScopeStringUnquoted},
 	},
 	GrammarStateStringDouble: {

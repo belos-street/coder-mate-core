@@ -7,6 +7,20 @@ import (
 	"code-mate-core/core"
 )
 
+func TestParse_NegativeNumberSequenceItem(t *testing.T) {
+	// 2.4 回归：此前 numeric 规则先于 '-'，-5 被整体吃成数字
+	tokens := flatten(Language.Parse("-5"))
+	if len(tokens) < 2 {
+		t.Fatalf("expected at least 2 tokens, got %v", tokens)
+	}
+	if tokens[0].Text != "-" || tokens[0].Scope != ScopePunctuationSequenceItem {
+		t.Errorf("expected '-' as sequence item punctuation, got %q (%q)", tokens[0].Text, tokens[0].Scope)
+	}
+	if tokens[1].Text != "5" || tokens[1].Scope != ScopeConstantNumeric {
+		t.Errorf("expected '5' numeric, got %q (%q)", tokens[1].Text, tokens[1].Scope)
+	}
+}
+
 func TestParse_BasicMappingAndSequence(t *testing.T) {
 	code := `name: coder-mate
 version: 1

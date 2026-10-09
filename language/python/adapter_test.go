@@ -7,6 +7,34 @@ import (
 	"code-mate-core/core"
 )
 
+func TestParse_MissingKeywords(t *testing.T) {
+	// 2.4 回归：这些关键字此前落入 identifier（Python 关键字表缺口）
+	for _, kw := range []string{"assert", "del", "global", "nonlocal"} {
+		tokens := flatten(Language.Parse(kw + " x"))
+		if len(tokens) == 0 || tokens[0].Text != kw {
+			t.Errorf("%q: expected first token %q, got %v", kw, kw, tokens)
+			continue
+		}
+		if tokens[0].Scope != ScopeKeywordControl {
+			t.Errorf("%q: expected scope %q, got %q", kw, ScopeKeywordControl, tokens[0].Scope)
+		}
+	}
+}
+
+func TestParse_NumberLiterals(t *testing.T) {
+	// 2.4 回归：此前数字规则不支持 0x/0o/0b 前缀与下划线分隔
+	for _, lit := range []string{"0x1F", "0o17", "0b101", "1_000", "1_000.5"} {
+		tokens := flatten(Language.Parse(lit))
+		if len(tokens) == 0 || tokens[0].Text != lit {
+			t.Errorf("%q: expected single numeric token, got %v", lit, tokens)
+			continue
+		}
+		if tokens[0].Scope != ScopeConstantNumeric {
+			t.Errorf("%q: expected scope %q, got %q", lit, ScopeConstantNumeric, tokens[0].Scope)
+		}
+	}
+}
+
 func TestParse_BasicSyntax(t *testing.T) {
 	code := `# comment
 def greet(name: str) -> str:

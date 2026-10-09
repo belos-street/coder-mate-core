@@ -7,7 +7,7 @@ import (
 )
 
 var pythonBuiltins = regexp.MustCompile(`^(print|len|range|str|int|float|dict|list|set|tuple|sum|min|max|abs|enumerate|zip|map|filter|any|all|open)\b`)
-var pythonKeywords = regexp.MustCompile(`^(if|elif|else|while|try|except|finally|with|pass|break|continue|return|raise|in|is|and|or|not|lambda|yield|await|async|from|import|match|case)\b`)
+var pythonKeywords = regexp.MustCompile(`^(if|elif|else|while|try|except|finally|with|pass|break|continue|return|raise|in|is|and|or|not|lambda|yield|await|async|from|import|match|case|assert|del|global|nonlocal)\b`)
 var pythonAnnotationTypes = regexp.MustCompile(`^(int|str|float|bool|list|dict|set|tuple|bytes|Any|Optional|Union|Literal|TypedDict|Callable|Iterator|Iterable|Sequence|Mapping|Self|(?:[A-Z][A-Za-z0-9_]*))\b`)
 
 var GrammarRules = map[string][]core.GrammarRule{
@@ -46,7 +46,7 @@ var GrammarRules = map[string][]core.GrammarRule{
 		{Regex: regexp.MustCompile(`^(True|False)\b`), Scope: ScopeConstantBoolean},
 		{Regex: regexp.MustCompile(`^None\b`), Scope: ScopeConstantNone},
 		{Regex: pythonAnnotationTypes, Scope: ScopeSupportAnnotation},
-		{Regex: regexp.MustCompile(`^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?`), Scope: ScopeConstantNumeric},
+		{Regex: regexp.MustCompile(`^-?(?:0[xX][0-9a-fA-F_]+|0[oO][0-7_]+|0[bB][01_]+|\d[\d_]*(?:\.\d[\d_]*)?(?:[eE][+-]?\d+)?)[jJ]?`), Scope: ScopeConstantNumeric},
 		{Regex: regexp.MustCompile(`^(==|!=|<=|>=|\*\*|\/\/|->|:=|[+\-*/%=<>{}\[\]():.,|])`), Scope: ScopeOperator},
 		{Regex: regexp.MustCompile(`^[A-Za-z_][A-Za-z0-9_]*`), Scope: ScopeVarIdentifier},
 	},
@@ -132,7 +132,7 @@ var GrammarRules = map[string][]core.GrammarRule{
 		{Regex: regexp.MustCompile(`^(for)\b`), Scope: ScopeKeywordControl, PushState: StateExpectComprehension},
 		{Regex: pythonKeywords, Scope: ScopeKeywordControl},
 		{Regex: regexp.MustCompile(`^(True|False|None)\b`), Scope: ScopeConstantBoolean},
-		{Regex: regexp.MustCompile(`^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?`), Scope: ScopeConstantNumeric},
+		{Regex: regexp.MustCompile(`^-?(?:0[xX][0-9a-fA-F_]+|0[oO][0-7_]+|0[bB][01_]+|\d[\d_]*(?:\.\d[\d_]*)?(?:[eE][+-]?\d+)?)[jJ]?`), Scope: ScopeConstantNumeric},
 		{Regex: regexp.MustCompile(`^(==|!=|<=|>=|[+\-*/%=<>{}\[\]():.,|])`), Scope: ScopeOperator},
 		{Regex: regexp.MustCompile(`^[A-Za-z_][A-Za-z0-9_]*`), Scope: ScopeVarIdentifier},
 		{Regex: regexp.MustCompile(`^.`), Scope: ScopeDefault},

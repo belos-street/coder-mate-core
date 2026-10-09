@@ -24,4 +24,5 @@ var JsStyles = map[string]string{
 	"support.function.promise.js":                   "color: #DCDCAA; font-weight: bold;",
 	"variable.identifier.js":                        "color: #9CDCFE;",
 	"variable.language.global-this.js":              "color: #C586C0; font-weight: bold;",
+	"variable.language.this.js":                     "color: #569CD6;",
 }
