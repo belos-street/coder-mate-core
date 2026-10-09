@@ -399,16 +399,15 @@ func TestParseInlineStyle_Empty(t *testing.T) {
 
 func TestStringifyInlineStyle(t *testing.T) {
 	style := core.TokenStyle{
-		"color":       "#569CD6",
 		"font-weight": "bold",
+		"color":       "#569CD6",
 	}
 	result := stringifyInlineStyle(style)
 
-	if !strings.Contains(result, "color: #569CD6") {
-		t.Errorf("expected color in output, got %q", result)
-	}
-	if !strings.Contains(result, "font-weight: bold") {
-		t.Errorf("expected font-weight in output, got %q", result)
+	// 按 key 排序序列化：输出必须逐字节确定，与 map 内部顺序无关
+	expected := "color: #569CD6; font-weight: bold;"
+	if result != expected {
+		t.Errorf("expected %q, got %q", expected, result)
 	}
 }
 
@@ -466,5 +465,90 @@ func TestCreateCacheKey(t *testing.T) {
 	key := createCacheKey("javascript", "const x = 1;")
 	if !strings.Contains(key, "\x00") {
 		t.Error("cache key should contain null separator")
+	}
+}
+
+func TestNewHighlighter_AutoRegistersBuiltins(t *testing.T) {
+	// 模拟纯 Go 消费者：不手动注册语言/主题，直接按 README 用法调用
+	theme.ClearRegistry()
+	core.ClearRegistry()
+	language.ResetBuiltins()
+
+	hl := NewHighlighter()
+
+	html, err := hl.CodeToHtml("const x = 1;", "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if !strings.Contains(html, "const") {
+		t.Error("expected highlighted output to contain 'const'")
+	}
+}
+
+func TestNewHighlighter_UnknownThemeFallsBackToDefault(t *testing.T) {
+	hl := NewHighlighter(HighlighterOptions{Theme: "no-such-theme"})
+	defaultHl := NewHighlighter()
+
+	code := "const x = 1; /* comment */"
+	got, err := hl.CodeToHtml(code, "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	want, err := defaultHl.CodeToHtml(code, "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if got != want {
+		t.Error("unknown theme should fall back to default theme output")
+	}
+}
+
+func TestNewHighlighter_InvalidThemeTypeFallsBackToDefault(t *testing.T) {
+	hl := NewHighlighter(HighlighterOptions{Theme: 42})
+	defaultHl := NewHighlighter()
+
+	code := "const x = 1;"
+	got, err := hl.CodeToHtml(code, "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	want, err := defaultHl.CodeToHtml(code, "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if got != want {
+		t.Error("invalid theme type should fall back to default theme output")
+	}
+}
+
+func TestCodeToHtml_DeterministicOutput(t *testing.T) {
+	hl := NewHighlighter()
+	code := "/* block comment */\nconst x = 1; const s = \"hi\";"
+
+	first, err := hl.CodeToHtml(code, "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	for i := 0; i < 2000; i++ {
+		out, err := hl.CodeToHtml(code, "javascript")
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+		if out != first {
+			t.Fatalf("non-deterministic output at iteration %d", i)
+		}
+	}
+}
+
+func TestCodeToHtml_MultibyteNotMojibake(t *testing.T) {
+	hl := NewHighlighter()
+
+	html, err := hl.CodeToHtml("let 值 = 1", "javascript")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if !strings.Contains(html, "值") {
+		t.Errorf("expected HTML to contain complete CJK char, got %q", html)
 	}
 }

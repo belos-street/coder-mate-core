@@ -2,6 +2,7 @@ package core
 
 import (
 	"regexp"
+	"strings"
 	"testing"
 )
 
@@ -596,5 +597,92 @@ func TestTokenize_EmptyLangID(t *testing.T) {
 	_, err := Tokenize("hello", "")
 	if err == nil {
 		t.Fatal("expected error for empty language ID")
+	}
+}
+
+func TestMatchToken_FallbackMultibyte(t *testing.T) {
+	spec := &TokenizerSpec{
+		InitialState:  "global",
+		FallbackScope: "default",
+		Rules:         map[string][]GrammarRule{},
+	}
+	ctx := NewParserContext("global")
+
+	// 中文 = 3 字节
+	token, newCtx := MatchToken("值", ctx, spec)
+	if token == nil {
+		t.Fatal("expected fallback token, got nil")
+	}
+	if token.Text != "值" {
+		t.Errorf("expected complete multibyte char, got %q", token.Text)
+	}
+	if newCtx.Col != ctx.Col+3 { // Col 按字节推进
+		t.Errorf("expected Col to advance by byte width (3), got %d", newCtx.Col)
+	}
+
+	// emoji = 4 字节
+	token4, newCtx4 := MatchToken("🎨", ctx, spec)
+	if token4 == nil {
+		t.Fatal("expected fallback token, got nil")
+	}
+	if token4.Text != "🎨" {
+		t.Errorf("expected complete emoji, got %q", token4.Text)
+	}
+	if newCtx4.Col != ctx.Col+4 {
+		t.Errorf("expected Col to advance by byte width (4), got %d", newCtx4.Col)
+	}
+}
+
+func TestMatchToken_FallbackInvalidUTF8(t *testing.T) {
+	spec := &TokenizerSpec{
+		InitialState:  "global",
+		FallbackScope: "default",
+		Rules:         map[string][]GrammarRule{},
+	}
+	ctx := NewParserContext("global")
+
+	token, newCtx := MatchToken("\xff", ctx, spec)
+	if token == nil {
+		t.Fatal("expected fallback token, got nil")
+	}
+	// 非法字节按原字节保留（不替换成 U+FFFD），分词完全无损
+	if token.Text != "\xff" {
+		t.Errorf("expected raw byte preserved, got %q", token.Text)
+	}
+	if newCtx.Col != ctx.Col+1 {
+		t.Errorf("expected Col to advance by 1, got %d", newCtx.Col)
+	}
+}
+
+func TestParse_ZeroWidthRuleGuard(t *testing.T) {
+	spec := &TokenizerSpec{
+		InitialState:  "global",
+		FallbackScope: "default",
+		Rules: map[string][]GrammarRule{
+			"global": {
+				// a* 可匹配空串：无零长度消费防护时 Parse 会死循环
+				{Regex: regexp.MustCompile(`a*`), Scope: "zero"},
+			},
+		},
+	}
+
+	joinTokens := func(stream TokenStream) string {
+		var b strings.Builder
+		for _, row := range stream {
+			for _, tok := range row {
+				b.WriteString(tok.Text)
+			}
+		}
+		return b.String()
+	}
+
+	// 输入不命中规则：零宽匹配触发防护，按 rune 兜底消费
+	if got := joinTokens(Parse("bbb", spec)); got != "bbb" {
+		t.Errorf("expected lossless consumption, got %q", got)
+	}
+
+	// 输入部分命中："a" 被规则正常消费（非空匹配），"b" 走兜底
+	if got := joinTokens(Parse("ab", spec)); got != "ab" {
+		t.Errorf("expected lossless consumption, got %q", got)
 	}
 }
