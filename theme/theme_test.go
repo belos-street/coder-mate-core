@@ -4,28 +4,6 @@ import (
 	"testing"
 )
 
-func TestThemeType(t *testing.T) {
-	theme := &HighlightTheme{
-		ID:           "test",
-		DisplayName:  "Test Theme",
-		DefaultStyle: "color: #000;",
-		PreStyle:     "background: #FFF;",
-		Styles: ThemeStyleMap{
-			"keyword": "color: #00F;",
-		},
-	}
-
-	if theme.ID != "test" {
-		t.Errorf("expected ID='test', got %q", theme.ID)
-	}
-	if theme.DefaultStyle != "color: #000;" {
-		t.Errorf("expected DefaultStyle='color: #000;', got %q", theme.DefaultStyle)
-	}
-	if theme.Styles["keyword"] != "color: #00F;" {
-		t.Errorf("expected keyword style='color: #00F;', got %q", theme.Styles["keyword"])
-	}
-}
-
 func TestRegisterTheme(t *testing.T) {
 	ClearRegistry()
 

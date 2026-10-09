@@ -561,26 +561,48 @@ func TestListLanguages_Deduplication(t *testing.T) {
 func TestTokenize_Success(t *testing.T) {
 	ClearRegistry()
 
-	spec := &TokenizerSpec{
-		InitialState:  "global",
-		FallbackScope: "default",
-		Rules:         map[string][]GrammarRule{},
-	}
+	// 注册一个返回真实 token 流的 adapter，验证 Tokenize 的分发行为
+	RegisterLanguage(funcAdapter{fn: func(code string) TokenStream {
+		return TokenStream{{{Text: code, Scope: "test.scope", Line: 1, Col: [2]int{1, len(code)}}}}
+	}})
 
-	type realAdapter struct{}
-
-	adapter := &struct {
-		mockAdapter
-	}{mockAdapter{id: "test", aliases: []string{}}}
-
-	RegisterLanguage(LanguageAdapter(adapter))
-
-	_, err := Tokenize("hello", "test")
+	rows, err := Tokenize("hello", "func")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	_ = spec // used to verify Parse logic
+	if len(rows) != 1 || len(rows[0]) != 1 {
+		t.Fatalf("expected 1 row with 1 token, got %v", rows)
+	}
+	if rows[0][0].Text != "hello" || rows[0][0].Scope != "test.scope" {
+		t.Errorf("unexpected token: %+v", rows[0][0])
+	}
 }
+
+func TestEnsureValidID_PanicsOnEmpty(t *testing.T) {
+	// panic 路径：空语言 ID 在注册表入口 fail-fast（阶段 3 补齐的覆盖）
+	defer func() {
+		if r := recover(); r == nil {
+			t.Error("expected panic for empty language id")
+		}
+	}()
+	GetLanguage("   ")
+}
+
+func TestRegisterLanguage_PanicsOnEmptyID(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Error("expected panic for empty adapter id")
+		}
+	}()
+	RegisterLanguage(mockAdapter{id: "", aliases: nil})
+}
+
+// funcAdapter 按注入的函数返回解析结果
+type funcAdapter struct{ fn func(code string) TokenStream }
+
+func (f funcAdapter) ID() string                    { return "func" }
+func (f funcAdapter) Aliases() []string             { return nil }
+func (f funcAdapter) Parse(code string) TokenStream { return f.fn(code) }
 
 func TestTokenize_UnknownLanguage(t *testing.T) {
 	ClearRegistry()
