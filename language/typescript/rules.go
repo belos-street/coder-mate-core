@@ -56,8 +56,18 @@ func buildGrammarRules() map[string][]core.GrammarRule {
 		}
 	}
 
+	// TS 类型关键字须排在 JS 关键字规则之前，但注释与动态 import 规则必须
+	// 保持更靠前——锚定「动态 import」规则定位插入点，替代对 JS 规则顺序的
+	// 位置硬编码（insertPos := 3）
+	insertPos := len(filtered)
+	for i, rule := range filtered {
+		if rule.PushState == js.StateImportDynamic {
+			insertPos = i + 1
+			break
+		}
+	}
+
 	var merged []core.GrammarRule
-	insertPos := 3
 	for i, rule := range filtered {
 		if i == insertPos {
 			merged = append(merged, tsRules...)

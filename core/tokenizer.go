@@ -137,16 +137,12 @@ func MatchToken(code string, ctx *ParserContext, spec *TokenizerSpec) (*Token, *
 
 			newCtx := *ctx
 			if rule.PushState != "" {
-				newStack := make([]string, len(ctx.StateStack))
-				copy(newStack, ctx.StateStack)
-				newStack = append(newStack, rule.PushState)
-				newCtx.StateStack = newStack
+				newCtx = *PushState(&newCtx, rule.PushState)
 			}
 			if rule.PopState {
-				if len(newCtx.StateStack) > 1 {
-					newStack := make([]string, len(newCtx.StateStack)-1)
-					copy(newStack, newCtx.StateStack[:len(newCtx.StateStack)-1])
-					newCtx.StateStack = newStack
+				// 与 TS 版对齐：栈底 pop 静默忽略（PopState 返回错误时不回退）
+				if popped, err := PopState(&newCtx); err == nil {
+					newCtx = *popped
 				}
 			}
 			newCtx.Col = token.Col[1] + 1
@@ -213,12 +209,8 @@ func Parse(code string, spec *TokenizerSpec) TokenStream {
 
 		token, newCtx := MatchToken(remainingCode, ctx, spec)
 
-		if token == nil {
-			remainingCode = remainingCode[1:]
-			ctx.Col++
-			continue
-		}
-
+		// MatchToken 仅在空输入返回 nil，循环条件已保证非空；
+		// 零宽匹配（token.Text 为空）由下方防护兜底
 		if len(token.Text) == 0 {
 			// 防护：零宽匹配的自定义规则会造成零长度消费死循环，按 1 rune 兜底
 			token, newCtx = matchFallbackToken(remainingCode, ctx, spec)
