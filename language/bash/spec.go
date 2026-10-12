@@ -2,8 +2,8 @@ package bash
 
 import "code-mate-core/core"
 
-var Spec = core.TokenizerSpec{
+var spec = core.TokenizerSpec{
 	InitialState:  GrammarStateGlobal,
-	Rules:         GrammarRules,
+	Rules:         grammarRules,
 	FallbackScope: ScopeDefault,
 }

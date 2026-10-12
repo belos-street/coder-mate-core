@@ -114,3 +114,20 @@ func ClearRegistry() {
 	defer registryMu.Unlock()
 	languageRegistry = make(map[string]LanguageAdapter)
 }
+
+// simpleAdapter 由构造函数注入解析逻辑的默认适配器实现
+type simpleAdapter struct {
+	id      string
+	aliases []string
+	parse   func(code string) TokenStream
+}
+
+func (a simpleAdapter) ID() string                    { return a.id }
+func (a simpleAdapter) Aliases() []string             { return a.aliases }
+func (a simpleAdapter) Parse(code string) TokenStream { return a.parse(code) }
+
+// NewSimpleAdapter 构造仅由 id/别名/解析函数构成的语言适配器，
+// 供各语言包复用，消除同骨架 adapter 样板
+func NewSimpleAdapter(id string, aliases []string, parse func(code string) TokenStream) LanguageAdapter {
+	return simpleAdapter{id: id, aliases: aliases, parse: parse}
+}

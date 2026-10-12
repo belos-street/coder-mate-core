@@ -10,7 +10,7 @@ var goKeywordsDecl = regexp.MustCompile(`^(package|import|func|var|const|type|st
 var goKeywordsControl = regexp.MustCompile(`^(if|else|switch|case|default|for|range|select|go|defer|return|break|continue|fallthrough|goto)\b`)
 var goBuiltinTypes = regexp.MustCompile(`^(any|comparable|error|string|bool|byte|rune|int|int8|int16|int32|int64|uint|uint8|uint16|uint32|uint64|uintptr|float32|float64|complex64|complex128)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLine},

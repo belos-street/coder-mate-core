@@ -23,7 +23,7 @@ var sqlTableName = `^(?:` +
 	"\x60[^\x60\r\n]+\x60|" +
 	`[A-Za-z_][A-Za-z0-9_$]*))*`
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^--[^\r\n]*`), Scope: ScopeCommentLine},

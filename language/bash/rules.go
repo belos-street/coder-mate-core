@@ -9,7 +9,7 @@ import (
 var bashKeywords = regexp.MustCompile(`^(if|then|else|elif|fi|for|while|until|do|done|case|esac|in|select|time|coproc)\b`)
 var bashBuiltins = regexp.MustCompile(`^(echo|printf|read|cd|pwd|export|unset|alias|unalias|source|set|shift|test|true|false|trap|exec|exit|return|local|declare|typeset|readonly|mapfile|wait|kill|jobs|fg|bg)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^#.*`), Scope: ScopeCommentLine},

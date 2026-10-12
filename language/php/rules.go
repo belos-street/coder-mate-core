@@ -11,7 +11,7 @@ var phpKeywordsModifier = regexp.MustCompile(`^(public|private|protected|static|
 var phpKeywordsControl = regexp.MustCompile(`^(if|else|elseif|switch|case|default|for|foreach|while|do|break|continue|return|try|catch|finally|throw|match|yield|as|new|instanceof|echo|include|require|include_once|require_once|fn)\b`)
 var phpBuiltinTypes = regexp.MustCompile(`^(int|float|string|bool|array|object|mixed|void|null|callable|iterable|self|parent|never)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLineDS},

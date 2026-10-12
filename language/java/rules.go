@@ -11,7 +11,7 @@ var javaKeywordsModifier = regexp.MustCompile(`^(public|protected|private|static
 var javaKeywordsControl = regexp.MustCompile(`^(if|else|switch|case|for|while|do|break|continue|return|try|catch|finally|throw|throws|new|instanceof|assert|yield)\b`)
 var javaBuiltinTypes = regexp.MustCompile(`^(void|boolean|byte|short|int|long|float|double|char|var|String)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLine},

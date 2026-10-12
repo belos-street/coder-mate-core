@@ -2,12 +2,6 @@ package php
 
 import "code-mate-core/core"
 
-type adapter struct{}
-
-func (a adapter) ID() string        { return "php" }
-func (a adapter) Aliases() []string { return []string{"phtml", "php8"} }
-func (a adapter) Parse(code string) core.TokenStream {
-	return core.Parse(code, &Spec)
-}
-
-var Language core.LanguageAdapter = adapter{}
+var Language = core.NewSimpleAdapter("php", []string{"phtml", "php8"}, func(code string) core.TokenStream {
+	return core.Parse(code, &spec)
+})

@@ -2,12 +2,6 @@ package cpp
 
 import "code-mate-core/core"
 
-type adapter struct{}
-
-func (a adapter) ID() string        { return "cpp" }
-func (a adapter) Aliases() []string { return []string{"c++", "cc", "cxx", "hpp", "hxx", "hh"} }
-func (a adapter) Parse(code string) core.TokenStream {
-	return core.Parse(code, &Spec)
-}
-
-var Language core.LanguageAdapter = adapter{}
+var Language = core.NewSimpleAdapter("cpp", []string{"c++", "cc", "cxx", "hpp", "hxx", "hh"}, func(code string) core.TokenStream {
+	return core.Parse(code, &spec)
+})

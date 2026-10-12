@@ -6,7 +6,7 @@ import (
 	"code-mate-core/core"
 )
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^(?: {4}|\t)[^\r\n]*`), Scope: ScopeIndentedCode},
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},

@@ -2,27 +2,14 @@ package typescript
 
 import (
 	"regexp"
-	"sync"
 
 	"code-mate-core/core"
 	js "code-mate-core/language/javascript"
 )
 
-var (
-	grammarRules     map[string][]core.GrammarRule
-	grammarRulesOnce sync.Once
-)
-
 var tsBuiltinTypes = regexp.MustCompile(`^(string|number|boolean|any|unknown|never|void|object|symbol|bigint|Array|Promise|Record|Partial|Pick|Omit|Readonly|Required)\b`)
 var operatorJS = regexp.MustCompile(`^(\.\.\.|===|!==|==|!=|>=|<=|&&|\|\||\+\+|--|\+|-|\*|\/|%|=|>|<|!|&|\||\?|\.|,|:|;|\(|\)|\{|\}|\[|\])`)
 var punctuation = regexp.MustCompile(`^(\.\.\.|[+\-*/=<>!&|.,;:?()[\]])`)
-
-func getGrammarRules() map[string][]core.GrammarRule {
-	grammarRulesOnce.Do(func() {
-		grammarRules = buildGrammarRules()
-	})
-	return grammarRules
-}
 
 func buildGrammarRules() map[string][]core.GrammarRule {
 	base := js.GetRules()

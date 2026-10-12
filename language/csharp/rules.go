@@ -12,7 +12,7 @@ var csKeywordsControl = regexp.MustCompile(`^(if|else|switch|case|default|for|fo
 var csBuiltinTypes = regexp.MustCompile(`^(void|bool|byte|sbyte|short|ushort|int|uint|long|ulong|nint|nuint|float|double|decimal|char|string|object|dynamic|var|Task|ValueTask|DateTime|Guid|List|Dictionary|IEnumerable|IQueryable|Span|Memory|Func|Action|CancellationToken)\b`)
 var csAttributePattern = regexp.MustCompile(`^\[[A-Za-z_][A-Za-z0-9_.]*(?:\s*:\s*[A-Za-z_][A-Za-z0-9_.]*)?(?:\s*\([^\)\r\n]*\))?\]`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLineDS},

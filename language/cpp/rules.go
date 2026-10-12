@@ -15,7 +15,7 @@ var cppMacroRefDirective = regexp.MustCompile(`^#\s*(?:ifdef|ifndef|undef)\b`)
 var cppOtherDirective = regexp.MustCompile(`^#\s*(?:if|elif|else|endif|pragma|error|warning|line)\b`)
 var cppBuiltinTypes = regexp.MustCompile(`^(void|bool|char|char8_t|char16_t|char32_t|wchar_t|short|int|long|float|double|auto|size_t|ptrdiff_t|string|std::string|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLineDS},

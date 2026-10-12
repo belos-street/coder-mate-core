@@ -11,7 +11,7 @@ var rustKeywordsModifier = regexp.MustCompile(`^(pub|mut|unsafe|async|move|ref|d
 var rustKeywordsControl = regexp.MustCompile(`^(if|else|match|for|while|loop|break|continue|return|await|as)\b`)
 var rustBuiltinTypes = regexp.MustCompile(`^(bool|char|str|String|i8|i16|i32|i64|i128|isize|u8|u16|u32|u64|u128|usize|f32|f64|Option|Result|Vec|Box|HashMap|BTreeMap)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLineDS},

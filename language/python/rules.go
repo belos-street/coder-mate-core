@@ -10,7 +10,7 @@ var pythonBuiltins = regexp.MustCompile(`^(print|len|range|str|int|float|dict|li
 var pythonKeywords = regexp.MustCompile(`^(if|elif|else|while|try|except|finally|with|pass|break|continue|return|raise|in|is|and|or|not|lambda|yield|await|async|from|import|match|case|assert|del|global|nonlocal)\b`)
 var pythonAnnotationTypes = regexp.MustCompile(`^(int|str|float|bool|list|dict|set|tuple|bytes|Any|Optional|Union|Literal|TypedDict|Callable|Iterator|Iterable|Sequence|Mapping|Self|(?:[A-Z][A-Za-z0-9_]*))\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	StateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^#.*`), Scope: ScopeCommentLine},

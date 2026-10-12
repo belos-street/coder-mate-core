@@ -12,7 +12,7 @@ var keywordsControl = regexp.MustCompile(`^(if|else|switch|case|default|for|whil
 var directive = regexp.MustCompile(`^#\s*(?:include|define|undef|if|ifdef|ifndef|elif|else|endif|pragma|error|warning|line)\b`)
 var builtinTypes = regexp.MustCompile(`^(void|char|int|float|double|_Bool|bool|size_t|ptrdiff_t|wchar_t|FILE|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t)\b`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^//.*`), Scope: ScopeCommentLine},

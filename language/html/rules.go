@@ -8,7 +8,7 @@ import (
 
 var htmlEntity = regexp.MustCompile(`^&(?:[a-zA-Z][a-zA-Z0-9]+|#[0-9]+|#x[0-9A-Fa-f]+);`)
 
-var GrammarRules = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	GrammarStateGlobal: {
 		{Regex: regexp.MustCompile(`^\s+`), Scope: ScopeDefault},
 		{Regex: regexp.MustCompile(`^<!--`), Scope: ScopeCommentBlock, PushState: GrammarStateComment},
