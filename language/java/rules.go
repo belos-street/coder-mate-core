@@ -28,7 +28,7 @@ var GrammarRules = map[string][]core.GrammarRule{
 		{Regex: regexp.MustCompile(`^null\b`), Scope: ScopeConstantNull},
 		{Regex: regexp.MustCompile(`^(this|super)\b`), Scope: ScopeVariableLang},
 		{Regex: javaBuiltinTypes, Scope: ScopeSupportBuiltin},
-		{Regex: regexp.MustCompile(`^[A-Za-z_][A-Za-z0-9_]*\(`), Scope: ScopeEntityFunction},
+		{Regex: regexp.MustCompile(`^[A-Za-z_][A-Za-z0-9_]*[ \t]*\(`), Scope: ScopeEntityFunction},
 		{Regex: regexp.MustCompile(`^[A-Z][A-Za-z0-9_]*(?:<[^>]*>)?`), Scope: ScopeEntityType},
 		{Regex: regexp.MustCompile(`^-?(?:0[xX][0-9A-Fa-f_]+|0[bB][01_]+|0[0-7_]+|(?:\d[\d_]*)(?:\.\d[\d_]*)?(?:[eE][+-]?\d[\d_]*)?)[fFdDlL]?`), Scope: ScopeConstantNumeric},
 		{Regex: regexp.MustCompile(`^(?:->|::|==|!=|<=|>=|\+\+|--|&&|\|\||<<|>>>?|[-+*/%=&|^~!?<>:.;,()[\]{}])`), Scope: ScopeOperator},

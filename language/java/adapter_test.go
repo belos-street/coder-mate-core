@@ -20,6 +20,20 @@ func TestParse_FunctionCallNotType(t *testing.T) {
 	}
 }
 
+func TestParse_FunctionCallWithSpace(t *testing.T) {
+	// 阶段 4 nit：'Foo (' 形式的函数调用此前欠匹配、恒判类型名
+	tokens := flatten(Language.Parse("Foo (1);"))
+	found := false
+	for _, tok := range tokens {
+		if tok.Scope == ScopeEntityFunction {
+			found = true
+		}
+	}
+	if !found {
+		t.Errorf("expected function scope for 'Foo (', got %+v", tokens)
+	}
+}
+
 func TestParse_BasicSyntax(t *testing.T) {
 	t.Parallel()
 

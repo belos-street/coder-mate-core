@@ -39,6 +39,20 @@ func TestParse_NumberLiterals(t *testing.T) {
 	}
 }
 
+func TestParse_NumberTrailingUnderscore(t *testing.T) {
+	// 阶段 4 nit：尾下划线不是合法 Python 数字字面量，数字 token 不得吞 _
+	for _, code := range []string{"1_", "1.5_", "0x1F_"} {
+		tokens := flatten(Language.Parse(code))
+		if len(tokens) == 0 || tokens[0].Scope != ScopeConstantNumeric {
+			t.Errorf("%q: expected leading numeric token, got %v", code, tokens)
+			continue
+		}
+		if strings.HasSuffix(tokens[0].Text, "_") {
+			t.Errorf("%q: numeric token must not swallow trailing underscore, got %q", code, tokens[0].Text)
+		}
+	}
+}
+
 func TestParse_BasicSyntax(t *testing.T) {
 	t.Parallel()
 
