@@ -1,6 +1,6 @@
 # CodeMate Core
 
-A fast, zero-dependency syntax highlighting engine for Go — supporting 17 programming languages with a FSM-based tokenizer, theming system, and WASM browser integration.
+A fast, zero-dependency syntax highlighting engine for Go — 17 languages, 10 themes, and an FSM-based tokenizer. Runs as a native Go library or compiled to WASM for the browser.
 
 ```go
 hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{})
@@ -13,6 +13,9 @@ html, _ := hl.CodeToHtml(`const x: number = 42;`, "typescript")
 - **17 languages** — JavaScript, TypeScript, Python, Bash, C, C++, C#, CSS, Go, HTML, Java, JSON, Markdown, PHP, Rust, SQL, YAML
 - **10 themes** — Dark+ (default), GitHub Light, Dracula, One Dark Pro, Nord, Monokai, Material Ocean, Tokyo Night, Solarized Dark, Solarized Light
 - **No external dependencies** — pure Go standard library
+- **Deterministic output** — same input always produces the same HTML
+- **Thread-safe** — a shared `Highlighter` can be used concurrently from multiple goroutines
+- **Golden-tested** — 51 token-stream fixtures verified against the TypeScript reference implementation
 - **WASM support** — compile to WebAssembly for browser use
 - **Token caching** — avoids re-parsing repeated input
 - **Customizable** — per-call pre style, line class prefix, theme switching
@@ -137,40 +140,43 @@ Options for `createHighlighter`: `theme` (string), `preStyle` (string), `lineCla
 
 ## Architecture
 
-```
-code  →  Tokenizer (FSM)  →  Token Stream  →  Theme Engine  →  HTML
-         ┌─────────────────┐  ┌──────────────┐  ┌──────────────┐
-         │ 17 language      │  │ token[].Scope  │  │ scope → color│
-         │ specs each with  │  │ token[].Line   │  │ inline styles│
-         │ 10-30 grammar    │  │ token[].Col    │  │              │
-         │ rules + states   │  │ token[].Style  │  │              │
-         └─────────────────┘  └──────────────┘  └──────────────┘
+```mermaid
+flowchart LR
+    code["Source code"] --> tok["Tokenizer (FSM)<br/>17 language specs<br/>10-30 grammar rules<br/>+ push/pop states"]
+    tok --> tokens["Token stream<br/>Scope · Line · Col · Style"]
+    tokens --> engine["Theme engine<br/>scope → color"]
+    engine --> html["HTML output<br/>inline styles"]
 ```
 
 The tokenizer uses a **finite state machine** with push/pop state stack. Each language defines grammar rules per state, and rules are matched in priority order. Cross-line tokens (e.g. multi-line strings) are handled by persisting state across line breaks.
 
 ## Performance
 
-Benchmarked on **Intel Core Ultra 7 258V** (Windows, Go 1.23):
+Benchmarked on **12th Gen Intel Core i7-12700** (Windows, Go 1.26.5):
 
 ```
-BenchmarkParse_JavaScript-8           2,595    457,296 ns/op   101,666 B/op   1,495 allocs/op
-BenchmarkParse_Python-8               3,022    344,932 ns/op    75,905 B/op   1,094 allocs/op
-BenchmarkCodeToHtml_SmallJS-8      329,286      3,877 ns/op     4,987 B/op      50 allocs/op
-BenchmarkCodeToHtml_Python-8         9,789    126,112 ns/op   138,525 B/op   1,106 allocs/op
-BenchmarkCodeToHtml_LargeJS-8        7,552    165,096 ns/op   182,321 B/op   1,419 allocs/op
-BenchmarkCodeToHtml_CacheHit-8       6,897    165,755 ns/op   182,291 B/op   1,419 allocs/op
-BenchmarkParse_EmptyCode-8      43,432,467         24 ns/op        16 B/op       1 allocs/op
-BenchmarkParse_SingleChar-8      1,372,580        778 ns/op       301 B/op       8 allocs/op
-BenchmarkParse_ManyShortLines-8     75,010     15,733 ns/op     5,323 B/op      96 allocs/op
-BenchmarkUpdateTheme-8          14,727,775         76 ns/op         0 B/op       0 allocs/op
+BenchmarkParse_JavaScript-20           2,836    406,793 ns/op   102,509 B/op   1,401 allocs/op
+BenchmarkParse_Python-20               3,640    352,565 ns/op    75,586 B/op   1,093 allocs/op
+BenchmarkParse_MultiByte-20            4,050    302,313 ns/op    74,928 B/op   1,075 allocs/op
+BenchmarkCodeToHtml_SmallJS-20       214,309      4,978 ns/op     5,176 B/op     52 allocs/op
+BenchmarkCodeToHtml_Python-20         10,000    161,464 ns/op   138,878 B/op   1,117 allocs/op
+BenchmarkCodeToHtml_LargeJS-20         5,191    211,746 ns/op   182,627 B/op   1,429 allocs/op
+BenchmarkCodeToHtml_MultiByte-20       6,559    163,952 ns/op   137,984 B/op   1,087 allocs/op
+BenchmarkCodeToHtml_Parallel-20       14,452     85,661 ns/op   182,960 B/op   1,431 allocs/op
+BenchmarkCodeToHtml_CacheHit-20        5,164    220,985 ns/op   182,577 B/op   1,429 allocs/op
+BenchmarkParse_EmptyCode-20         61,157,091         22.7 ns/op       16 B/op      1 allocs/op
+BenchmarkParse_SingleChar-20         1,510,675        803.9 ns/op      303 B/op      8 allocs/op
+BenchmarkParse_ManyShortLines-20        68,078     17,472 ns/op     5,335 B/op     95 allocs/op
+BenchmarkUpdateTheme-20              12,128,991       101.8 ns/op       0 B/op      0 allocs/op
 ```
 
-- **~0.5 ms** to parse and highlight a 30-line JavaScript file
-- **~4 μs** for a small `const x = 1;` (heavily cached)
-- **~24 ns** for empty input (near-zero overhead)
-- **Cache hit** matches the parse cost (cache avoids re-parsing but still clones token stream)
-- **Theme switching** is near-free (76 ns, zero allocations)
+- **~0.4 ms** to parse and highlight a ~30-line JavaScript file
+- **~5 μs** for a small `const x = 1;`
+- **~23 ns** for empty input (near-zero overhead)
+- **Multi-byte (CJK) input** handled without extra overhead — Chinese identifiers/comments/strings parse at the same cost as ASCII
+- **Concurrent access** on one shared `Highlighter`: ~86 μs/op across 20 threads (`-20` = GOMAXPROCS), safe without external locking
+- **Cache hit** matches the full pipeline cost — the cache avoids re-parsing, while token clone + re-render dominate
+- **Theme switching** is near-free (~100 ns, zero allocations)
 
 ### Go WASM vs JS Version
 

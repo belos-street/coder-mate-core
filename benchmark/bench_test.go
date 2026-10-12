@@ -182,6 +182,64 @@ func BenchmarkParse_ManyShortLines(b *testing.B) {
 	}
 }
 
+// --- Multi-byte (CJK) benchmarks ---
+
+var cjkBenchCode = `// 计算订单总额并输出格式化结果（中文注释与标识符混合）
+const 单位标签 = "元 / 件";
+
+function 计算订单总额(订单列表) {
+  let 总额 = 0;
+  for (const 订单 of 订单列表) {
+    总额 += 订单.单价 * 订单.数量;
+  }
+  return 总额;
+}
+
+const 订单列表 = [
+  { 名称: "机械键盘", 单价: 399.00, 数量: 2 },
+  { 名称: "显示器支架", 单价: 129.50, 数量: 3 },
+];
+
+console.log(` + "`" + `订单总额：${计算订单总额(订单列表)} ${单位标签}` + "`" + `);
+`
+
+func BenchmarkParse_MultiByte(b *testing.B) {
+	b.ReportAllocs()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		rows := js.Language.Parse(cjkBenchCode)
+		_ = len(rows)
+	}
+}
+
+func BenchmarkCodeToHtml_MultiByte(b *testing.B) {
+	hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{Theme: "dark-plus"})
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		html, err := hl.CodeToHtml(cjkBenchCode, "javascript")
+		if err != nil {
+			b.Fatalf("unexpected error: %v", err)
+		}
+		_ = html
+	}
+}
+
+// --- Concurrency benchmark (thread-safety of a shared Highlighter) ---
+
+func BenchmarkCodeToHtml_Parallel(b *testing.B) {
+	hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{Theme: "dark-plus"})
+	b.ResetTimer()
+	b.ReportAllocs()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			if _, err := hl.CodeToHtml(jsBenchCode, "javascript"); err != nil {
+				b.Fatalf("unexpected error: %v", err)
+			}
+		}
+	})
+}
+
 // --- Theme switching benchmark ---
 
 func BenchmarkUpdateTheme(b *testing.B) {
