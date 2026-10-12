@@ -4,6 +4,6 @@ import "code-mate-core/core"
 
 var Spec = core.TokenizerSpec{
 	InitialState:  StateGlobal,
-	Rules:         GRAMMAR_RULES,
+	Rules:         grammarRules,
 	FallbackScope: ScopeDefault,
 }

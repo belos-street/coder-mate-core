@@ -3,12 +3,22 @@ package codematecore
 import (
 	"fmt"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
 
 	"code-mate-core/core"
 	"code-mate-core/language"
 	"code-mate-core/theme"
+)
+
+const (
+	// maxCacheEntries 缓存条目上限：超限时整体重置，保证服务端对任意
+	// 用户输入调用时内存有界（简单有界策略，非严格 LRU）
+	maxCacheEntries = 1024
+	// maxCacheableCodeLen 超长代码不入缓存：大文件重复高亮的缓存价值低，
+	// 却占用大量内存
+	maxCacheableCodeLen = 64 * 1024
 )
 
 type cachedEntry struct {
@@ -54,10 +64,6 @@ func escapeHtml(text string) string {
 			b.WriteString("&quot;")
 		case '\'':
 			b.WriteString("&#39;")
-		case '`':
-			b.WriteString("&#96;")
-		case '$':
-			b.WriteString("&#36;")
 		case '\t':
 			b.WriteString("&#9;")
 		default:
@@ -214,9 +220,15 @@ func (h *highlighter) CodeToTokens(code, lang string) (core.TokenStream, error) 
 	defer h.mu.Unlock()
 	styledRows := applyThemeStyles(baseRows, h.currentTheme, h.parsedStyleCache)
 
-	h.cache[cacheKey] = &cachedEntry{
-		baseRows:   baseRows,
-		styledRows: styledRows,
+	// 有界缓存：超长代码不入缓存；条目超限时整体重置
+	if len(code) <= maxCacheableCodeLen {
+		if len(h.cache) >= maxCacheEntries {
+			h.cache = make(map[string]*cachedEntry)
+		}
+		h.cache[cacheKey] = &cachedEntry{
+			baseRows:   baseRows,
+			styledRows: styledRows,
+		}
 	}
 
 	return cloneTokenStream(styledRows), nil
@@ -258,11 +270,16 @@ func (h *highlighter) CodeToHtml(code, lang string, opts ...HtmlOption) (string,
 	for rowIndex, rowTokens := range rows {
 		rowsHtml.WriteString(`<div class="code-line `)
 		rowsHtml.WriteString(escapeHtmlAttr(lineClassPrefix))
-		rowsHtml.WriteString(fmt.Sprintf("%d", rowIndex+1))
+		rowsHtml.WriteString(strconv.Itoa(rowIndex + 1))
 		rowsHtml.WriteString(`">`)
 
 		for _, token := range rowTokens {
 			style := stringifyInlineStyle(token.Style)
+			if style == "" {
+				// 无样式 token 不输出空 span，减少 HTML 体积
+				rowsHtml.WriteString(escapeHtml(token.Text))
+				continue
+			}
 			rowsHtml.WriteString(`<span style="`)
 			rowsHtml.WriteString(style)
 			rowsHtml.WriteString(`">`)

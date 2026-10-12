@@ -9,7 +9,7 @@ import (
 
 var DefaultThemeID = "dark-plus"
 
-var THEME_ALIAS_MAP = map[string]string{
+var themeAliasMap = map[string]string{
 	"dark":   "dark-plus",
 	"github": "github-light",
 }
@@ -46,7 +46,7 @@ func GetTheme(themeID string) (*HighlightTheme, error) {
 	}
 
 	// 先检查别名
-	if resolvedID, ok := THEME_ALIAS_MAP[normalizeThemeID(themeID)]; ok {
+	if resolvedID, ok := themeAliasMap[normalizeThemeID(themeID)]; ok {
 		themeID = resolvedID
 	}
 
@@ -85,7 +85,7 @@ func ListThemes() []*HighlightTheme {
 func ResolveAlias(theme any) any {
 	if s, ok := theme.(string); ok {
 		normalized := normalizeThemeID(s)
-		if resolved, ok := THEME_ALIAS_MAP[normalized]; ok {
+		if resolved, ok := themeAliasMap[normalized]; ok {
 			return resolved
 		}
 		return normalized
@@ -125,8 +125,8 @@ func ResolveThemeOrDefault(theme any) *HighlightTheme {
 // 1) 精确匹配
 // 2) 前缀回退（a.b.c -> a.b -> a）
 // 3) defaultStyle
-func ResolveScopeStyle(scope string, theme *HighlightTheme) string {
-	if style, ok := theme.Styles[scope]; ok {
+func ResolveScopeStyle(scope string, t *HighlightTheme) string {
+	if style, ok := t.Styles[scope]; ok {
 		return style
 	}
 
@@ -134,15 +134,15 @@ func ResolveScopeStyle(scope string, theme *HighlightTheme) string {
 	for strings.Contains(candidate, ".") {
 		idx := strings.LastIndex(candidate, ".")
 		candidate = candidate[:idx]
-		if style, ok := theme.Styles[candidate]; ok {
+		if style, ok := t.Styles[candidate]; ok {
 			return style
 		}
 	}
 
-	if style, ok := theme.Styles["default"]; ok {
+	if style, ok := t.Styles["default"]; ok {
 		return style
 	}
-	return theme.DefaultStyle
+	return t.DefaultStyle
 }
 
 func ClearRegistry() {

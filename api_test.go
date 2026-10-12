@@ -368,8 +368,7 @@ func TestEscapeHtml(t *testing.T) {
 		{"a & b", "a &amp; b"},
 		{`"quote"`, "&quot;quote&quot;"},
 		{"'s", "&#39;s"},
-		{"`code`", "&#96;code&#96;"},
-		{"$var", "&#36;var"},
+		{"`code` $var", "`code` $var"},
 		{"\t", "&#9;"},
 	}
 

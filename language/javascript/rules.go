@@ -7,17 +7,17 @@ import (
 )
 
 func GetRules() map[string][]core.GrammarRule {
-	// Deep copy to prevent modification of the original
-	copy_ := make(map[string][]core.GrammarRule, len(GRAMMAR_RULES))
-	for k, v := range GRAMMAR_RULES {
+	// 深拷贝，防止调用方篡改内部规则表
+	cloned := make(map[string][]core.GrammarRule, len(grammarRules))
+	for k, v := range grammarRules {
 		rules := make([]core.GrammarRule, len(v))
 		copy(rules, v)
-		copy_[k] = rules
+		cloned[k] = rules
 	}
-	return copy_
+	return cloned
 }
 
-var GRAMMAR_RULES = map[string][]core.GrammarRule{
+var grammarRules = map[string][]core.GrammarRule{
 	// ==================== global 状态 ====================
 	StateGlobal: {
 		// === 1. 注释规则 ===
