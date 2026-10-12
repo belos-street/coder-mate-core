@@ -104,14 +104,15 @@
 
 ## 阶段 4：P3 择机
 
-- [ ] 抽象去重：`core.NewSimpleAdapter(id, aliases, spec)` 构造器 + 共享规则工厂（注释块收尾/字符串四件套），17 个语言包只留规则数据 — [language/*/adapter.go](file:///D:/code/personal/coder-mate-core/language/javascript/adapter.go)（17 份同构）
-- [ ] TS 规则插入解耦：去 `insertPos := 3` 魔法数与硬编码 `"global"`，按锚定规则定位插入点并加断言锁 JS 规则顺序 — [typescript/rules.go#L60-L69](file:///D:/code/personal/coder-mate-core/language/typescript/rules.go#L60-L69)
-- [ ] 死代码清理：`Parse` 不可达 `token == nil` 分支与恒真守卫；`MatchToken` 改调 `PushState`/`PopState` 消除双实现（pop 到底语义需统一：建议静默，与 TS 版对齐）— [tokenizer.go#L211-L215](file:///D:/code/personal/coder-mate-core/core/tokenizer.go#L211-L215)、[L17-L35](file:///D:/code/personal/coder-mate-core/core/tokenizer.go#L17-L35)
-- [ ] API 细节：`interface{}` → `any`；`NewHighlighter` 直接收 `HighlighterOptions` 并连同 1.1 备选方案 B 的 `(*Highlighter, error)` 返回值**一并做签名变更**（影响面清单见 1.1，变更时逐项同步）；去冗余 `ResolveAlias` 双重解析；`ensureValidID` panic 改返回 error — [api.go#L16](file:///D:/code/personal/coder-mate-core/api.go#L16)、[L44](file:///D:/code/personal/coder-mate-core/api.go#L44)、[core/registry.go#L21-L27](file:///D:/code/personal/coder-mate-core/core/registry.go#L21-L27)
-- [ ] 命名惯例：`GRAMMAR_RULES`/`THEME_ALIAS_MAP`/`copy_` 改 Go 风格；`ResolveScopeStyle` 参数名 `theme` 遮蔽包名；spec 导出模式统一（16 包可变导出 map vs TS `GetSpec()` vs JS 深拷贝三套并存，防篡改防护对齐）— [javascript/rules.go#L11-L20](file:///D:/code/personal/coder-mate-core/language/javascript/rules.go#L11-L20)
-- [ ] 性能：缓存 LRU 上限或超长代码不缓存（现整段源码做 key 无淘汰）— [highlighter.go#L33-L34](file:///D:/code/personal/coder-mate-core/highlighter.go#L33-L34)；`fmt.Sprintf("%d")` → `strconv.Itoa`；空 style 跳过 `<span style="">`；`escapeHtml` 冗余转义（`` ` ``/`$`）清理
+- [x] 抽象去重：`core.NewSimpleAdapter(id, aliases, parse)` 构造器落地，17 个语言包 adapter.go 收敛为单变量（51 文件 -231/+123 行）；共享规则工厂评估后**暂缓**——注释/字符串规则值是领域数据而非样板，强行抽象降低可读性，如后续新增语言再提取
+- [x] TS 规则插入解耦：去 `insertPos := 3` 魔法数与硬编码 `"global"`，改为锚定「动态 import」规则（PushState == StateImportDynamic）定位插入点 — [typescript/rules.go](file:///D:/code/personal/coder-mate-core/language/typescript/rules.go)
+- [x] 死代码清理：`Parse` 不可达 `token == nil` 分支删除；`MatchToken` 改调 `PushState`/`PopState` 消除双实现（pop 到底维持静默忽略，与 TS 版对齐）— [core/tokenizer.go](file:///D:/code/personal/coder-mate-core/core/tokenizer.go)
+- [x] API 细节：`interface{}` → `any`；`NewHighlighter` 直接收 `HighlighterOptions`（同步 api_test/bench_test/cmd/wasm/README 全部调用点）；去冗余 `ResolveAlias` 双重解析；`ensureValidID` panic 改返回 error（GetLanguage 空 ID 返回 nil,false）。**方案 B（`(*Highlighter, error)`）评估后放弃**：方案 A 落地后 NewHighlighter 已无失败路径（无效主题回退默认），恒 nil error 属 API 噪音；如未来引入可失败配置再评估
+- [x] 命名惯例：`GRAMMAR_RULES`→`grammarRules`、`THEME_ALIAS_MAP`→`themeAliasMap`、`copy_`→`cloned`；`ResolveScopeStyle` 参数名不再遮蔽包名；spec 导出统一完成（15 包 `Spec`/`GrammarRules` 内化为未导出，typescript 弃用 sync.Once 特例；javascript `GetRules()` 深拷贝保留）
+- [x] 性能：缓存有界化（>64KB 不入缓存 + 条目超 1024 整体重置）；`fmt.Sprintf("%d")` → `strconv.Itoa`；空 style 跳过 `<span style="">`；`escapeHtml` 去掉反引号/`$` 非必需转义
 - [ ] （可选）缓存真收益：同 key 命中缓存渲染后 HTML 字符串而非 token 流（当前缓存只省 parse，clone + 重渲染占主导）
-- [ ] 评审 nit（2026-10-09 复审补充）：① `CodeToHtml` 的 theme 快照与 `CodeToTokens` styled rows 间有极小 TOCTOU 窗口（UpdateTheme 恰好插入两步之间时混用旧样式 + 新 preStyle），纯外观非 race，可在快照后加版本号校验或接受现状；② Python 数字 `\d[\d_]*` 会过匹配尾下划线（`1_` 不合法）→ 改 `\d(?:[\d_]*\d)?`；③ Java `EntityFunction` 要求 `(` 紧跟标识符（`Foo (` 欠匹配仍判类型）→ 允许可选空白
+- [x] 评审 nit（2026-10-09 复审补充）：① TOCTOU 窗口——**接受现状**（纯外观非 race，窗口极小，加版本号校验的复杂度不值）；② Python 数字尾下划线已修（下划线仅可夹在数字间）；③ Java `Foo (` 已修（EntityFunction 允许可选空白，对齐 TS `\s*` 语义）
+- [ ] （方向性备注，未排期）golden 分歧清单 27 例中 21 例根因是 RE2 无 lookahead（函数名吞 `(`、属性吞 `:`/`=`、命名空间吞 `::`）。若未来要真正消掉这批分歧，出路是 **MatchToken 后处理拆分**（规则仍吞分隔符，匹配后把 token 尾部分隔符剥回独立 operator token），而不是往清单里继续加条目；其次是 TS quirk 类的 scopeOnlyDivergences 精确比对模式（已落地，可作为后续硬化模板）
 
 ---
 
