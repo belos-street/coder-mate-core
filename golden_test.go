@@ -59,20 +59,25 @@ var knownDivergences = map[string]string{
 	"rust-hello":           "RE2 无 lookahead：Go 函数名 token 吞 '('（TS 拆分为 name + operator）",
 	"rust-lifetime-impl":   "RE2 无 lookahead：Go 函数名 token 吞 '('（TS 拆分为 name + operator）",
 	"rust-rawstring-match": "RE2 无 lookahead：Go 函数名 token 吞 '('（TS 拆分为 name + operator）",
-	// —— 结构性分歧：TS 属性/分隔符用 lookahead 拆分，Go 合并 ——
-	"bash-conditional":     "RE2 无 lookahead：Go bash 变量赋值 token 含 '='（TS 拆分为 var + operator）",
-	"css-basic":            "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"css-media-query":      "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"css-selectors":        "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"yaml-anchor-tag":      "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"yaml-scalars":         "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"yaml-sequence-nested": "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	// —— TS quirk：TS 宏规则把单字母大写标识符误判为 macro，Go 判 type 更合理 ——
-	"c-struct-comment":   "TS 宏规则误判 struct 名 P 为 entity.name.macro；Go 判 entity.name.type 更合理",
-	"cpp-template-class": "TS 宏规则误判类型参数 T 为 entity.name.macro；Go 判 entity.name.type 更合理",
-	// —— 粒度/细节差异 ——
+	// —— 结构性分歧：TS 属性/分隔符/命名空间用 lookahead 拆分，Go 合并 ——
+	"bash-conditional":      "RE2 无 lookahead：Go bash 变量赋值 token 含 '='（TS 拆分为 var + operator）",
+	"cpp-vector-rawstring":  "RE2 无 lookahead：Go cpp 命名空间 token 吞 '::'（TS 拆分为 std + ::，2026-10-12 归因）",
+	"css-basic":             "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"css-media-query":       "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"css-selectors":         "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"yaml-anchor-tag":       "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"yaml-scalars":          "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"yaml-sequence-nested":  "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	// —— 粒度差异 ——
 	"markdown-headings-emphasis": "markdown 强调/斜体的 token 粒度不同（TS 整词，Go 逐字符，渲染等价）",
-	"cpp-vector-rawstring":       "cpp 原始字符串/预处理边界细节差异（TS 规则演进，未逐 token 归因）",
+}
+
+// scopeOnlyDivergences：token 数量与 text 序列与 TS 完全一致、仅个别 scope
+// 有文档化分歧的 case（TS quirk）。做硬化比对：text 严格相等，scope 按
+// 映射表（golden scope → Go scope）转换后严格相等——scope 级回归在此显式失败。
+var scopeOnlyDivergences = map[string]map[string]string{
+	"c-struct-comment":   {"entity.name.macro.c": "entity.name.type.c"},
+	"cpp-template-class": {"entity.name.macro.cpp": "entity.name.type.cpp"},
 }
 
 func flattenGolden(rows [][]goldenToken) []goldenToken {
@@ -130,7 +135,30 @@ func TestGoldenConsistencyWithTSReference(t *testing.T) {
 				t.Errorf("tokenization is lossy: got %q, want %q", b.String(), gc.Code)
 			}
 
-			reason, divergent := knownDivergences[gc.Lang+"-"+gc.Case]
+			// 硬化分支：仅 scope 有文档化分歧的 case——text 严格相等，
+			// scope 经映射表转换后严格相等（scope 级回归在此显式失败）
+			key := gc.Lang + "-" + gc.Case
+			if scopeMap, ok := scopeOnlyDivergences[key]; ok {
+				if len(got) != len(want) {
+					t.Fatalf("scope-divergent case changed token count: got %d, golden %d（如为有意变更，请更新 scopeOnlyDivergences/knownDivergences）", len(got), len(want))
+				}
+				for i := range want {
+					if got[i].Text != want[i].Text {
+						t.Errorf("token %d text: got %q, want %q", i, got[i].Text, want[i].Text)
+						continue
+					}
+					expectedScope := want[i].Scope
+					if mapped, ok := scopeMap[want[i].Scope]; ok {
+						expectedScope = mapped
+					}
+					if got[i].Scope != expectedScope {
+						t.Errorf("token %d scope: got %q, want %q（golden %q 经映射表 %v）", i, got[i].Scope, expectedScope, want[i].Scope, scopeMap)
+					}
+				}
+				return
+			}
+
+			reason, divergent := knownDivergences[key]
 			if divergent {
 				// 已知分歧 case：仅要求无损性（上方已断言）与行号单调递增，
 				// 不做 token 数量/逐 token 比对——lookahead 类分歧本身就改变 token 数
