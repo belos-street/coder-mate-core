@@ -23,19 +23,26 @@ func normalizeID(id string) string {
 	return strings.TrimSpace(strings.ToLower(id))
 }
 
-func ensureValidID(id string) string {
+func ensureValidID(id string) (string, error) {
 	normalized := normalizeID(id)
 	if normalized == "" {
-		panic("Language id cannot be empty")
+		return "", fmt.Errorf("language id cannot be empty")
 	}
-	return normalized
+	return normalized, nil
 }
 
 func RegisterLanguage(lang LanguageAdapter) error {
-	canonicalID := ensureValidID(lang.ID())
+	canonicalID, err := ensureValidID(lang.ID())
+	if err != nil {
+		return err
+	}
 	keys := []string{canonicalID}
 	for _, alias := range lang.Aliases() {
-		keys = append(keys, ensureValidID(alias))
+		aliasID, err := ensureValidID(alias)
+		if err != nil {
+			return err
+		}
+		keys = append(keys, aliasID)
 	}
 
 	registryMu.Lock()
@@ -56,7 +63,10 @@ func RegisterLanguage(lang LanguageAdapter) error {
 }
 
 func GetLanguage(id string) (LanguageAdapter, bool) {
-	normalized := ensureValidID(id)
+	normalized, err := ensureValidID(id)
+	if err != nil {
+		return nil, false
+	}
 
 	registryMu.RLock()
 	defer registryMu.RUnlock()

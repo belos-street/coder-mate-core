@@ -150,7 +150,7 @@ func TestCodeToHtml_RendersHtml(t *testing.T) {
 }
 
 func TestCodeToHtml_CustomPreStyle(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 	customStyle := "background: #000; color: #FFF;"
 
 	html, err := hl.CodeToHtml("const x = 1", "javascript",
@@ -166,7 +166,7 @@ func TestCodeToHtml_CustomPreStyle(t *testing.T) {
 }
 
 func TestCodeToHtml_CustomLineClassPrefix(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 	customPrefix := "ln-"
 
 	html, err := hl.CodeToHtml("const x = 1", "javascript",
@@ -182,7 +182,7 @@ func TestCodeToHtml_CustomLineClassPrefix(t *testing.T) {
 }
 
 func TestCodeToTokens_UnknownLanguage(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	_, err := hl.CodeToTokens("hello", "unknown-lang")
 	if err == nil {
@@ -196,7 +196,7 @@ func TestCodeToTokens_UnknownLanguage(t *testing.T) {
 }
 
 func TestCodeToTokens_EmptyLanguage(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	_, err := hl.CodeToTokens("hello", "   ")
 	if err == nil {
@@ -281,7 +281,7 @@ func TestCache_Clone(t *testing.T) {
 }
 
 func TestUpdateTheme_InvalidTheme(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	err := hl.UpdateTheme("nonexistent-theme")
 	if err == nil {
@@ -290,7 +290,7 @@ func TestUpdateTheme_InvalidTheme(t *testing.T) {
 }
 
 func TestCodeToHtml_HtmlEscaping(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	html, err := hl.CodeToHtml(`const x = "<div>";`, "javascript")
 	if err != nil {
@@ -303,7 +303,7 @@ func TestCodeToHtml_HtmlEscaping(t *testing.T) {
 }
 
 func TestCodeToHtml_MultiLineOutput(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	code := "const x = 1;\nconst y = 2;"
 	html, err := hl.CodeToHtml(code, "javascript")
@@ -320,7 +320,7 @@ func TestCodeToHtml_MultiLineOutput(t *testing.T) {
 }
 
 func TestNewHighlighter_NullTheme(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	_, err := hl.CodeToTokens("const x = 42;", "javascript")
 	if err != nil {
@@ -475,7 +475,7 @@ func TestNewHighlighter_AutoRegistersBuiltins(t *testing.T) {
 	core.ClearRegistry()
 	language.ResetBuiltins()
 
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	html, err := hl.CodeToHtml("const x = 1;", "javascript")
 	if err != nil {
@@ -488,7 +488,7 @@ func TestNewHighlighter_AutoRegistersBuiltins(t *testing.T) {
 
 func TestNewHighlighter_UnknownThemeFallsBackToDefault(t *testing.T) {
 	hl := NewHighlighter(HighlighterOptions{Theme: "no-such-theme"})
-	defaultHl := NewHighlighter()
+	defaultHl := NewHighlighter(HighlighterOptions{})
 
 	code := "const x = 1; /* comment */"
 	got, err := hl.CodeToHtml(code, "javascript")
@@ -506,7 +506,7 @@ func TestNewHighlighter_UnknownThemeFallsBackToDefault(t *testing.T) {
 
 func TestNewHighlighter_InvalidThemeTypeFallsBackToDefault(t *testing.T) {
 	hl := NewHighlighter(HighlighterOptions{Theme: 42})
-	defaultHl := NewHighlighter()
+	defaultHl := NewHighlighter(HighlighterOptions{})
 
 	code := "const x = 1;"
 	got, err := hl.CodeToHtml(code, "javascript")
@@ -523,7 +523,7 @@ func TestNewHighlighter_InvalidThemeTypeFallsBackToDefault(t *testing.T) {
 }
 
 func TestCodeToHtml_DeterministicOutput(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 	code := "/* block comment */\nconst x = 1; const s = \"hi\";"
 
 	first, err := hl.CodeToHtml(code, "javascript")
@@ -543,7 +543,7 @@ func TestCodeToHtml_DeterministicOutput(t *testing.T) {
 }
 
 func TestCodeToHtml_MultibyteNotMojibake(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	html, err := hl.CodeToHtml("let 值 = 1", "javascript")
 	if err != nil {
@@ -555,7 +555,7 @@ func TestCodeToHtml_MultibyteNotMojibake(t *testing.T) {
 }
 
 func TestConcurrentHighlighting(t *testing.T) {
-	hl := NewHighlighter()
+	hl := NewHighlighter(HighlighterOptions{})
 
 	var wg sync.WaitGroup
 	themes := []string{"dark-plus", "github-light", "dracula", "nord"}

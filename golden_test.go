@@ -60,14 +60,14 @@ var knownDivergences = map[string]string{
 	"rust-lifetime-impl":   "RE2 无 lookahead：Go 函数名 token 吞 '('（TS 拆分为 name + operator）",
 	"rust-rawstring-match": "RE2 无 lookahead：Go 函数名 token 吞 '('（TS 拆分为 name + operator）",
 	// —— 结构性分歧：TS 属性/分隔符/命名空间用 lookahead 拆分，Go 合并 ——
-	"bash-conditional":      "RE2 无 lookahead：Go bash 变量赋值 token 含 '='（TS 拆分为 var + operator）",
-	"cpp-vector-rawstring":  "RE2 无 lookahead：Go cpp 命名空间 token 吞 '::'（TS 拆分为 std + ::，2026-10-12 归因）",
-	"css-basic":             "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"css-media-query":       "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"css-selectors":         "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"yaml-anchor-tag":       "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"yaml-scalars":          "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
-	"yaml-sequence-nested":  "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"bash-conditional":     "RE2 无 lookahead：Go bash 变量赋值 token 含 '='（TS 拆分为 var + operator）",
+	"cpp-vector-rawstring": "RE2 无 lookahead：Go cpp 命名空间 token 吞 '::'（TS 拆分为 std + ::，2026-10-12 归因）",
+	"css-basic":            "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"css-media-query":      "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"css-selectors":        "RE2 无 lookahead：Go css 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"yaml-anchor-tag":      "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"yaml-scalars":         "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
+	"yaml-sequence-nested": "RE2 无 lookahead：Go yaml 属性名 token 含 ':'（TS 拆分为 property + separator）",
 	// —— 粒度差异 ——
 	"markdown-headings-emphasis": "markdown 强调/斜体的 token 粒度不同（TS 整词，Go 逐字符，渲染等价）",
 }

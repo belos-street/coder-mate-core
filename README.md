@@ -3,7 +3,7 @@
 A fast, zero-dependency syntax highlighting engine for Go — supporting 17 programming languages with a FSM-based tokenizer, theming system, and WASM browser integration.
 
 ```go
-hl := codematecore.NewHighlighter()
+hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{})
 html, _ := hl.CodeToHtml(`const x: number = 42;`, "typescript")
 // → <pre style="..."><code>...</code></pre>
 ```
@@ -24,7 +24,7 @@ html, _ := hl.CodeToHtml(`const x: number = 42;`, "typescript")
 ```go
 import codematecore "code-mate-core"
 
-hl := codematecore.NewHighlighter()
+hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{})
 
 // Get token stream
 tokens, err := hl.CodeToTokens("def hello(): pass", "python")

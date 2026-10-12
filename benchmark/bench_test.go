@@ -186,7 +186,7 @@ func BenchmarkParse_ManyShortLines(b *testing.B) {
 // --- Theme switching benchmark ---
 
 func BenchmarkUpdateTheme(b *testing.B) {
-	hl := codematecore.NewHighlighter()
+	hl := codematecore.NewHighlighter(codematecore.HighlighterOptions{})
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {

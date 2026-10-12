@@ -82,7 +82,7 @@ func ListThemes() []*HighlightTheme {
 	return themes
 }
 
-func ResolveAlias(theme interface{}) interface{} {
+func ResolveAlias(theme any) any {
 	if s, ok := theme.(string); ok {
 		normalized := normalizeThemeID(s)
 		if resolved, ok := THEME_ALIAS_MAP[normalized]; ok {
@@ -93,7 +93,7 @@ func ResolveAlias(theme interface{}) interface{} {
 	return theme
 }
 
-func ResolveTheme(theme interface{}) (*HighlightTheme, error) {
+func ResolveTheme(theme any) (*HighlightTheme, error) {
 	switch v := theme.(type) {
 	case nil:
 		return GetTheme("")
@@ -109,7 +109,7 @@ func ResolveTheme(theme interface{}) (*HighlightTheme, error) {
 // ResolveThemeOrDefault 解析主题；未知主题名或无效类型时回退默认主题。
 // 这是 NewHighlighter 的文档化行为：无效的主题配置不报错、不中断，
 // 回退到 DefaultThemeID。调用前须已通过 EnsureBuiltinsRegistered 注册内置主题。
-func ResolveThemeOrDefault(theme interface{}) *HighlightTheme {
+func ResolveThemeOrDefault(theme any) *HighlightTheme {
 	if resolved, err := ResolveTheme(theme); err == nil && resolved != nil {
 		return resolved
 	}

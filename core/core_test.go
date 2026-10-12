@@ -578,23 +578,18 @@ func TestTokenize_Success(t *testing.T) {
 	}
 }
 
-func TestEnsureValidID_PanicsOnEmpty(t *testing.T) {
-	// panic 路径：空语言 ID 在注册表入口 fail-fast（阶段 3 补齐的覆盖）
-	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic for empty language id")
-		}
-	}()
-	GetLanguage("   ")
+func TestGetLanguage_EmptyIDNoPanic(t *testing.T) {
+	// 空/空白语言 ID：注册表入口返回 (nil, false)，不 panic
+	lang, ok := GetLanguage("   ")
+	if ok || lang != nil {
+		t.Errorf("expected (nil, false) for empty language id, got (%v, %v)", lang, ok)
+	}
 }
 
-func TestRegisterLanguage_PanicsOnEmptyID(t *testing.T) {
-	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic for empty adapter id")
-		}
-	}()
-	RegisterLanguage(mockAdapter{id: "", aliases: nil})
+func TestRegisterLanguage_EmptyIDError(t *testing.T) {
+	if err := RegisterLanguage(mockAdapter{id: "", aliases: nil}); err == nil {
+		t.Error("expected error for empty adapter id")
+	}
 }
 
 // funcAdapter 按注入的函数返回解析结果

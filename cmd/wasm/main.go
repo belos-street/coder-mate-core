@@ -22,7 +22,7 @@ func main() {
 	language.RegisterBuiltins()
 	theme.RegisterBuiltInThemes()
 
-	defaultHL = codematecore.NewHighlighter()
+	defaultHL = codematecore.NewHighlighter(codematecore.HighlighterOptions{})
 
 	js.Global().Set("coderMateHighlight", js.FuncOf(jsCoderMateHighlight))
 

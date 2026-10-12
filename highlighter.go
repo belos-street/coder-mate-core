@@ -276,7 +276,7 @@ func (h *highlighter) CodeToHtml(code, lang string, opts ...HtmlOption) (string,
 	return `<pre style="` + escapeHtmlAttr(preStyle) + `"><code>` + rowsHtml.String() + `</code></pre>`, nil
 }
 
-func (h *highlighter) UpdateTheme(t interface{}) error {
+func (h *highlighter) UpdateTheme(t any) error {
 	newTheme, err := theme.ResolveTheme(t)
 	if err != nil {
 		return err
