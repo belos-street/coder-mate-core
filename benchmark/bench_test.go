@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	codematecore "code-mate-core"
-	"code-mate-core/core"
 	"code-mate-core/language"
 	js "code-mate-core/language/javascript"
 	py "code-mate-core/language/python"
@@ -78,7 +77,7 @@ func BenchmarkParse_JavaScript(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		rows := core.Parse(jsBenchCode, &js.Spec)
+		rows := js.Language.Parse(jsBenchCode)
 		_ = len(rows)
 	}
 }
@@ -87,7 +86,7 @@ func BenchmarkParse_Python(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		rows := core.Parse(pyBenchCode, &py.Spec)
+		rows := py.Language.Parse(pyBenchCode)
 		_ = len(rows)
 	}
 }
@@ -159,7 +158,7 @@ func BenchmarkParse_EmptyCode(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		rows := core.Parse("", &js.Spec)
+		rows := js.Language.Parse("")
 		_ = len(rows)
 	}
 }
@@ -168,7 +167,7 @@ func BenchmarkParse_SingleChar(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		rows := core.Parse("x", &js.Spec)
+		rows := js.Language.Parse("x")
 		_ = len(rows)
 	}
 }
@@ -178,7 +177,7 @@ func BenchmarkParse_ManyShortLines(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		rows := core.Parse(code, &js.Spec)
+		rows := js.Language.Parse(code)
 		_ = len(rows)
 	}
 }
